@@ -10,7 +10,7 @@ Julkaise **h0-hello** -websivu.
 
 Linuxin interfacejen IP-osoitteet.
 
-	[leos@ora12c ~]$ ip a
+	[leos@ora ~]$ ip a
 	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
 		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 		inet 127.0.0.1/8 scope host lo
