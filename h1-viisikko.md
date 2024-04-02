@@ -42,6 +42,7 @@ asennetusta salt-minion:sta.
 
 ### Tilafunktio pkg
 Ajamalla seuraavan komennon saadaan selville finger-komennon asennuksen tila.
+
 	vagrant@bullseye:~$ sudo salt-call --local -l info state.single pkg.installed finger
 	[INFO    ] Loading fresh modules for state activity
 	[INFO    ] Running state [finger] at time 11:40:45.578120
@@ -178,3 +179,44 @@ Tarkastetaan, onko vagrant-käyttäjätunnus olemassa seuraavalla komennolla.
 	Total run time:  28.211 ms
 
  local-osiosta nähdään, että vagrant-käyttäjä on olemassa (Result: True).
+
+### Tilafunktio cmd
+cmd-tilafunktiolla voidaan ajaa omia komentoja.
+
+	vagrant@bullseye:~$ sudo salt-call --local -l info state.single cmd.run 'finger'
+	[INFO    ] Loading fresh modules for state activity
+	[INFO    ] Running state [finger] at time 12:08:11.028263
+	[INFO    ] Executing state cmd.run for [finger]
+	[INFO    ] Executing command 'finger' in directory '/root'
+	[INFO    ] {'pid': 3065, 'retcode': 0, 'stdout': 'Login     Name       Tty      Idle  Login Time   Office     Office Phone\nvagrant              pts/0      20  Apr  2 11:25 (10.0.2.2)\nvagrant              pts/1          Apr  2 11:47 (10.0.2.2)', 'stderr': ''}
+	[INFO    ] Completed state [finger] at time 12:08:11.042522 (duration_in_ms=14.259)
+	local:
+	----------
+	          ID: finger
+	    Function: cmd.run
+	      Result: True
+	     Comment: Command "finger" run
+	     Started: 12:08:11.028263
+	    Duration: 14.259 ms
+	     Changes:
+	              ----------
+	              pid:
+	                  3065
+	              retcode:
+	                  0
+	              stderr:
+	              stdout:
+	                  Login     Name       Tty      Idle  Login Time   Office     Office Phone
+	                  vagrant              pts/0      20  Apr  2 11:25 (10.0.2.2)
+	                  vagrant              pts/1          Apr  2 11:47 (10.0.2.2)
+	
+	Summary for local
+	------------
+	Succeeded: 1 (changed=1)
+	Failed:    0
+	------------
+	Total states run:     1
+	Total run time:  14.259 ms
+
+local-osiosta nähdään, että komento suoritettiin onnistuneesti (Result: True). Changes-osiosta on nähtävissä finger-komennon prosessi id (pid: 3065), virhekanavan tilan olevan tyhjä (stderr:) ja komennon tulostus stdout-osiossa.
+
