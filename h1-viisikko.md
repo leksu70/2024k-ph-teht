@@ -118,4 +118,63 @@ Luodaan tiedosto /tmp/helloleo, jonka sisältönä on "Sutinen" ja tarkastetaan 
 
  "local"-osion alaosiossa Changes löytyy tiedoston luonti tila, joka on "New file" eli uusi tiedosto. Summary-osiossa näkyy onnistunut komennon suoritus "Suceeded: 1 (changed=1)". Lopuksi tarkastettiin /tmp/helloleo-tiedoston sisältö oikeaksi (Sutinen).
 
- 
+### Tilafunktio service
+Tarkastetaan onko sshd-service päällä seuraavalla komennolla.
+
+	vagrant@bullseye:~$ sudo salt-call --local -l info state.single service.running sshd
+	[INFO    ] Loading fresh modules for state activity
+	[INFO    ] Running state [sshd] at time 12:00:34.347293
+	[INFO    ] Executing state service.running for [sshd]
+	[INFO    ] Executing command systemctl in directory '/root'
+	[INFO    ] Executing command systemctl in directory '/root'
+	[INFO    ] Executing command systemctl in directory '/root'
+	[INFO    ] The service sshd is already running
+	[INFO    ] Completed state [sshd] at time 12:00:34.403616 (duration_in_ms=56.321)
+	local:
+	----------
+	          ID: sshd
+	    Function: service.running
+	      Result: True
+	     Comment: The service sshd is already running
+	     Started: 12:00:34.347295
+	    Duration: 56.321 ms
+	     Changes:
+	
+	Summary for local
+	------------
+	Succeeded: 1
+	Failed:    0
+	------------
+	Total states run:     1
+	Total run time:  56.321 ms
+
+sshd-service on päällä ja se on nähtävissä "local"-osiossa (Result: true).
+
+### Tilafunktio user
+Tarkastetaan, onko vagrant-käyttäjätunnus olemassa seuraavalla komennolla.
+
+	vagrant@bullseye:~$ sudo salt-call --local -l info state.single user.present vagrant
+	[INFO    ] Loading fresh modules for state activity
+	[INFO    ] Running state [vagrant] at time 12:04:18.102122
+	[INFO    ] Executing state user.present for [vagrant]
+	[INFO    ] User vagrant is present and up to date
+	[INFO    ] Completed state [vagrant] at time 12:04:18.130330 (duration_in_ms=28.211)
+	local:
+	----------
+	          ID: vagrant
+	    Function: user.present
+	      Result: True
+	     Comment: User vagrant is present and up to date
+	     Started: 12:04:18.102119
+	    Duration: 28.211 ms
+	     Changes:
+	
+	Summary for local
+	------------
+	Succeeded: 1
+	Failed:    0
+	------------
+	Total states run:     1
+	Total run time:  28.211 ms
+
+ local-osiosta nähdään, että vagrant-käyttäjä on olemassa (Result: True).
