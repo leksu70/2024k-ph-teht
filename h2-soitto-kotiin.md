@@ -310,10 +310,123 @@ host2:
 ```
 Kyllä yhteys toimi normaalisti.
 
-## c) Shell-komento orjalla (9.4.2024 XXXX)
+## c) Shell-komento orjalla (9.4.2024 00:14-00:15)
+Tehtävänä oli ajaa shell-komento slavella Saltin master-slave yhteyden yli. Tämä tehtävä tehtiin tehtävän b) lopussa ajamallla whoami shell-komento.
+
+## d) Idempotentti komentojen ajo master-slave yhteydessä (9.4.2024 00:15-00:35)
+Tehtävänä oli ajaa idempotentteja (state.single) komentoja master-slave yhteyden yli. Apuna käytettiin [VMwaren Salt User Guidea](https://docs.saltproject.io/salt/user-guide/en/latest/).
+
+### pkg.installed
+Tarkastettiin onko vim-editori asennettuna slavelle.
+```
+vagrant@host1:~$ sudo salt '*' state.single pkg.installed name='vim'
+host2:
+----------
+          ID: vim
+    Function: pkg.installed
+      Result: True
+     Comment: The following packages were installed/updated: vim
+     Started: 21:21:24.291150
+    Duration: 7031.862 ms
+     Changes:
+              ----------
+              libgpm2:
+                  ----------
+                  new:
+                      1.20.7-8
+                  old:
+              vim:
+                  ----------
+                  new:
+                      2:8.2.2434-3+deb11u1
+                  old:
+              vim-runtime:
+                  ----------
+                  new:
+                      2:8.2.2434-3+deb11u1
+                  old:
+
+Summary for host2
+------------
+Succeeded: 1 (changed=1)
+Failed:    0
+------------
+Total states run:     1
+Total run time:   7.032 s
+vagrant@host1:~$ sudo salt '*' state.single pkg.installed name='vim'
+host2:
+----------
+          ID: vim
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 21:23:12.587941
+    Duration: 46.724 ms
+     Changes:
+
+Summary for host2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  46.724 ms
+vagrant@host1:~$
+```
+Ajettiin komento `sudo salt '*' state.single pkg.installed name='vim'` kahteen kertaan, jotta nähtiin muuttuiko editorin asennuksen tila. Tila ei muuttunut ("Changes:"), joten kyseessä on idempotentti tila.
+
+### user.present
+Testattiin, löytyykö vagrant-käyttäjä slave koneesta.
+```
+vagrant@host1:~$ sudo salt '*' state.single user.present vagrant
+host2:
+----------
+          ID: vagrant
+    Function: user.present
+      Result: True
+     Comment: User vagrant is present and up to date
+     Started: 21:30:18.033859
+    Duration: 34.494 ms
+     Changes:
+
+Summary for host2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  34.494 ms
+```
+Vagrant käyttäjä löytyi host2-koneesta ja ajamalla komento uudelleen ei tapahtunut muutosta ("Changes:"). Tila oli idempotentti.
+
+### service.running
+Tarkastettiin, oliko cron-palvelu käynnissä slave koneella.
+```
+vagrant@host1:~$ sudo salt '*' state.single service.running cron.service
+host2:
+----------
+          ID: cron.service
+    Function: service.running
+      Result: True
+     Comment: The service cron.service is already running
+     Started: 21:47:44.268845
+    Duration: 49.428 ms
+     Changes:
+
+Summary for host2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  49.428 ms
+```
+Kyllä cron-palvelu oli käynnissä. Tila on idempotentti, jos palvelu pysyy pystyssä eikä se jostain syystä kaadu tai sitä ei sammuteta manuaalisesti eli sen tila ei muutu ("Changes:").
+
 
 ## Lähteet
+* Cousineau, D. 2021. Stackoverflow: How can I hide block of text using YouTrack Markdown syntax? https://stackoverflow.com/questions/51997371/how-can-i-hide-block-of-text-using-youtrack-markdown-syntax
 * Karvinen, T. 2018. Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux. https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/
 * Karvinen, T. 2021. Two Machine Virtual Network With Debian 11 Bullseye and Vagrant. https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/
 * Karvinen, T. 2024. Hello Salt Infra-as-Code. https://terokarvinen.com/2024/hello-salt-infra-as-code/
-* Cousineau, D. 2021. Stackoverflow: How can I hide block of text using YouTrack Markdown syntax? https://stackoverflow.com/questions/51997371/how-can-i-hide-block-of-text-using-youtrack-markdown-syntax
+* VMware Inc. 2021-2024. Salt Project User Guide. https://docs.saltproject.io/salt/user-guide/en/latest/
