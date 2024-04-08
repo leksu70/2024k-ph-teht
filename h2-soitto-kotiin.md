@@ -12,8 +12,9 @@ Karvisen (2021) artikkelissa  käsiteltiin seuraavia aiheita:
 	* kuinka koneet voi luoda uudelleen `vagrant up`-komennon avulla ja
  	* kuinka IP-osoitteen voi helposti selvittää Debianissa komennolla `hostname -I`.
 * Asennuksen voi tarkastaa molemmista koneista käyttämällä `ping`-komentoa.
-(20:42)
+(lopetus 20:40)
 
+(aloitus 20:42)
 ### Artikkeli [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/)
 Karvisen (2018) artikkelissa käsiteltiin kuinka Salt:n avulla voidaan käsitellä tuhansia koneita. Aluksi Salt master-koneen asennus ja sen jälkeen slave-koneen asennus.
 ```
@@ -55,8 +56,31 @@ master$ sudo salt '*' grains.item virtual
 master$ sudo salt '*' pkg.install httpie
 master$ sudo salt '*' sys.doc|less
 ```
-(21:16)
+(lopetus 21:15)
+
+(aloitus 21:32)
+### Artikkeli [Hello Salt Infra-as-Code](https://terokarvinen.com/2024/hello-salt-infra-as-code/)
+Karvisen (2024) artikkelissa luotiin "Hello, World!" Salt-konfiguraatio. (Saltin asennus on kuvattu jo aiemmassa dokumentaatiossa, joten en kuvaa sitä tässä uudestaan.)
+Jotta Salt voi jakaa hallitsemilleen koneille tiedostoja, luodaan salt-hakemisto master-koneelle.????????
+```
+slave$ sudo mkdir -p /srv/salt/hello/
+slave$ cd /srv/salt/hello/
+```
+Luodaan `init.sls`-tiedosto hakemistoon `/srv/salt/hello/` (hello kertoo moduulin nimien).
+```
+/tmp/helloleo:
+  file.managed
+```
+Käynnistetään `hello`-moduuli.
+```
+slave$ sudo salt-call --local state.apply hello
+```
+(lopetus 21:48)
+
+
+
 
 ## Lähteet
-* Karvinen, T. 2021. Two Machine Virtual Network With Debian 11 Bullseye and Vagrant. https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/
 * Karvinen, T. 2018. Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux. https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/
+* Karvinen, T. 2021. Two Machine Virtual Network With Debian 11 Bullseye and Vagrant. https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/
+* Karvinen, T. 2024. Hello Salt Infra-as-Code. https://terokarvinen.com/2024/hello-salt-infra-as-code/
