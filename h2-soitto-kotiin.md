@@ -4,8 +4,8 @@
 ### Artikkeli [Two Machine Virtual Network With Debian 11 Bullseye and Vagrant](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/)
 Karvisen (2021) artikkelissa  käsiteltiin seuraavia aiheita:
 * Kuinka voidaan asentaa Vagrant ja Virtualbox Ubuntu-koneseen.
-* Asennuksen jälkeen Vagrantfile-tiedosto luotiin ja muokattiin ohjeiden mukaan ja tiedostoon lisätttiin kaksi `config.vm.define "hostX" do | hostX |` osiota kahdelle koneelle. Tämä muistettiin tehdä molemmille koneille, sekä tehtiin `hostX.vm.hostname` ja `hostX.vm.network` määritykset.
-* Käynnistetiin virtuaalikoneet `vagrant up`-komennolla.
+* Asennuksen jälkeen Vagrantfile-tiedosto luotiin ja muokattiin ohjeiden mukaan ja tiedostoon lisättiin kaksi `config.vm.define "hostX" do | hostX |` osiota kahdelle koneelle. Tämän lisäksi molemmille koneille tehtiin `hostX.vm.hostname` ja `hostX.vm.network` määritykset.
+* Virtuaalikoneet käynnistettiin `vagrant up`-komennolla.
 * Molempiin koneisiin pystyttiin kirjautua komennolla `vagrant ssh hostX`.
 * Ohjeesta löytyi myös,
 	* kuinka koneet voi poistaa Virtualbox:sta `vagrant destroy`-komennon avulla,
