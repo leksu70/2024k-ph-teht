@@ -1,6 +1,6 @@
 # h2 Soitto kotiin (8.4.2024)
 
-## x) Lue ja tiivistä (8.4.2024 20:15 - )
+## x) Lue ja tiivistä (8.4.2024 20:15-20:40)
 ### Artikkeli [Two Machine Virtual Network With Debian 11 Bullseye and Vagrant](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/)
 Karvisen (2021) artikkelissa  käsiteltiin seuraavia aiheita:
 * Kuinka voidaan asentaa Vagrant ja Virtualbox Ubuntu-koneseen.
@@ -12,10 +12,8 @@ Karvisen (2021) artikkelissa  käsiteltiin seuraavia aiheita:
 	* kuinka koneet voi luoda uudelleen `vagrant up`-komennon avulla ja
  	* kuinka IP-osoitteen voi helposti selvittää Debianissa komennolla `hostname -I`.
 * Asennuksen voi tarkastaa molemmista koneista käyttämällä `ping`-komentoa.
-(lopetus 20:40)
 
-(aloitus 20:42)
-### Artikkeli [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/)
+### Artikkeli [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/) (8.4.2024 20:45-21:15)
 Karvisen (2018) artikkelissa käsiteltiin kuinka Salt:n avulla voidaan käsitellä tuhansia koneita. Aluksi Salt master-koneen asennus ja sen jälkeen slave-koneen asennus.
 ```
 master$ sudo apt-get -y install salt-master
@@ -56,10 +54,8 @@ master$ sudo salt '*' grains.item virtual
 master$ sudo salt '*' pkg.install httpie
 master$ sudo salt '*' sys.doc|less
 ```
-(lopetus 21:15)
 
-(aloitus 21:32)
-### Artikkeli [Hello Salt Infra-as-Code](https://terokarvinen.com/2024/hello-salt-infra-as-code/)
+### Artikkeli [Hello Salt Infra-as-Code](https://terokarvinen.com/2024/hello-salt-infra-as-code/) (8.4.2024 21:32-21:48)
 Karvisen (2024) artikkelissa luotiin "Hello, World!" Salt-konfiguraatio. (Saltin asennus on kuvattu jo aiemmassa dokumentaatiossa, joten en kuvaa sitä tässä uudestaan.)
 Jotta Salt voi jakaa hallitsemilleen koneille tiedostoja, luodaan salt-hakemisto master-koneelle.????????
 ```
@@ -75,7 +71,6 @@ Käynnistetään `hello`-moduuli.
 ```
 slave$ sudo salt-call --local state.apply hello
 ```
-(lopetus 21:48)
 
 
 
