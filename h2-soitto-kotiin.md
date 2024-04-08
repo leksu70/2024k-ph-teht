@@ -423,6 +423,22 @@ Total run time:  49.428 ms
 ```
 Kyllä cron-palvelu oli käynnissä. Tila on idempotentti, jos palvelu pysyy pystyssä eikä se jostain syystä kaadu tai sitä ei sammuteta manuaalisesti eli sen tila ei muutu ("Changes:").
 
+## e) Tekninen tieto verkon yli (9.4.2024 00:55-01:00)
+Tehtävänä oli kerätä teknistä tietoa orjista verkon yli grans.item:n avulla.
+
+Haettin slave-koneelta käyttöjärjestelmätieto ja konfiguroitu Salt masterin IP-osoite.
+```
+vagrant@host1:~$ sudo salt '*' grains.item osfinger master
+host2:
+    ----------
+    master:
+        10.1.0.11
+    osfinger:
+        Debian-11
+```
+
+## f) Hello, IaC, infraa koodina (9.4.2024 XXXXX-XXXXX)
+Tämä on kesken!
 
 ## Lähteet
 * Cousineau, D. 2021. Stackoverflow: How can I hide block of text using YouTrack Markdown syntax? https://stackoverflow.com/questions/51997371/how-can-i-hide-block-of-text-using-youtrack-markdown-syntax
