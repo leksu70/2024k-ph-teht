@@ -75,7 +75,7 @@ slave$ sudo salt-call --local state.apply hello
 ```
 
 ## a) Kaksi virtuaalikonetta (8.4.2024 21:55-22.35)
-Tehtävä oli asentaa kaksi virtuaalikonetta samaan verkkoon ja osoittamaan, että niitä pystyttiin käyttämään. Tehtävässä lopuksi testatiin toimivuus `ping`-komenolla. Tehtävässä käytettiin Karvisen (2021) esimerkkiä apuna.
+Tehtävä oli asentaa kaksi virtuaalikonetta samaan verkkoon ja osoittamaan, että niitä pystyttiin käyttämään. Tehtävässä lopuksi testatiin toimivuus `ping`-komenolla. Tehtävässä käytettiin [Karvisen (2021) esimerkkiä](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/) apuna.
 
 Luotiin uusi `Vagrantfile`-tiedosto `twohost`-hakemistoon. Omassa koneessani oli Windows 10 -käyttöjärjestelmä ja käytin git:n shelliä komentorivinä. Luodun tiedoston tulostus.
 ```
@@ -237,7 +237,7 @@ rtt min/avg/max/mdev = 0.364/0.364/0.364/0.000 ms
 Todettiin, että yhteydet toimivat normaalisti, sillä yhtään ICMP-pakettia ei ollut hukattu.
 
 ## b) Saltin herra-orja arkkitehtuuri toimimaan verkon yli (8.4.2024 23:15-23:45)
-Tehtävänä oli asentaa Saltin master-slave arkkitehtuuri toimimaan verkon yli. Verkkona käytettiin virtuaalista verkkoa virtuaalikoneiden välillä.
+Tehtävänä oli asentaa Saltin master-slave arkkitehtuuri toimimaan verkon yli. Verkkona käytettiin virtuaalista verkkoa virtuaalikoneiden välillä. Tehtävässä käytettiin [Karvisen (2018) ohjetta](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/) apuna.
 
 Aluksi päivitettii molempien virtuaalikoneiden katalogi molemmilla koneilla.
 ```
@@ -310,7 +310,7 @@ host2:
 ```
 Kyllä yhteys toimi normaalisti.
 
-## c) Shell-komento orjalla (8.4.2024 23:15-23:45)
+## c) Shell-komento orjalla (9.4.2024 XXXX)
 
 ## Lähteet
 * Karvinen, T. 2018. Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux. https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/
