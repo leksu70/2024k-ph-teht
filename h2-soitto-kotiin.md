@@ -197,7 +197,7 @@ Virtuaalikoneiden luonti onnistui. Tarkastettiin luotujen virtuaalikoneiden yhte
 leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/twohost
 $ vagrant ssh host1
 ```
-<details><summary>Näytä komennon koko tulostus.</summary>
+<details><summary>Komennon koko tulostus.</summary>
 
 ```
 Linux host1 5.10.0-28-amd64 #1 SMP Debian 5.10.209-2 (2024-01-31) x86_64
@@ -235,6 +235,82 @@ PING 10.1.0.11 (10.1.0.11) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.364/0.364/0.364/0.000 ms
 ```
 Todettiin, että yhteydet toimivat normaalisti, sillä yhtään ICMP-pakettia ei ollut hukattu.
+
+## b) Saltin herra-orja arkkitehtuuri toimimaan verkon yli (8.4.2024 23:15-23:45)
+Tehtävänä oli asentaa Saltin master-slave arkkitehtuuri toimimaan verkon yli. Verkkona käytettiin virtuaalista verkkoa virtuaalikoneiden välillä.
+
+Aluksi päivitettii molempien virtuaalikoneiden katalogi molemmilla koneilla.
+```
+vagrant@host1:~$ sudo apt-get update
+```
+<details><summary>Komennon koko tulostus.</summary>
+
+```
+Get:1 https://deb.debian.org/debian bullseye InRelease [116 kB]
+Get:2 https://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Get:3 https://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 https://deb.debian.org/debian bullseye-backports InRelease [49.0 kB]
+Get:5 https://deb.debian.org/debian bullseye/main Sources [8500 kB]
+Get:6 https://security.debian.org/debian-security bullseye-security/main Sources [170 kB]
+Get:7 https://security.debian.org/debian-security bullseye-security/main amd64 Packages [271 kB]
+Get:8 https://security.debian.org/debian-security bullseye-security/main Translation-en [175 kB]
+Get:9 https://deb.debian.org/debian bullseye/main amd64 Packages [8068 kB]
+Get:10 https://deb.debian.org/debian bullseye/main Translation-en [6236 kB]
+Get:11 https://deb.debian.org/debian bullseye-updates/main Sources [7908 B]
+Get:12 https://deb.debian.org/debian bullseye-updates/main amd64 Packages [18.8 kB]
+Get:13 https://deb.debian.org/debian bullseye-updates/main Translation-en [10.9 kB]
+Get:14 https://deb.debian.org/debian bullseye-backports/main Sources [381 kB]
+Get:15 https://deb.debian.org/debian bullseye-backports/main amd64 Packages [405 kB]
+Get:16 https://deb.debian.org/debian bullseye-backports/main Translation-en [345 kB]
+Fetched 24.8 MB in 7s (3603 kB/s)
+Reading package lists... Done
+```
+</details>
+
+```
+vagrant@host2:~$ sudo apt-get update
+```
+
+Seuraavaksi asennettiin host1-koneelle Salt master ja host2-koneelle Salt slave.
+```
+vagrant@host1:~$ sudo apt-get -y install salt-master
+vagrant@host2:~$ sudo apt-get -y install salt-minion
+```
+Asennuksissa ei tullut virheitä.
+Konfiguroitiin Salt slave eli host2-koneeseen master koneen tiedot muokkaamalla `/etc/salt/minion`-tiedostoa.
+```
+vagrant@host2:~$ sudoedit /etc/salt/minion
+
+master: 10.1.0.11
+id: host2
+```
+Koska salt-palvelu oli päällä, se piti käynnistää uudelleen.
+```
+vagrant@host2:~$ sudo systemctl restart salt-minion.service
+```
+Jotta Salt master hyväksyy uuden slaven, sen ensin täytyi hyväksyä slaven avain.
+```
+vagrant@host1:~$ sudo salt-key -A
+The following keys are going to be accepted:
+Unaccepted Keys:
+host2
+Proceed? [n/Y] y
+Key for minion host2 accepted.
+```
+Tämän jälkeen testattiin kahdella eri komennolla toimiko yhteys Salt masterilta slavelle.
+```
+vagrant@host1:~$ sudo salt '*' cmd.run 'whoami'
+host2:
+    root
+vagrant@host1:~$ sudo salt '*' grains.item fqdn
+host2:
+    ----------
+    fqdn:
+        host2
+```
+Kyllä yhteys toimi normaalisti.
+
+## c) Shell-komento orjalla (8.4.2024 23:15-23:45)
 
 ## Lähteet
 * Karvinen, T. 2018. Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux. https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/
