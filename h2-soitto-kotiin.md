@@ -22,7 +22,7 @@ slave$ sudo apt-get update
 slave$ sudo apt-get -y install salt-minion
 ```
 
-Tämän jälkeen muokattiin slave-koneen tietoihin master-koneen IP-osoite ja käyttäjätunnus, sillä slave-koneen tulee tietää mistä master-koneen löytää.
+Tämän jälkeen muokattiin slave-koneen tietoihin master-koneen IP-osoite ja slave-koneen nimi, koska slave-koneen tulee tietää mistä IP-osoitteesta master-koneen löytää.
 ```
 slave$ sudoedit /etc/salt/minion
 master: 10.0.0.88
@@ -230,7 +230,7 @@ Todettiin, että yhteydet toimivat normaalisti, sillä yhtään ICMP-pakettia ei
 ## b) Saltin herra-orja arkkitehtuuri toimimaan verkon yli (8.4.2024 23:15-23:45)
 Tehtävänä oli asentaa Saltin master-slave arkkitehtuuri toimimaan verkon yli. Verkkona käytettiin virtuaalista verkkoa virtuaalikoneiden välillä. Tehtävässä käytettiin [Karvisen (2018) ohjetta](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/) apuna.
 
-Aluksi päivitettii molempien virtuaalikoneiden katalogi molemmilla koneilla.
+Aluksi päivitettii virtuaalikoneiden katalogi molemmilla koneilla.
 ```
 vagrant@host1:~$ sudo apt-get update
 ```
@@ -271,7 +271,8 @@ Asennuksissa ei tullut virheitä.
 Konfiguroitiin Salt slave eli host2-koneeseen master koneen tiedot muokkaamalla `/etc/salt/minion`-tiedostoa.
 ```
 vagrant@host2:~$ sudoedit /etc/salt/minion
-
+```
+```
 master: 10.1.0.11
 id: host2
 ```
@@ -309,7 +310,7 @@ vagrant@host1:~$ sudo salt '*' cmd.run 'uname -a'
 host2:
     Linux host2 5.10.0-28-amd64 #1 SMP Debian 5.10.209-2 (2024-01-31) x86_64 GNU/Linux
 ```
-Salt-koment palautti oikein slave-koneen tiedot.
+Salt-komento palautti oikein slave-koneen tiedot.
 
 ## d) Idempotentti komentojen ajo master-slave yhteydessä (9.4.2024 00:15-00:35)
 Tehtävänä oli ajaa idempotentteja komentoja (state.single) master-slave yhteyden yli. Apuna käytettiin [VMwaren Salt User Guidea](https://docs.saltproject.io/salt/user-guide/en/latest/).
@@ -454,9 +455,12 @@ vagrant@host1:~$ sudo mkdir /srv/salt/hello
 Jotta moduuli toimisi, kansioon lisättiin `init.sls`-tiedosto, johon sijoitettiin itse moduulin koodi. Lisäykseen käytetiin `sudoedit`-komentoa. Lopuksi tarkastettiin tiedoston sisältö.
 ```
 vagrant@host1:~$ sudoedit /srv/salt/hello/init.sls
+```
+```
 /tmp/helloleo:
   file.manage
-
+```
+```
 vagrant@host1:~$ cat /srv/salt/hello/init.sls
 /tmp/helloleo:
   file.managed
