@@ -11,10 +11,10 @@ Karvisen (2021) artikkelissa  käsiteltiin seuraavia aiheita:
 	* kuinka koneet voi poistaa Virtualbox:sta `vagrant destroy`-komennon avulla,
 	* kuinka koneet voi luoda uudelleen `vagrant up`-komennon avulla ja
  	* kuinka IP-osoitteen voi helposti selvittää Debianissa komennolla `hostname -I`.
-* Asennus voitiin tarkastaa molemmista koneista käyttämällä `ping`-komentoa.
+* Asennus ja kahden koneen välinen yhteys voitiin tarkastaa molemmista koneista käyttämällä `ping`-komentoa.
 
 ### Artikkeli [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/) (8.4.2024 20:45-21:15)
-Karvisen (2018) artikkelissa käsiteltiin kuinka Salt:n avulla voidaan käsitellä tuhansia koneita. Aluksi asennettiin päivitettiin apt:n katalogi ja sen jälkeen Salt master-kone sekä slave-kone.
+Karvisen (2018) artikkelissa käsiteltiin kuinka Salt:n avulla voidaan käsitellä tuhansia koneita. Aluksi asennettiin päivitettiin apt:n katalogi ja sen jälkeen asennettiin Salt master- ja slave-koneeseen.
 ```
 master$ sudo apt-get update
 master$ sudo apt-get -y install salt-master
@@ -28,11 +28,11 @@ slave$ sudoedit /etc/salt/minion
 master: 10.0.0.88
 id: slave
 ```
-Slave-koneen Salt-palvelu tuli käynnistää uudelleen.
+Slave-koneen `salt-minion`-palvelu tuli käynnistää uudelleen.
 ```
 slave$ sudo systemctl restart salt-minion.service
 ```
-Jotta master-kone voisi hyväksyä sille vieraan slave-koneen hallintaan, master-koneen tuli hyväksyä se manuaalisesti.
+Jotta master-kone voisi hyväksyä sille vieraan slave-koneen hallintaan, master-koneen tuli hyväksyä pyyntö manuaalisesti.
 ```
 master$ sudo salt-key -A
 Unaccepted Keys:
@@ -41,7 +41,7 @@ Proceed? [n/Y]
 Key for minion slave accepted.
 ```
 
-Tämän jälkeen slave-kone pystyi hallitsemaan yhtä konetta. Tämä voitiin tarkastaa esim. `whoami`-komennolla.
+Tämän jälkeen master-kone pystyi hallitsemaan yhtä slave-konetta. Tämä voitiin tarkastaa esim. `whoami`-komennolla.
 ```
 master$ sudo salt '*' cmd.run 'whoami'
 vagrant:
@@ -58,27 +58,18 @@ master$ sudo salt '*' sys.doc|less
 ```
 
 ### Artikkeli [Hello Salt Infra-as-Code](https://terokarvinen.com/2024/hello-salt-infra-as-code/) (8.4.2024 21:32-21:48)
-Karvisen (2024) artikkelissa luotiin "Hello, World!" Salt-konfiguraatio. (Saltin asennus oli kuvattu jo aiemmassa dokumentaatiossa, joten en kuvammut sitä tässä uudestaan.)
-Jotta Salt pystyi jakamaan hallitsemilleen koneille tiedostoja, luotiin salt-hakemisto master-koneelle.????????
-```
-slave$ sudo mkdir -p /srv/salt/hello/
-slave$ cd /srv/salt/hello/
-```
-Luodiin `init.sls`-tiedosto hakemistoon `/srv/salt/hello/` (hello kertoi moduulin nimen).
-```
-/tmp/helloleo:
-  file.managed
-```
-Käynnistettiiän `hello`-moduuli.
-```
-slave$ sudo salt-call --local state.apply hello
-```
+Karvisen (2024) artikkelissa luotiin "Hello, World!" Salt-konfiguraatio.
+
+Jotta Salt pystyi jakamaan hallitsemilleen koneille tiedostoja, luotiin `/srv/salt`-kansio master-koneelle. Lisäksi luotiin `hello`-moduulikansio `/srv/salt`-kansion alle.
+
+Jotta moduuli toimisi, sille luotiin `init.sls`-tiedosto moduulikansioon ja lopuksi Käynnistettiin `hello`-moduuli.
 
 ## a) Kaksi virtuaalikonetta (8.4.2024 21:55-22.35)
 Tehtävä oli asentaa kaksi virtuaalikonetta samaan verkkoon ja osoittamaan, että niitä pystyttiin käyttämään. Tehtävässä lopuksi testatiin toimivuus `ping`-komenolla. Tehtävässä käytettiin [Karvisen (2021) esimerkkiä](https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/) apuna.
 
-Luotiin uusi `Vagrantfile`-tiedosto `twohost`-hakemistoon. Omassa koneessani oli Windows 10 -käyttöjärjestelmä ja käytin git:n shelliä komentorivinä. Luodun tiedoston tulostus.
+Luotiin uusi `Vagrantfile`-tiedosto `twohost`-hakemistoon. Omassa koneessani oli Windows 10 -käyttöjärjestelmä ja käytin git:n shelliä komentorivinä sekä shell oli käynnistetty administrator-käyttäjänä. Luodun tiedoston tulostus
 ```
+leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/twohost
 $ cat Vagrantfile
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -288,7 +279,7 @@ Koska salt-palvelu oli päällä, se piti käynnistää uudelleen.
 ```
 vagrant@host2:~$ sudo systemctl restart salt-minion.service
 ```
-Jotta Salt master hyväksyy uuden slaven, sen ensin täytyi hyväksyä slaven avain.
+Jotta Salt master hyväksyi uuden slaven, sen ensin täytyi hyväksyä slaven avain.
 ```
 vagrant@host1:~$ sudo salt-key -A
 The following keys are going to be accepted:
@@ -321,7 +312,7 @@ host2:
 Salt-koment palautti oikein slave-koneen tiedot.
 
 ## d) Idempotentti komentojen ajo master-slave yhteydessä (9.4.2024 00:15-00:35)
-Tehtävänä oli ajaa idempotentteja (state.single) komentoja master-slave yhteyden yli. Apuna käytettiin [VMwaren Salt User Guidea](https://docs.saltproject.io/salt/user-guide/en/latest/).
+Tehtävänä oli ajaa idempotentteja komentoja (state.single) master-slave yhteyden yli. Apuna käytettiin [VMwaren Salt User Guidea](https://docs.saltproject.io/salt/user-guide/en/latest/).
 
 ### pkg.installed
 Tarkastettiin onko vim-editori asennettuna slavelle.
@@ -433,7 +424,7 @@ Kyllä cron-palvelu oli käynnissä. Tila on idempotentti, jos palvelu pysyy pys
 ## e) Tekninen tieto verkon yli (9.4.2024 00:55-01:00)
 Tehtävänä oli kerätä teknistä tietoa orjista verkon yli grans.item:n avulla.
 
-Haettin slave-koneelta käyttöjärjestelmätieto ja konfiguroitu Salt masterin IP-osoite.
+Haettiin slave-koneelta käyttöjärjestelmätieto ja konfiguroitu Salt masterin IP-osoite.
 ```
 vagrant@host1:~$ sudo salt '*' grains.item osfinger master
 host2:
@@ -443,16 +434,24 @@ host2:
     osfinger:
         Debian-11
 ```
+Varmistettiin master-koneen IP-osoite.
+```
+vagrant@host1:~$ hostname -I
+10.0.2.15 10.1.0.11
+```
+Master-koneen IP-osoite oli oikea.
 
 ## f) Hello, IaC, infraa koodina (9.4.2024 12:06-12:30)
 Tehtävänä oli kirjoittaa infraa koodina. Erilaiset luodut Saltin moduulit tuli sijoittaa `/srv/salt`-kansioon.
 
-Ensiksi luodaan moduulikansion juuri `/srv/salt` ja lisätään hello-moduulikansio master-koneella.
+Aluksi master-koneella luotiin moduulikansion juuri `/srv/salt` ja lisättiin hello-moduulikansio.
 ```
 vagrant@host1:~$ sudo mkdir -p /srv/salt
 vagrant@host1:~$ sudo mkdir /srv/salt/hello
 ```
-Luotiin hello-moduuli `/srv/salt/hello`-kansioon ja lisättiin `init.sls`-tiedosto, jonne sijoitetaan itse moduulin koodi. Lisäykseen käytetiin `sudoedit`-komentoa. Lopuksi tarkastettiin tiedoston sisältö.
+`hello`-moduulin kansio luotiin onnistuneesti.
+
+Jotta moduuli toimisi, kansioon lisättiin `init.sls`-tiedosto, johon sijoitettiin itse moduulin koodi. Lisäykseen käytetiin `sudoedit`-komentoa. Lopuksi tarkastettiin tiedoston sisältö.
 ```
 vagrant@host1:~$ sudoedit /srv/salt/hello/init.sls
 /tmp/helloleo:
@@ -462,7 +461,7 @@ vagrant@host1:~$ cat /srv/salt/hello/init.sls
 /tmp/helloleo:
   file.managed
 ```
-Näin luotiin idempotentti koodi.
+Näin luotiin idempotentti koodi moduulille.
 
 Otetaan moduuli käyttöön slave-koneilla ajamalla komento master-koneella.
 ```
@@ -511,7 +510,7 @@ Total run time:  10.524 ms
 ```
 Komento ei muuttanut tiedoston tilaa, joten tämä on idempotentti.
 
-Varmuuden vuoksi tarkastettiin vielä host2:lta, oliko tiedosto luotu/tmp-kansioon.
+Varmuuden vuoksi tarkastettiin vielä host2:lta, oliko tiedosto luotu `/tmp`-kansioon.
 ```
 vagrant@host1:~$ sudo salt '*' cmd.run 'ls -l /tmp/helloleo'
 host2:
