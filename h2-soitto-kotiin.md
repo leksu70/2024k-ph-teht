@@ -308,7 +308,7 @@ host2:
     fqdn:
         host2
 ```
-Kyllä yhteys toimi normaalisti.
+Yhteys toimi normaalisti ja slave-koneesta saatiin pyydetty tieto.
 
 ## c) Shell-komento orjalla (9.4.2024 11:40-11:43)
 Tehtävänä oli ajaa shell-komento slavella Saltin master-slave yhteyden yli ja siinä ajettiin `uname -a`-komento yhteyden yli.
@@ -444,8 +444,80 @@ host2:
         Debian-11
 ```
 
-## f) Hello, IaC, infraa koodina (9.4.2024 XXXXX-XXXXX)
-Tämä on kesken!
+## f) Hello, IaC, infraa koodina (9.4.2024 12:06-12:30)
+Tehtävänä oli kirjoittaa infraa koodina. Erilaiset luodut Saltin moduulit tuli sijoittaa `/srv/salt`-kansioon.
+
+Ensiksi luodaan moduulikansion juuri `/srv/salt` ja lisätään hello-moduulikansio master-koneella.
+```
+vagrant@host1:~$ sudo mkdir -p /srv/salt
+vagrant@host1:~$ sudo mkdir /srv/salt/hello
+```
+Luotiin hello-moduuli `/srv/salt/hello`-kansioon ja lisättiin `init.sls`-tiedosto, jonne sijoitetaan itse moduulin koodi. Lisäykseen käytetiin `sudoedit`-komentoa. Lopuksi tarkastettiin tiedoston sisältö.
+```
+vagrant@host1:~$ sudoedit /srv/salt/hello/init.sls
+/tmp/helloleo:
+  file.manage
+
+vagrant@host1:~$ cat /srv/salt/hello/init.sls
+/tmp/helloleo:
+  file.managed
+```
+Näin luotiin idempotentti koodi.
+
+Otetaan moduuli käyttöön slave-koneilla ajamalla komento master-koneella.
+```
+vagrant@host1:~$ sudo salt '*' state.apply hello
+host2:
+----------
+          ID: /tmp/helloleo
+    Function: file.managed
+      Result: True
+     Comment: Empty file
+     Started: 09:22:30.957802
+    Duration: 17.227 ms
+     Changes:
+              ----------
+              new:
+                  file /tmp/helloleo created
+
+Summary for host2
+------------
+Succeeded: 1 (changed=1)
+Failed:    0
+------------
+Total states run:     1
+Total run time:  17.227 ms
+```
+Komento suoritettiin onnistuneesti. Ajettiin komento uudelleen.
+```
+vagrant@host1:~$ sudo salt '*' state.apply hello
+host2:
+----------
+          ID: /tmp/helloleo
+    Function: file.managed
+      Result: True
+     Comment: File /tmp/helloleo exists with proper permissions. No changes made.
+     Started: 09:22:45.185628
+    Duration: 10.524 ms
+     Changes:
+
+Summary for host2
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  10.524 ms
+```
+Komento ei muuttanut tiedoston tilaa, joten tämä on idempotentti.
+
+Varmuuden vuoksi tarkastettiin vielä host2:lta, oliko tiedosto luotu/tmp-kansioon.
+```
+vagrant@host1:~$ sudo salt '*' cmd.run 'ls -l /tmp/helloleo'
+host2:
+    -rw-r--r-- 1 root root 0 Apr  9 09:22 /tmp/helloleo
+```
+Tiedosto oli luotu onnistuneesti slave-koneen (host2) oikeaan kansioon.
 
 ## Lähteet
 * Cousineau, D. 2021. Stackoverflow: How can I hide block of text using YouTrack Markdown syntax? https://stackoverflow.com/questions/51997371/how-can-i-hide-block-of-text-using-youtrack-markdown-syntax
