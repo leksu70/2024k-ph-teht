@@ -26,7 +26,7 @@ Tämän jälkeen muokattiin slave-koneen tietoihin master-koneen IP-osoite ja k�
 ```
 slave$ sudoedit /etc/salt/minion
 master: 10.0.0.88
-id: vagrant
+id: slave
 ```
 Slave-koneen Salt-palvelu tuli käynnistää uudelleen.
 ```
@@ -36,9 +36,9 @@ Jotta master-kone voisi hyväksyä sille vieraan slave-koneen hallintaan, master
 ```
 master$ sudo salt-key -A
 Unaccepted Keys:
-vagrant
+slave
 Proceed? [n/Y]
-Key for minion vagrant accepted.
+Key for minion slave accepted.
 ```
 
 Tämän jälkeen slave-kone pystyi hallitsemaan yhtä konetta. Tämä voitiin tarkastaa esim. `whoami`-komennolla.
@@ -310,8 +310,15 @@ host2:
 ```
 Kyllä yhteys toimi normaalisti.
 
-## c) Shell-komento orjalla (9.4.2024 00:14-00:15)
-Tehtävänä oli ajaa shell-komento slavella Saltin master-slave yhteyden yli. Tämä tehtävä tehtiin tehtävän b) lopussa ajamallla whoami shell-komento.
+## c) Shell-komento orjalla (9.4.2024 11:40-11:43)
+Tehtävänä oli ajaa shell-komento slavella Saltin master-slave yhteyden yli ja siinä ajettiin `uname -a`-komento yhteyden yli.
+```
+master$ sudo salt '*' cmd.run 'uname -a'
+vagrant@host1:~$ sudo salt '*' cmd.run 'uname -a'
+host2:
+    Linux host2 5.10.0-28-amd64 #1 SMP Debian 5.10.209-2 (2024-01-31) x86_64 GNU/Linux
+```
+Salt-koment palautti oikein slave-koneen tiedot.
 
 ## d) Idempotentti komentojen ajo master-slave yhteydessä (9.4.2024 00:15-00:35)
 Tehtävänä oli ajaa idempotentteja (state.single) komentoja master-slave yhteyden yli. Apuna käytettiin [VMwaren Salt User Guidea](https://docs.saltproject.io/salt/user-guide/en/latest/).
