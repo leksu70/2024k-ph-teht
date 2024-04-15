@@ -72,13 +72,18 @@ HEAD is now at f87fab1 Add tehtävä b - Dolly
 
 ## Tehtävä d - Tukki
 Ajettu `git log --patch --color`-komento tutkiakseni `2024k-ph-teht-summer`-varaston historiaa:
-* commit f87fab19a96eda1fa0119bb54b09baf0f5ce04a9:
+* `commit f87fab19a96eda1fa0119bb54b09baf0f5ce04a9`:
   * ajettu komento `git commit -m "Add tehtävä b - Dolly"`
   * muutoksen tekijä: `Leo Sutinen @PC <leo.sutinen@myy.haaga-helia.fi>`
   * muutosajankohta: `Mon Apr 15 22:02:57 2024 +0300`
   * muuttunut tiedosto: `README.md`
   * plus-merkillä alkavat rivit ovat lisäyksiä tiedostoon ja vastaavasti miinus-merkillä alkavat rivit ovat poistoja tiedostosta
   * `@@ -3,5 +3,19 @@` kertoo, että muutokset ovat riveillä 5-19.
+* `commit 8d87ad0209543427717d5518167ebb70279ae2b3`
+  * ajettu komento `git commit -m "Add lähde"`
+  * muutoksen tekijä: `Leo Sutinen @PC <leo.sutinen@myy.haaga-helia.fi>`
+  * muutosajankohta: `Mon Apr 15 21:36:22 2024 +0300`
+  * `@@ -1,7 +1,7 @@`: muutoksia tehty riville 7.
 
 ![Varaston 2024k-ph-teht-summer historia](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/tukki.png "Varaston 2024k-ph-teht-summer historiaa").
 
