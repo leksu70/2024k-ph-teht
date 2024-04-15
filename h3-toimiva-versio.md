@@ -33,7 +33,7 @@ Kloonasin Tero Karvisen suolax-tietovaraston omalle koneelle komennolla
   * muutos on tehty "Wed Apr 10 20:04:43 2024 +0300" eli silloin on ajettu `git commit -m "Clean up README.md"`, mutta sitä ennen oli ajettu `git add .`, muuttuneet tiedostot olivat `Makefile` ja `README.md`
 * ja niin edelleen.
 
-![Tero Karvisen git-varaston suolax historia.](https://github.com/leksu70/2024k-ph-teht/blob/master/blob/master/kuvat/suolax.png "git log --patch ---color | less -R")
+![Tero Karvisen git-varaston suolax historia.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/suolax.png "git log --patch ---color | less -R")
 
 
 Lähteenä on käytetty [Chacon & Straubin (2024b) websivuston lukua 2.3](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).
