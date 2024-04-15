@@ -87,7 +87,13 @@ Ajettu `git log --patch --color`-komento tutkiakseni `2024k-ph-teht-summer`-vara
 
 ![Varaston 2024k-ph-teht-summer historia](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/tukki.png "Varaston 2024k-ph-teht-summer historiaa").
 
+# Tehtävä e - Suolattu rakki
+Tero Karvisen (2024) tehtävässä pyydettiin ajamaan Salt-tiloja omasta varastostasi. "(Salt tiedostot mistä vain hakemistosta `--file-root teronSaltHakemisto`. Esimerkiksi `sudo salt-call --local --file-root srv/salt/ state.apply`, huomaa suhteellinen polku)".
+
+Loin [uuden varaston](https://github.com/leksu70/2024k-ph-vko3-teht-e) GitHubiin [Tero Karvisen (2023)](https://terokarvinen.com/2023/create-a-web-page-using-github/) ohjeita mukaillen.
+
 ## Lähteet
   * Chacon, S. & Straub, B. 2014a. Pro Git: 1.3 Getting Started - What is Git?. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
   * Chacon, S. & Straub, B. 2014b. Pro Git: 2.3 Git Basics - Viewing the Commit History. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
   * Karvinen, T. 2023. Blogiteksti. https://terokarvinen.com/2023/create-a-web-page-using-github/
+  * Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024 -kurssi. https://terokarvinen.com/2024/configuration-management-2024-spring/
