@@ -56,7 +56,7 @@ Receiving objects: 100% (10/10), 13.64 KiB | 229.00 KiB/s, done.
 Resolving deltas: 100% (1/1), done.)
 ```
 Tehty muutoksia `README.md`-tiedostoon. Gitin varasto näyttää nyt tältä:
-![Päivitetty 2024k-ph-teht-summer-varasto](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/summer.png "GitHubin Dolly päivitetty varastoon 2024k-ph-teht-summer").
+![Päivitetty 2024k-ph-teht-summer-varasto](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/dolly.png "GitHubin Dolly päivitetty varastoon 2024k-ph-teht-summer").
 
 
 ## Lähteet
