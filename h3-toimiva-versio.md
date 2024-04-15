@@ -80,8 +80,7 @@ Ajettu `git log --patch --color`-komento tutkiakseni `2024k-ph-teht-summer`-vara
   * plus-merkillä alkavat rivit ovat lisäyksiä tiedostoon ja vastaavasti miinus-merkillä alkavat rivit ovat poistoja tiedostosta
   * `@@ -3,5 +3,19 @@` kertoo, että muutokset ovat riveillä 5-19.
 
-![Varaston historia](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/tukki.png "Varastoon 2024k-ph-teht-summer" historia.)
-
+![Varaston 2024k-ph-teht-summer historia](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/tukki.png "Varaston 2024k-ph-teht-summer historiaa").
 
 ## Lähteet
   * Chacon, S. & Straub, B. 2014a. Pro Git: 1.3 Getting Started - What is Git?. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
