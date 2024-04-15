@@ -58,6 +58,18 @@ Resolving deltas: 100% (1/1), done.)
 Tehty muutoksia `README.md`-tiedostoon. Gitin varasto näyttää nyt tältä:
 ![Päivitetty 2024k-ph-teht-summer-varasto](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/dolly.png "GitHubin Dolly päivitetty varastoon 2024k-ph-teht-summer").
 
+## Tehtävä c - Doh!
+Tehty tyhmä muutos 2024k-ph-teht-summer-dolly-hakemistoon ja ajettu peruutuskomento.
+
+
+```
+leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/2024k-ph-teht-summer-dolly (master)
+$ git add .
+
+leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/2024k-ph-teht-summer-dolly (master)
+$ git reset --hard
+HEAD is now at f87fab1 Add tehtävä b - Dolly
+```
 
 ## Lähteet
   * Chacon, S. & Straub, B. 2014a. Pro Git: 1.3 Getting Started - What is Git?. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
