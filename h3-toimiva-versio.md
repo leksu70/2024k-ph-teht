@@ -79,8 +79,6 @@ Ajettu `git log --patch --color`-komento tutkiakseni `2024k-ph-teht-summer`-vara
   * muuttunut tiedosto: `README.md`
   * plus-merkillä alkavat rivit ovat lisäyksiä tiedostoon ja vastaavasti miinus-merkillä alkavat rivit ovat poistoja tiedostosta
   * `@@ -3,5 +3,19 @@` kertoo, että muutokset ovat riveillä 5-19.
-  * 
- 
 
 ![Varaston historia](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/tukki.png "Varastoon 2024k-ph-teht-summer" historia.)
 
