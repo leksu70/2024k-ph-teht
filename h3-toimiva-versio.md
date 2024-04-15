@@ -1,6 +1,6 @@
 # h3 Toimiva versio
 
-## Tehtävä x)
+## Tehtävä x
 Tehtävänä on lukea ja tiivistää [Chaconin ja Straubin (2014a) esittely Git:stä](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F):
 * Git käsittelee tietoja kuin se käsittelisi pienen tiedostojärjestelmän snapshottien sarjoja. Jotta Git olisi tehokas, se ei tallenna kopiota muuttumattomista tiedoista vaan luo linkin edelliseen aikaisemmin tallennettuun tietoon. Gitin tiedot ovat kuin snapshottien sarja.
 * Gitin etuihin kuuluu mm. se, että melkein kaikki Gitin tapahtumat ovat paikallisia eli ne tapahtuvat omassa koneessa eikä Gitin palvelin puolen järjestelmässä (remote). Tämän vuoksi Git ei rasita verkkoa eikä palvelimen päätä. Esimerkkinä Git-projektin historian selaaminen: Git hakee tarvittavat tiedot paikallisesta Gitin tietokannasta eikä tähän tarvita muita tietokoneita (esim. palvelinta).
@@ -35,9 +35,14 @@ Kloonasin Tero Karvisen suolax-tietovaraston omalle koneelle komennolla
 
 ![Tero Karvisen git-varaston suolax historia.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/suolax.png "git log --patch ---color | less -R")
 
-
 Lähteenä on käytetty [Chacon & Straubin (2024b) websivuston lukua 2.3](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).
+
+
+## Tehtävä a - online
+Luotu uusi [2024k-ph-teht-summer-varasto](https://github.com/leksu70/2024k-ph-teht-summer) GitHubiin mukaillen Tero Karvisen (2023) blogitekstiä.
+![2024k-ph-teht-summer varasto luotu GitHubiin.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/summer.png "GitHubin varasto 2024k-ph-teht-summer")
 
 ## Lähteet
   * Chacon, S. & Straub, B. 2014a. Pro Git: 1.3 Getting Started - What is Git?. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
   * Chacon, S. & Straub, B. 2014b. Pro Git: 2.3 Git Basics - Viewing the Commit History. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+  * Karvinen, T. 2023. Blogiteksti. https://terokarvinen.com/2023/create-a-web-page-using-github/
