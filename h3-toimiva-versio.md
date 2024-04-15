@@ -42,6 +42,23 @@ Lähteenä on käytetty [Chacon & Straubin (2024b) websivuston lukua 2.3](https:
 Luotu uusi [2024k-ph-teht-summer-varasto](https://github.com/leksu70/2024k-ph-teht-summer) GitHubiin mukaillen Tero Karvisen (2023) blogitekstiä.
 ![2024k-ph-teht-summer varasto luotu GitHubiin.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/summer.png "GitHubin varasto 2024k-ph-teht-summer")
 
+## Tehtävä b - online
+Kloonattu tehtävän a varasto uuteen 2024k-ph-teht-summer-dolly-hakemistoon.
+```
+leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant
+$ git clone git@github.com:leksu70/2024k-ph-teht-summer.git 2024k-ph-teht-summer-dolly
+Cloning into '2024k-ph-teht-summer-dolly'...
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 10 (delta 1), reused 5 (delta 0), pack-reused 0
+Receiving objects: 100% (10/10), 13.64 KiB | 229.00 KiB/s, done.
+Resolving deltas: 100% (1/1), done.)
+```
+Tehty muutoksia `README.md`-tiedostoon. Gitin varasto näyttää nyt tältä:
+![Päivitetty 2024k-ph-teht-summer-varasto](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/summer.png "GitHubin Dolly päivitetty varastoon 2024k-ph-teht-summer").
+
+
 ## Lähteet
   * Chacon, S. & Straub, B. 2014a. Pro Git: 1.3 Getting Started - What is Git?. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
   * Chacon, S. & Straub, B. 2014b. Pro Git: 2.3 Git Basics - Viewing the Commit History. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
