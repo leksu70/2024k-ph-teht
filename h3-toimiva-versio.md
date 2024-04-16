@@ -90,7 +90,59 @@ Ajettu `git log --patch --color`-komento tutkiakseni `2024k-ph-teht-summer`-vara
 # Tehtävä e - Suolattu rakki
 Tero Karvisen (2024) tehtävässä pyydettiin ajamaan Salt-tiloja omasta varastostasi. "(Salt tiedostot mistä vain hakemistosta `--file-root teronSaltHakemisto`. Esimerkiksi `sudo salt-call --local --file-root srv/salt/ state.apply`, huomaa suhteellinen polku)".
 
-Loin [uuden varaston](https://github.com/leksu70/2024k-ph-vko3-teht-e) GitHubiin [Tero Karvisen (2023)](https://terokarvinen.com/2023/create-a-web-page-using-github/) ohjeita mukaillen.
+Loin [uuden varaston `2024k-ph-vko3-teht-e`](https://github.com/leksu70/2024k-ph-vko3-teht-e) GitHubiin [Tero Karvisen (2023)](https://terokarvinen.com/2023/create-a-web-page-using-github/) ohjeita mukaillen.
+
+Loin oman `srv/salt`-hakemistorakenteen, jonne lisäsin `hello`- ja `favourites`-kansiot.
+```
+vagrant@host1:~/gits/2024k-ph-vko3-teht-e$ tree
+.
+├── LICENSE
+├── README.md
+└── srv
+    └── salt
+        ├── favourites
+        │   └── init.sls
+        ├── hello
+        │   └── init.sls
+        └── top.sls
+
+4 directories, 5 files
+```
+
+`favourites/init.sls`-tiedoston sisältö:
+```
+tree:
+  pkg.installed
+
+favourite-packages:
+  pkg.installed:
+    - pkgs:
+      - git
+      - cowsay
+      - cmatrix
+      - trash-cli
+      - wget
+      - curl
+      - finger
+      - fingerd
+```
+
+Ja `hello/init.sls`-tiedoston sisältö:
+```
+file_helloleo:
+  file.managed:
+    - name: /tmp/helloleo
+    - user: vagrant
+    - group: vagrant
+    - mode: 640
+    - contents:
+      - Rivi 1
+      - Rivi 2
+```
+![Salt-komento ajettu.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/vko3-teht-e-hello-apply.png "Ajettu salt-komento:") `sudo salt-call --local --file-root srv/salt/ state.apply hello`.
+
+Ajettu komento sudo `salt-call --local --file-root srv/salt/ state.apply`, jolloin myös `favourites` on ajettu.
+![Salt-komento ajettu kaikille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/vko3-teht-e-all-apply.png "Ajettu salt-komento kaikille").
 
 ## Lähteet
   * Chacon, S. & Straub, B. 2014a. Pro Git: 1.3 Getting Started - What is Git?. 2. painos. Luettavissa: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
