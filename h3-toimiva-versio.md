@@ -139,7 +139,14 @@ file_helloleo:
       - Rivi 1
       - Rivi 2
 ```
-![Salt-komento ajettu.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/vko3-teht-e-hello-apply.png "Ajettu salt-komento:") `sudo salt-call --local --file-root srv/salt/ state.apply hello`.
+
+Ajetaan salt-komento vain `hello`:lle: 
+
+```
+sudo salt-call --local --file-root srv/salt/ state.apply hello
+```
+
+![Salt-komento ajettu.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/vko3-teht-e-hello-apply.png "Ajettu salt-komento.") 
 
 Ajettu komento sudo `salt-call --local --file-root srv/salt/ state.apply`, jolloin myös `favourites` on ajettu.
 ![Salt-komento ajettu kaikille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/vko3-teht-e-all-apply.png "Ajettu salt-komento kaikille").
