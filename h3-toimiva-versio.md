@@ -69,6 +69,7 @@ leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/2024k-ph-teht-summer-dolly (master)
 $ git reset --hard
 HEAD is now at f87fab1 Add tehtävä b - Dolly
 ```
+Huomattavaa on, että kaikki muutokset poistuivat ja tiedoston muutokset poistuivat.
 
 ## Tehtävä d - Tukki
 Ajettu `git log --patch --color`-komento tutkiakseni `2024k-ph-teht-summer`-varaston historiaa:
