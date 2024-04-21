@@ -185,6 +185,46 @@ Apache ja curl otettu käyttöön onnistuneesti.
 
 Päädyin välillä tilanteeseen, jolloin `sudo salt-call --local state.apply apache`-komennon ajo päättyi **killed**-tilaan ja suoraan komentokehotteeseen. Ajoin tämän jälkeen `echo $?`-komennon ja paluuarvo oli 137. Tämä paluuarvo saattaa merkitä muistin loppumista (paging).
 
+## Tehtävä d - SSH outo
+Tehtävä tehty 21.4.2024 klo 20.45-
+Tehtävänä on lisätä ylimääräinen portti SSH:lle.
+
+### Lisäys manuaalisesti
+Käytössä kaksi Linux-konetta (host1 ja host2). Lisätään host2:n `~/.ssh/id_rsa.pub`-tiedoston sisältö host1:n `~/.ssh/authorized_keys`-tiedoston loppuun, jotta kirjautuessa host2:lta host1:lle voidaan käyttää julkista avainta.
+
+Lisätään `/etc/ssh/sshd_config`-tiedostoon kaksi porttia.
+```
+Port 22
+Port 8022
+```
+
+Käynnistetään sshd-palvelu uudelleen `sudo systemctl restart sshd`-komennolla.
+
+Yritetään kirjautua host2-koneelta host1-koneelle (käyttäjätunnus on vagrant).
+```
+vagrant@host2:~/.ssh$ ssh 10.1.0.11 -p 8022
+The authenticity of host '[10.1.0.11]:8022 ([10.1.0.11]:8022)' can't be established.
+ECDSA key fingerprint is SHA256:keZRfnMRYBlWbnq423AabLFYfkN0kNpDrVvd7LjFcAE.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[10.1.0.11]:8022' (ECDSA) to the list of known hosts.
+Linux host1 5.10.0-28-amd64 #1 SMP Debian 5.10.209-2 (2024-01-31) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Apr 21 18:13:26 2024 from 10.1.0.12
+vagrant@host1:~$ hostname
+host1
+```
+
+Kirjautuminen onnistui normaalisti.
+
+
+
+
 
 # Lähteet
 Karvinen, T. 2018. Pkg-File-Service – Control Daemons with Salt – Change SSH Server Port. Blogi. https://terokarvinen.com/2018/04/03/pkg-file-service-control-daemons-with-salt-change-ssh-server-port/?fromSearch=karvinen%20salt%20ssh.
