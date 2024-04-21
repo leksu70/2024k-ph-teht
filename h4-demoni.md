@@ -36,7 +36,7 @@ Otetaan hello-tila käyttöön `sudo salt-call --local state.apply hello`.
 Tarkastetaan toimiiko hello-tila odotuksen mukaisesti.
 ![hello-tila ja luodun tiedoston sisältö.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h4-a-hello.png "Hello-tila ja luodun tiedoston sisältö.")
 
-Hello-tila luotu onnistuneesti.
+Hello-tila luotu onnistuneesti master-koneelle.
 
 ## Tehtävä b - Top. `top.sls`
 Tehtävä tehty 21.4.2024 klo 16.45-17.05.
@@ -48,7 +48,7 @@ base:
     - hello
 ```
 
-Otetaan hello-tila käyttöön salt-orjilla (salt-minion) `sudo salt '*' state.apply`.
+Otetaan hello-tila käyttöön salt-orjilla (salt-minion) ajamalla komento salt-masterilla (host1) `sudo salt '*' state.apply`.
 ![Orjien hello-tila.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h4-b-top.png "Orjien hello-tila.")
 
 Tarkastetaan orjakoneelta hello-tiedoston sisältö.
