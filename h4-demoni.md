@@ -105,7 +105,7 @@ Hello, tämä on tyhjä index.html-tiedosto host0-koneella.
 Apache-palvelu toimii normaalisti.
 
 ### Apachen käyttöönotto automaattisesti Salt-tilan avulla
-Tehtävä tehty 21.4.2024 klo 18.10-XXXXXXXXX
+Tehtävä tehty 21.4.2024 klo 18.10-20.28.
 
 Otetaan Apache-palvelin käyttöön käyttäen Saltin tilaa hyväksi.
 
@@ -123,12 +123,6 @@ curl:
 /etc/apache2/sites-available/leosite.conf:
   file.managed:
     - source: "salt://apache/leosite.conf"
-    - watch_in:
-      - service: "apache2.service"
-
-# Poistetaan oletus palvelin.
-/etc/apache2/sites-enabled/000-default.conf:
-  file.absent:
     - watch_in:
       - service: "apache2.service"
 
@@ -150,16 +144,21 @@ curl:
 # Leosite-palvelimen pääsivu
 /home/vagrant/publicsites/leo/index.html:
   file.managed:
-    - source: "salt://apache/index.html"
     - user: vagrant
     - group: vagrant
-#    - watch_in:
-#      - service: "apache2.service"
+    - source: "salt://apache/index.html"
+    - watch_in:
+      - service: "apache2.service"
+
+# Poistetaan oletus palvelin.
+/etc/apache2/sites-enabled/000-default.conf:
+  file.absent:
+    - watch_in:
+      - service: "apache2.service"
 
 # Apachen palvelun seuranta
 apache2.service:
   service.running
-
 ```
 
 Luodaan `leosite.conf`-konfiguraatiotiedosto Apachea varten Saltin apache-kansioon komennolla `sudo vi /srv/salt/apache/leosite.conf`.
@@ -184,7 +183,7 @@ Otetaan apache käyttöön Salt-masterilla komennolla `sudo salt-call --local st
 
 Apache ja curl otettu käyttöön onnistuneesti.
 
-
+Päädyin välillä tilanteeseen, jolloin `sudo salt-call --local state.apply apache`-komennon ajo päättyi **killed**-tilaan ja suoraan komentokehotteeseen. Ajoin tämän jälkeen `echo $?`-komennon ja paluuarvo oli 137. Tämä paluuarvo saattaa merkitä muistin loppumista (paging).
 
 
 # Lähteet
