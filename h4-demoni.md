@@ -178,7 +178,7 @@ Luodaan `index.html`-tiedosto leosite:a varten komennolla `sudo vi /srv/salt/apa
 Hello, tämä on tyhjä index.html-tiedosto.
 ```
 
-Otetaan apache käyttöön Salt-masterilla komennolla `sudo salt-call --local state.apply apache` ja tarkastetaan Apache-serverin tila `curl -s curl -s 10.1.0.11`.
+Otetaan apache käyttöön Salt-masterilla komennolla `sudo salt-call --local state.apply apache` ja tarkastetaan Apache-serverin tila `curl -s 10.1.0.11`.
 
 ![Masterin apache-tila.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h4-c-apache.png "Masterin apache-tila.")
 
@@ -191,7 +191,7 @@ Tehtävä tehty 21.4.2024 klo 20.45-22.30.
 Tehtävänä on lisätä ylimääräinen portti SSH:lle.
 
 ### Lisäys manuaalisesti
-Käytössä kaksi Linux-konetta (host1 ja host2). Lisätään host2:n `~/.ssh/id_rsa.pub`-tiedoston sisältö host1:n `~/.ssh/authorized_keys`-tiedoston loppuun, jotta kirjautuessa host2:lta host1:lle voidaan käyttää julkista avainta.
+Käytössä kaksi Linux-konetta (host1 ja host2). Lisätään host2:n `~/.ssh/id_rsa.pub`-tiedoston sisältö host1:n `~/.ssh/authorized_keys`-tiedoston loppuun, jotta kirjautuessa host2:lta host1:lle voidaan käyttää salaista avainta (epäsymmetrinen salaus).
 
 Lisätään `/etc/ssh/sshd_config`-tiedostoon kaksi porttia.
 ```
