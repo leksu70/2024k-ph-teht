@@ -59,6 +59,54 @@ Hei maailma!
 
 Top-tilan käyttöönotto onnistui ja orjakoneelle luotiin tiedosto onnistuneesti.
 
+## Tehtävä c - Apache easy mode
+
+### Apachen käyttöönotto manuaalisesti
+Tehtävä tehty 21.4.2024 klo 17.20-17.45.
+
+Tehtävänä on ottaa Apache käyttöön manuaalisesti.
+
+Asennetaan tarvittavat sovellukset Apache ja Curl.
+```
+vagrant@host0:~/$ sudo apt-get install apache2 curl -y
+```
+
+Luodaan Apache-serverin käyttämä konfiguraatiokansio ja konfiguraatio tiedostoon `index.html`.
+```
+vagrant@host0:~$ mkdir -p publicsites/leo
+vagrant@host0:~$ cd publicsites/leo
+vagrant@host0:~/publicsites/leo$ cat <<EOF >> index.html
+Hello, tämä on tyhjä index.html-tiedosto host0-koneella.
+> EOF
+```
+
+Siirytään Apache-site:n konfigurointikansioon `cd /etc/apache2/sites-available`-komennolla ja luodaan oma apache-palvelimen `leosite.conf`-konfiguraatio.
+```
+vagrant@host0:/etc/apache2/sites-available$ sudo vi leosite.conf
+<VirtualHost *:80>
+ ServerName leo
+ DocumentRoot /home/vagrant/publicsites/leo/
+ <Directory /home/vagrant/publicsites/leo/ >
+   Require all granted
+ </Directory>
+</VirtualHost>
+```
+
+Siirtytään Apache-site:n aktivointikansioon `cd /etc/apache2/sites-enabled`-komennolla ja disabloidaa oletuspalvelin komennolla `sudo a2dissite 000-default.conf`. Aktivoidaan uusi juuri luotu leosite-palvelin komennolla `sudo a2ensite leosite.conf` ja käynnistetään Apache uudelleen `sudo systemctl reload apache2`.
+
+Tarkastetaan Apachen toimivuus `curl`-komennon avulla.
+```
+vagrant@host0:~$ hostname -I
+10.0.2.15 10.1.0.10
+vagrant@host0:~$ curl -s 10.1.0.10
+Hello, tämä on tyhjä index.html-tiedosto host0-koneella.
+```
+
+Apache-palvelu toimii normaalisti.
+
+### Apachen käyttöönotto automaattisesti Salt-tilan avulla
+
+
 
 # Lähteet
 Karvinen, T. 2018. Pkg-File-Service – Control Daemons with Salt – Change SSH Server Port. Blogi. https://terokarvinen.com/2018/04/03/pkg-file-service-control-daemons-with-salt-change-ssh-server-port/?fromSearch=karvinen%20salt%20ssh.
