@@ -14,7 +14,7 @@ Tehtävänä on lukea ja tiivistää tärkeimmät asiat muutamalla ranskalaisell
 Lopuksi silmäilin Saltin ohjeita pkg-, file- ja service-tilafunktioille.
 
 ## Tehtävä a - Hello SLS!
-Tehtävä tehty 21.4.2024 klo 16.10-XXXX
+Tehtävä tehty 21.4.2024 klo 16.10-16.40.
 
 Tehtävänä on luoda "Hei maailma"-tila tekstitiedostoon.
 
@@ -35,6 +35,8 @@ Otetaan hello-tila käyttöön `sudo salt-call --local state.apply hello`.
 
 Tarkastetaan toimiiko hello-tila odotuksen mukaisesti.
 ![hello-tila ja luodun tiedoston sisältö.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h4-a-hello.png "Hello-tila ja luodun tiedoston sisältö.")
+
+Hello-tila luotu onnistuneesti.
 
 # Lähteet
 Karvinen, T. 2018. Pkg-File-Service – Control Daemons with Salt – Change SSH Server Port. Blogi. https://terokarvinen.com/2018/04/03/pkg-file-service-control-daemons-with-salt-change-ssh-server-port/?fromSearch=karvinen%20salt%20ssh.
