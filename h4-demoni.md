@@ -1,7 +1,8 @@
 # H4 - demoni
 
 # Tehtävä x - Lue ja tiivistä
-Aloitettu Windows 10 -koneella 21.4.2024 klo 15.15.
+Tehty Windows 10 -koneella 21.4.2024 klo 15.15-15.45.
+
 Tehtävänä on lukea ja tiivistää tärkeimmät asiat muutamalla ranskalaisella viivalla [Karvisen (2023) blogista](https://terokarvinen.com/2023/salt-vagrant/#infra-as-code---your-wishes-as-a-text-file), [Saltin (2024) ohjeista](https://docs.saltproject.io/salt/user-guide/en/latest/topics/overview.html#rules-of-yaml) ja [Karvisen (2018) blogista](https://terokarvinen.com/2018/04/03/pkg-file-service-control-daemons-with-salt-change-ssh-server-port/?fromSearch=karvinen%20salt%20ssh).
 
 * [Karvisen (2023) blogi](https://terokarvinen.com/2023/salt-vagrant/#infra-as-code---your-wishes-as-a-text-file) esittelee "Hello World!":in saltin tilan (```/srv/salt/hello/init.sls```) ja hallittavien koneiden (slave/orja) tilat (```/srv/salt/top.sls```).
