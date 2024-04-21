@@ -105,6 +105,85 @@ Hello, tämä on tyhjä index.html-tiedosto host0-koneella.
 Apache-palvelu toimii normaalisti.
 
 ### Apachen käyttöönotto automaattisesti Salt-tilan avulla
+Tehtävä tehty 21.4.2024 klo 18.10-XXXXXXXXX
+
+Otetaan Apache-palvelin käyttöön käyttäen Saltin tilaa hyväksi.
+
+Luodaan ensin Saltin-tilaan Apache-kansio `sudo mkdir -p /srv/salt/apache` ja luodaan `init.sls`-tiedosto `sudo vi /srv/salt/apache/init.sls`-komennolla.
+```
+# Apachen asennus
+apache2:
+  pkg.installed
+
+# Asennetaan curl komentorivitestausta varten
+curl:
+  pkg.installed
+
+# Apachen leosite-palvelin
+/etc/apache2/sites-available/leosite.conf:
+  file.managed:
+    - source: "salt://apache/leosite.conf"
+    - watch_in:
+      - service: "apache2.service"
+
+# Poistetaan oletus palvelin.
+/etc/apache2/sites-enabled/000-default.conf:
+  file.absent:
+    - watch_in:
+      - service: "apache2.service"
+
+# Aktivoidaan leosite-palvelin
+/etc/apache2/sites-enabled/leosite.conf:
+  file.symlink:
+    - target: "../sites-available/leosite.conf"
+    - watch_in:
+      - service: "apache2.service"
+
+# Leosite-palvelimen juuri
+/home/vagrant/publicsites/leo:
+  file.directory:
+    - user: vagrant
+    - group: vagrant
+    - mode: 755
+    - makedirs: True
+
+# Leosite-palvelimen pääsivu
+/home/vagrant/publicsites/leo/index.html:
+  file.managed:
+    - source: "salt://apache/index.html"
+    - user: vagrant
+    - group: vagrant
+#    - watch_in:
+#      - service: "apache2.service"
+
+# Apachen palvelun seuranta
+apache2.service:
+  service.running
+
+```
+
+Luodaan `leosite.conf`-konfiguraatiotiedosto Apachea varten Saltin apache-kansioon komennolla `sudo vi /srv/salt/apache/leosite.conf`.
+```
+<VirtualHost *:80>
+  ServerName leksula
+  DocumentRoot /home/vagrant/publicsites/leo/
+  <Directory /home/vagrant/publicsites/leo/>
+    Require all granted
+  </Directory>
+</VirtualHost>
+```
+
+Luodaan `index.html`-tiedosto leosite:a varten komennolla `sudo vi /srv/salt/apache/index.html`.
+```
+Hello, tämä on tyhjä index.html-tiedosto.
+```
+
+Otetaan apache käyttöön Salt-masterilla komennolla `sudo salt-call --local state.apply apache` ja tarkastetaan Apache-serverin tila `curl -s curl -s 10.1.0.11`.
+
+![Masterin apache-tila.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h4-c-apache.png "Masterin apache-tila.")
+
+Apache ja curl otettu käyttöön onnistuneesti.
+
 
 
 
