@@ -39,7 +39,7 @@ Tarkastetaan toimiiko hello-tila odotuksen mukaisesti.
 Hello-tila luotu onnistuneesti master-koneelle.
 
 ## Tehtävä b - Top. `top.sls`
-Tehtävä tehty 21.4.2024 klo 16.45-17.05.
+Tehtävä tehty 21.4.2024 klo 16.45-17.05. Tehtävässä käytetty apuna Tero Karvisen 17.4.2024 pidetystä luennosta omia muistiinpanoja.
 
 Tilojen ajo automaattisesti onnistuu muokkaamalla `top.sls`-tiedostoa ja lisäämällä siihen halutut tilat `sudo vi /srv/salt/top.sls`-komennolla.
 ```
@@ -60,9 +60,10 @@ Hei maailma!
 Top-tilan käyttöönotto onnistui ja orjakoneelle luotiin tiedosto onnistuneesti.
 
 ## Tehtävä c - Apache easy mode
+Tämä tehtävä sisältää myös tehtävän e, joka on vapaaehtoinen tehtävä.
 
 ### Apachen käyttöönotto manuaalisesti
-Tehtävä tehty 21.4.2024 klo 17.20-17.45.
+Tehtävä tehty 21.4.2024 klo 17.20-17.45. Tehtävässä käytetty apuna Tero Karvisen 17.4.2024 pidetystä luennosta omia muistiinpanoja.
 
 Tehtävänä on ottaa Apache käyttöön manuaalisesti.
 
@@ -186,7 +187,7 @@ Apache ja curl otettu käyttöön onnistuneesti.
 Päädyin välillä tilanteeseen, jolloin `sudo salt-call --local state.apply apache`-komennon ajo päättyi **killed**-tilaan ja suoraan komentokehotteeseen. Ajoin tämän jälkeen `echo $?`-komennon ja paluuarvo oli 137. Tämä paluuarvo saattaa merkitä muistin loppumista (paging).
 
 ## Tehtävä d - SSH outo
-Tehtävä tehty 21.4.2024 klo 20.45-
+Tehtävä tehty 21.4.2024 klo 20.45-22.30.
 Tehtävänä on lisätä ylimääräinen portti SSH:lle.
 
 ### Lisäys manuaalisesti
@@ -222,9 +223,69 @@ host1
 
 Kirjautuminen onnistui normaalisti.
 
+### Lisäys käyttäen Salt-tilaa
+Poistetaan host2:lta lisätty tunnettu palvelin poistamalla rivi `~/ssh/known_hosts`-tiedostosta. Jätetään kuitenkin host2:den julkinen avain host1:n `~/.ssh/authorized_keys`-tiedostoon. Poistetaan `Port 22` ja `Port 8022` `/etc/ssh/sshd_config`-tiedostosta.
 
+Käynnistetään sshd-palvelu manuaalisesti komennolla `sudo systemctl restart sshd.service`.
 
+Luodaan uusi Saltin tila `/srv/salt/sshd`-kansioon ja kopioidaan `/etc/ssh/sshd_config`-tiedosto sinne talteen `sshd_config.cfg`-tiedostoon sekä lisätään `Port 22` ja `Port 8022` `sshd_config.cfg`-tiedostoon.
+```
+vagrant@host1:~/.ssh$ sudo mkdir -p /srv/salt/sshd
+vagrant@host1:~/.ssh$ sudo cp -p /etc/ssh/sshd_config /srv/salt/sshd/sshd_config.cfg
+vagrant@host1:~/.ssh$ sudo vi /srv/salt/sshd/sshd_config.cfg
+...
+Port 22
+port 8022
+...
+```
 
+Luodaan uusi Salt-tila sshd:lle muokkaamalla `/srv/salt/sshd/init.sls`-tiedostoa.
+```
+openssh-server:
+  pkg.installed
+
+/etc/ssh/sshd_config:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - source: "salt://sshd/sshd_config.cfg"
+    - watch_in:
+      - service: "sshd.service"
+
+# SSHd palvelun seuranta
+sshd.service:
+  service.running
+```
+
+#### Testataan toimivuus
+Kokeillaan ssh-yhteyttä host2:lta host1:lle ja se epäonnistuu kuten pitääkin.
+```
+vagrant@host2:~/.ssh$ ssh 10.1.0.11 -p 8022
+ssh: connect to host 10.1.0.11 port 8022: Connection refused
+```
+
+Ajetaan `sudo salt-call --local state.apply sshd`-komento ja tarkastetaan kirjautuminen.
+```
+vagrant@host2:~/.ssh$ ssh 10.1.0.11 -p 8022
+The authenticity of host '[10.1.0.11]:8022 ([10.1.0.11]:8022)' can't be established.
+ECDSA key fingerprint is SHA256:keZRfnMRYBlWbnq423AabLFYfkN0kNpDrVvd7LjFcAE.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[10.1.0.11]:8022' (ECDSA) to the list of known hosts.
+Linux host1 5.10.0-28-amd64 #1 SMP Debian 5.10.209-2 (2024-01-31) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Apr 21 18:29:05 2024 from 10.1.0.12
+vagrant@host1:~$ hostname
+host1
+```
+
+Kirjautuminen onnistui, kuten pitääkin.
 
 # Lähteet
 Karvinen, T. 2018. Pkg-File-Service – Control Daemons with Salt – Change SSH Server Port. Blogi. https://terokarvinen.com/2018/04/03/pkg-file-service-control-daemons-with-salt-change-ssh-server-port/?fromSearch=karvinen%20salt%20ssh.
