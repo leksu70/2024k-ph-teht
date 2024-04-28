@@ -31,12 +31,16 @@ Testataan, toimiiko uusi minion odotetusti komennolla
 ## Tehtävä a - Windows
 Tehtävänä on asentaa Salt Windowsille. Salt on asennettu aikaisemmin, joten tarkastetaan asennus komennolla `salt-call --local`.
 ![Windows Salt local-testi.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-a-salt-call-local.png "Windows Salt local -testi.")
+
 Windowsin Salt toimii normaalisti.
 
 ## Tehtävä b - grains.items
-Testataan Windows Saltia keräämällä paikalliselta koneelta käytettävän PC:n tuotetiedot ja käyttöjärjestelmä versio.
+Testataan Windows Saltia keräämällä paikalliselta koneelta tietoja.
 `salt-call --local grains.item productname osfullname`-komennolla.
 ![Windows Salt grains-testi.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-b-win-salt-grains.png "Windows Salt grans -testi.")
+
+Keräsin käytettävän PC:n tuotetiedot ja käyttöjärjestelmä version onnistuneesti.
+
 
 
 # Lähteet
