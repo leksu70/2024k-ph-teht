@@ -29,17 +29,35 @@ Testataan, toimiiko uusi minion odotetusti komennolla
 #### Tarkastetaan "Hello World!"
 
 ## Tehtävä a - Windows
+Tehtävä tehty 28.4.2024 klo 21.00-21.10.
 Tehtävänä on asentaa Salt Windowsille. Salt on asennettu aikaisemmin, joten tarkastetaan asennus komennolla `salt-call --local`.
 ![Windows Salt local-testi.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-a-salt-call-local.png "Windows Salt local -testi.")
 
 Windowsin Salt toimii normaalisti.
 
 ## Tehtävä b - grains.items
+Tehtävä tehty 28.4.2024 klo 21.10-21.15.
 Testataan Windows Saltia keräämällä paikalliselta koneelta tietoja.
 `salt-call --local grains.item productname osfullname`-komennolla.
 ![Windows Salt grains-testi.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-b-win-salt-grains.png "Windows Salt grans -testi.")
 
 Keräsin käytettävän PC:n tuotetiedot ja käyttöjärjestelmä version onnistuneesti.
+
+## Tehtävä c - file-toiminto
+Tehtävä tehty 28.4.2024 klo 21.30-22.00.
+Tehtävässä pyydetään kokeilla Saltin file -toimintoa Windowsilla.
+
+Luodaan kansio `c:\srv\salt\hellosaltfile`, lisätään sinne `init.sls`-tiedosto käyttäen editoria ja tarkastetaan `init.sls`-tiedoston sisältö.
+![Windows Salt file -testi.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-salt-file.png "Windows Salt file -testi.")
+
+Ajetaan `salt-call --local state.apply hellosaltfile --file-root c:\srv\salt`-komento.
+![Ajetaan saltin tila hellosaltfilelle.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-salt-state-apply.png "Ajetaan saltin tila hellosaltfilelle.")
+
+Tarkastettu vielä tiedoston sisältö.
+![Luodun tiedoston sisältö.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-salt-file-contains.png "Luodun tiedoston sisältö.")
+
+Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti. 
+
 
 
 
