@@ -17,9 +17,9 @@ Tämä tehtävä perustuu [Toni Sepän (2019) h5-tehtävään](https://salthomew
 Poistetaan aikaisemmin asennettu salt-minion Windowsista käyttäen `Windowsin Settings --> Apps & Features` kautta.
 
 ### Ladataan vanha Salt-Minion versio
-Jotta Salt toimisi oikein, tulee Salt-Minionin olla sama tai matalampi versio Salt-Masterista. Masterin versio `sudo salt --version`-komennon mukaan on `salt 3002.6`. Ladataan vastaava [Minionin versio Salt Projektin archivesta](https://archive.repo.saltproject.io/windows/Salt-Minion-3002.6-Py3-x86-Setup.exe) ja asennetaan se normaalisti. Asennusvaiheessa annetaan Salt Masterin IP-osoite `10.1.0.11` ja Minionin nimi `leksulapc`.
+Jotta Salt toimisi oikein, tulee Salt-Minionin olla sama tai aikaisempi versio Salt-Masterista. Masterin versio `sudo salt --version`-komennon mukaan on `salt 3002.6`. Ladataan vastaava [Minionin versio Salt Projektin archivesta](https://archive.repo.saltproject.io/windows/Salt-Minion-3002.6-Py3-x86-Setup.exe) ja asennetaan se normaalisti. Asennusvaiheessa annetaan Salt Masterin IP-osoite `10.1.0.11` ja Minionin nimi `leksulapc`.
 
-Asennus sujuu normaalisti
+Asennus sujuu normaalisti ja palvelu käynnistyy.
 
 ### Salt-minion lisäys masterille
 Lisätään uusi Salt-minion (leksulapc) Salt-serverille komennolla `sudo salt-key -A` sekä tarkastetaan minionieiden tila `sudo salt test.ping`-komennolla.
@@ -71,6 +71,29 @@ Tarkastettu vielä tiedoston sisältö.
 ![Luodun tiedoston sisältö.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-salt-file-contains.png "Luodun tiedoston sisältö.")
 
 Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti. 
+
+## Tehtävä d - CSI Kerava
+Tehtävä tehty 29.4.2024 klo 23.30-00.05.
+
+Tehtävässä tulee näyttää `find`-komennon avulla viimeisimmäksi muokatut tiedostot `/etc/`-hakemistosta ja kotihakemistostasi. Selitä kaikki käyttämäsi parametrit ja format string 'man find' avulla.
+
+### Haetaan viimeksi muokatut tiedostot
+Haetaan viimeksi muokatut tiedostot ja hakemistot eri paikoista (`/etc` ja `~/`).
+
+Ajetaan komento `find /etc ~/ -printf '%T+ %p\n' |sort`, jonka tulostus on tämä.
+![Find-komennon tulostus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-d-find.png "Find-komennon tulostus.")
+
+### Find-komento
+`find`-komennolla voidaan etsiä tiedostojärjestelmästä eri tietoja. Edellinen komento rakentuu eri osista, joita ovat hakemistopolut (`/etc` eli yksittäinen hakemisto ja `~/` eli kotihakemisto), optio `-printf` ja sen ohjeet, sekä lopuksi aakkostetaan löydetyt polut `sort`-komennon avulla.
+
+Käytettävien `find`-komennon ohjeet löytyy `man find`-komennolla.
+![Find-komennon manuaalisivu.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-d-man-find.png "Find-komennon manuaalisivu.")
+
+Komennon ohjeet olivat `%T+ %p\n`, jotka tarkoittavat
+- `%T` tiedoston viimeisin muokkauksen ajankohta
+- `+` lisätään `+`-merkki päiväyksen ja kellonajan väliin
+- `%p` tiedoston koko nimi polun kanssa
+- `\n` tehdään rivinvaihto eli erotellaan tiedot yksittäisille riveille.
 
 
 
