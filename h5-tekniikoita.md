@@ -95,6 +95,22 @@ Komennon ohjeet olivat `%T+ %p\n`, jotka tarkoittavat
 - `%p` tiedoston koko nimi polun kanssa
 - `\n` tehdään rivinvaihto eli erotellaan tiedot yksittäisille riveille.
 
+## Tehtävä e - Komennus
+Tehtävää tehty 30.4.2024 klo 00.10-00.20 ja XXXXXXXXXXXXX
+
+Tehtävässä luodaan salt-tila, joka asentaa järjestelmään uuden komennon (`/usr/local/bin/foo.sh`).
+
+### Uusi tila `shell-foo`
+Luodaan uusi `/srv/salt/shell-foo`-hakemisto Salt-masterilla komennolla `sudo mkdir -p /srv/salt/shell-foo`. 
+
+Lisätään sinne `foo.sh`-shellikomento komennon `sudo vi /srv/salt/shell-foo/foo.sh`
+```
+vagrant@host1:~$ cat /srv/salt/shell-foo/foo.sh
+#!/usr/bin/bash
+echo moi
+```
+
+Luodaan `init.sls`-tilatiedosto komennolla `sudo vi /srv/salt/shell-foo/init.sls`.
 
 
 
