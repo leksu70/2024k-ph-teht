@@ -85,6 +85,8 @@ Tarkastetaan Windows-koneelle syntynyt tiedosto PowerShellissä `ls C:\tmp\h4-he
 
 ![Windows:lle syntynyt tiedosto.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-win-hello.png "Windows:lle syntynyt tiedosto.")
 
+Tiedosto syntyy oikeaan paikkaan eli `c:\tmp\ -hakemistoon.
+
 ## Tehtävä d - CSI Kerava
 Tehtävä tehty 29.4.2024 klo 23.30-00.05.
 
