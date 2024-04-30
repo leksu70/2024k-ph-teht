@@ -162,7 +162,7 @@ Windows:
 Suoritetaan `shell-foo`-tila kaikille minionieille komennolla `sudo salt '*' state.apply shell-foo`.
 ![Shell-foo-tilan suoritus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-salt-shell-foo.png "Shell-foo-tilan suoritus.")
 
-Tarkastetaan, että `foo.sh`-komento löytyy `host2`-minionin polusta.
+Tarkastetaan, että `foo.sh`-komento löytyy `host2`-minionin polusta. Windows koneelle `leksulapc` ei tehty muutoksia.
 
 ![Ajetaan `foo.sh` minionilla.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-foo-no-path.png "[Ajetaan `foo.sh` minionilla.")
 
