@@ -125,13 +125,15 @@ vagrant@host1:~$ cat /srv/salt/shell-foo/foo.sh
 echo moi
 ```
 
+#### Testataan manuaalinen komennon suoritus
+
 Annetaan tiedostolle suoritusoikeudet (user, group ja others) komennolla `sudo chmod ugo+x /srv/salt/shell-foo/foo.sh` ja testataan komennon toimivuus vagrant- ja root-käyttäjillä komennolla `/srv/salt/shell-foo/foo.sh`.
 
 ![Suoritusoikeuksien anto ja vargant-käyttäjän komennon suoritus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-manual-foo-test-user-salt.png "Suoritusoikeuksien anto ja vargant-käyttäjän komennon suoritus.")
 
 ![Salt-käyttäjän komennon suoritus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-manual-foo-test-user-salt.png "Salt-käyttäjän komennon suoritus.")
 
-
+Tiedoston foo.sh suoritus onnistui vagrant- ja salt-käyttäjällä.
 
 
 
