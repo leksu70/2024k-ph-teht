@@ -139,6 +139,8 @@ Lopuksi poistetaan suoritusoikeudet foo.sh-tiedostolta komennolla `sudo chmod ug
 
 #### Jatketaan uuden tilan luontia
 
+Konfigurointitiedoston ehdoissa käytetty apuna Gijs Brandsman (2017) ohjetta Stack Overflowsta.
+
 Luodaan `init.sls`-tilatiedosto komennolla `sudo vi /srv/salt/shell-foo/init.sls`. Lisätään tiedostoon tarkastus, että tilaa ei ajeta Windows-koneelle.
 ```
 {% if "Windows" != grains["os"] %}
@@ -158,13 +160,15 @@ Windows:
 ```
 ![Ajetaan shell-foo-tila kaikille minionieille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-salt-shell-foo.png "Ajetaan shell-foo-tila kaikille minionieille.")
 
-Tarkastetaan, että `foo.sh`-komento löytyy polusta.
+Tarkastetaan, että `foo.sh`-komento löytyy `host2`-minionin polusta.
 
 ![Ajetaan `foo.sh` minionilla.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-foo-no-path.png "[Ajetaan `foo.sh` minionilla.")
 
 Komennon ajo onnistui normaalisti. Salt-tilan ajo uudestaan ei muuta tilaa, joten tämä on idempotentti tila.
 
 # Lähteet
+Brandsma, G. 2017. Stack Overflow: prevent a Salt state from running when condition is not met . https://stackoverflow.com/questions/41787799/prevent-a-salt-state-from-running-when-condition-is-not-met.
+
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024. https://terokarvinen.com/2024/configuration-management-2024-spring/.
 
 Salt Project. 2024a. Windows, Install directory locations. https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/windows.html#install-directory-locations.
