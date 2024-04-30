@@ -74,7 +74,7 @@ Tarkastettu vielä tiedoston sisältö.
 Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti.
 
 ### Ajetaan Saltia Masterilta Windows-minionille
-Tämä osa tehtiin 30.4.2024 klo 11.30-XXXXX
+Tämä osa tehtiin 30.4.2024 klo 11.30-11.45.
 
 Ajetaan masterilla aikaisemmin luotu hello-tila Windows-minionille komennolla `sudo salt 'leksulapc' state.apply hello`.
 ![Salt-komento ajetaan Salt-masterilta Windows-minionille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-master-win-minion-hello.png "Salt-komento ajetaan Salt-masterilta Windows-minionille.")
@@ -82,6 +82,7 @@ Ajetaan masterilla aikaisemmin luotu hello-tila Windows-minionille komennolla `s
 Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti.
 
 Tarkastetaan Windows-koneelle syntynyt tiedosto PowerShellissä `ls C:\tmp\h4-hellosalt-20240421`-komennolla.
+
 ![Windows:lle syntynyt tiedosto.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-win-hello.png "Windows:lle syntynyt tiedosto.")
 
 ## Tehtävä d - CSI Kerava
