@@ -139,7 +139,7 @@ Lopuksi poistetaan suoritusoikeudet foo.sh-tiedostolta komennolla `sudo chmod ug
 
 #### Jatketaan uuden tilan luontia
 
-Konfigurointitiedoston ehdoissa käytetty apuna Gijs Brandsman (2017) ohjetta Stack Overflowsta.
+Konfigurointitiedoston ehdoissa käytetty apuna [Gijs Brandsman (2017) ohjetta Stack Overflowsta](https://stackoverflow.com/questions/41787799/prevent-a-salt-state-from-running-when-condition-is-not-met).
 
 Luodaan `init.sls`-tilatiedosto komennolla `sudo vi /srv/salt/shell-foo/init.sls`. Lisätään tiedostoon tarkastus, että tilaa ei ajeta Windows-koneelle.
 ```
@@ -167,7 +167,7 @@ Tarkastetaan, että `foo.sh`-komento löytyy `host2`-minionin polusta.
 Komennon ajo onnistui normaalisti. Salt-tilan ajo uudestaan ei muuta tilaa, joten tämä on idempotentti tila.
 
 # Lähteet
-Brandsma, G. 2017. Stack Overflow: prevent a Salt state from running when condition is not met . https://stackoverflow.com/questions/41787799/prevent-a-salt-state-from-running-when-condition-is-not-met.
+Brandsma, G. 2017. Stack Overflow: prevent a Salt state from running when condition is not met. https://stackoverflow.com/questions/41787799/prevent-a-salt-state-from-running-when-condition-is-not-met.
 
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024. https://terokarvinen.com/2024/configuration-management-2024-spring/.
 
