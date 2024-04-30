@@ -61,6 +61,7 @@ Keräsin käytettävän PC:n tuotetiedot ja käyttöjärjestelmä version onnist
 Tehtävä tehty 28.4.2024 klo 21.30-22.00.
 Tehtävässä pyydetään kokeilla Saltin file -toimintoa Windowsilla.
 
+### Ajetaan Saltia paikallisesti
 Luodaan kansio `c:\srv\salt\hellosaltfile`, lisätään sinne `init.sls`-tiedosto käyttäen editoria ja tarkastetaan `init.sls`-tiedoston sisältö.
 ![Windows Salt file -testi.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-salt-file.png "Windows Salt file -testi.")
 
@@ -70,7 +71,18 @@ Ajetaan `salt-call --local state.apply hellosaltfile --file-root c:\srv\salt`-ko
 Tarkastettu vielä tiedoston sisältö.
 ![Luodun tiedoston sisältö.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-salt-file-contains.png "Luodun tiedoston sisältö.")
 
-Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti. 
+Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti.
+
+### Ajetaan Saltia Masterilta Windows-minionille
+Tämä osa tehtiin 30.4.2024 klo 11.30-XXXXX
+
+Ajetaan masterilla aikaisemmin luotu hello-tila Windows-minionille komennolla `sudo salt 'leksulapc' state.apply hello`.
+![Salt-komento ajetaan Salt-masterilta Windows-minionille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-master-win-minion-hello.png "Salt-komento ajetaan Salt-masterilta Windows-minionille.")
+
+Saltin tila suoritettiin onnistuneesti. Komennon uudelleen ajaminen ei muuta tilaa, joten tämä tila on idempotentti.
+
+Tarkastetaan Windows-koneelle syntynyt tiedosto PowerShellissä `ls C:\tmp\h4-hellosalt-20240421`-komennolla.
+![Windows:lle syntynyt tiedosto.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-c-win-hello.png "Windows:lle syntynyt tiedosto.")
 
 ## Tehtävä d - CSI Kerava
 Tehtävä tehty 29.4.2024 klo 23.30-00.05.
