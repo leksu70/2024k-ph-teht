@@ -158,7 +158,9 @@ Windows:
     - name: No changes in Windows machines.
 {% endif %}
 ```
-![Ajetaan shell-foo-tila kaikille minionieille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-salt-shell-foo.png "Ajetaan shell-foo-tila kaikille minionieille.")
+
+Suoritetaan shell-foo-tila kaikille minionieille komennolla `sudo salt '*' state.apply shell-foo`.
+![Shell-foo-tilan suoritus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-salt-shell-foo.png "Shell-foo-tilan suoritus.")
 
 Tarkastetaan, että `foo.sh`-komento löytyy `host2`-minionin polusta.
 
