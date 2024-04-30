@@ -3,7 +3,7 @@ Viikkotehvät ovat [Tero Karvisen (2024) Infra as Code - Palvelinten hallinta 20
 
 Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori.
 
-Tehtävien teko on aloitettu 28.4.2024 klo 14.00.
+Tehtävien teko on aloitettu 28.4.2024 klo 14.00 ja päätetty 30.4.2024 klo 11.15.
 
 ## Tehtävä x - aiemman vuoden kotitehtäväraportti
 
@@ -111,7 +111,7 @@ Komennon ohjeet olivat `%T+ %p\n`, jotka tarkoittavat
 - `\n` tehdään rivinvaihto eli erotellaan tiedot yksittäisille riveille.
 
 ## Tehtävä e - Komennus
-Tehtävää tehty 30.4.2024 klo 00.10-00.20 ja 11.50-XXXXXXX
+Tehtävää tehty 30.4.2024 klo 00.10-00.20 ja 11.50-13.15.
 
 Tehtävässä luodaan salt-tila, joka asentaa järjestelmään uuden komennon (`/usr/local/bin/foo.sh`).
 
