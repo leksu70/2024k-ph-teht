@@ -135,12 +135,34 @@ Annetaan tiedostolle suoritusoikeudet (user, group ja others) komennolla `sudo c
 
 Tiedoston foo.sh suoritus onnistui vagrant- ja salt-käyttäjällä.
 
+Lopuksi poistetaan suoritusoikeudet foo.sh-tiedostolta komennolla `sudo chmod ugo-x /srv/salt/shell-foo/foo.sh`
 
+#### Jatketaan uuden tilan luontia
 
+Luodaan `init.sls`-tilatiedosto komennolla `sudo vi /srv/salt/shell-foo/init.sls`. Lisätään tiedostoon tarkastus, että tilaa ei ajeta Windows-koneelle.
+```
+{% if "Windows" != grains["os"] %}
+{%      set foofile = "/usr/local/bin/foo.sh" %}
+{{ foofile }}:
+  file.managed:
+    - user: root
+    - group: root
+    - source: "salt://shell-foo/foo.sh"
+    - mode: 555
+    - makedirs: True
+{% else %}
+Windows:
+  test.succeed_without_changes:
+    - name: No changes in Windows machines.
+{% endif %}
+```
+![Ajetaan shell-foo-tila kaikille minionieille.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-salt-shell-foo.png "Ajetaan shell-foo-tila kaikille minionieille.")
 
-Luodaan `init.sls`-tilatiedosto komennolla `sudo vi /srv/salt/shell-foo/init.sls`.
+Tarkastetaan, että `foo.sh`-komento löytyy polusta.
 
+![Ajetaan `foo.sh` minionilla.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-foo-no-path.png "[Ajetaan `foo.sh` minionilla.")
 
+Komennon ajo onnistui normaalisti. Salt-tilan ajo uudestaan ei muuta tilaa, joten tämä on idempotentti tila.
 
 # Lähteet
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024. https://terokarvinen.com/2024/configuration-management-2024-spring/.
