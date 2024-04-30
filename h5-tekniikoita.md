@@ -111,7 +111,7 @@ Komennon ohjeet olivat `%T+ %p\n`, jotka tarkoittavat
 - `\n` tehdään rivinvaihto eli erotellaan tiedot yksittäisille riveille.
 
 ## Tehtävä e - Komennus
-Tehtävää tehty 30.4.2024 klo 00.10-00.20 ja XXXXXXXXXXXXX
+Tehtävää tehty 30.4.2024 klo 00.10-00.20 ja 11.50-XXXXXXX
 
 Tehtävässä luodaan salt-tila, joka asentaa järjestelmään uuden komennon (`/usr/local/bin/foo.sh`).
 
@@ -124,6 +124,17 @@ vagrant@host1:~$ cat /srv/salt/shell-foo/foo.sh
 #!/usr/bin/bash
 echo moi
 ```
+
+Annetaan tiedostolle suoritusoikeudet (user, group ja others) komennolla `sudo chmod ugo+x /srv/salt/shell-foo/foo.sh` ja testataan komennon toimivuus vagrant- ja root-käyttäjillä komennolla `/srv/salt/shell-foo/foo.sh`.
+
+![Suoritusoikeuksien anto ja vargant-käyttäjän komennon suoritus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-manual-foo-test-user-salt.png "Suoritusoikeuksien anto ja vargant-käyttäjän komennon suoritus.")
+
+![Salt-käyttäjän komennon suoritus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h5-e-manual-foo-test-user-salt.png "Salt-käyttäjän komennon suoritus.")
+
+
+
+
+
 
 Luodaan `init.sls`-tilatiedosto komennolla `sudo vi /srv/salt/shell-foo/init.sls`.
 
