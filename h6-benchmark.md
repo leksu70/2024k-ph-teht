@@ -3,6 +3,7 @@ Nämä tehtävät kuuluvat Tero Karvisen kurssille [Infra as Code - Palvelinten 
 
 Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä vielä Salt versiot minioneilta ja masterilta.
 
+Käytetyt Saltin versiot komennolla `sudo salt '*' grains.item saltversion`.
 ![Salt versiot.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-salt-versions.png "Salt versiot.")
 
 Tehtävien teko on aloitettu 5.5.2024 klo 20.30 ja päätetty XX.2024 klo XXXX.
@@ -50,14 +51,26 @@ Kokeilin uudelleen asentaa lokaaliin repositoryyn paketit komennolla `sudo salt-
 
 ![Winrepo-asennus onnistuu.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-winrepo.png "Winrepo-asennus onnistuu.")
 
+### Päivitä Windows minionien tietokannat
+Päivitetään masterin Windows-pakettien tiedot Windows-minioneiden tietokantaan komennolla `sudo salt -G 'os:windows' pkg.refresh_db`.
+
+![Windows-tietokannan päivitys.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-pkg-db-refresh.png "Windows-tietokannan päivitys.")
+
+Tiedot päivittyivät Salt Projektin (2024c) mukaan `C:\ProgramData\Salt Project\Salt\var\cache\salt\minion\files\base\win\repo-ng\salt-winrepo-ng_git`-hakemistoon ja tähän hakemistoon viitataan `sls`-konfigurointitiedostossa `salt://win/repo-ng`.
+
+### Paketin asentaminen Windowsiin masterilta
+Testiasennetaan `curl`-komento Windowsille komennolla `sudo salt * pkg.install 'curl'`.
+
+
+
+
 ## Lähteet
 
 Karvinen, T. 2024. [Infra as Code - Palvelinten hallinta 2024 https://terokarvinen.com/2024/configuration-management-2024-spring/.
 
-pygit2. pygit2 - libgit2 bindings in Python. https://pypi.org/project/pygit2/.
-
-
 Salt Project. 2024b. Git Fileserver Backend Walkthrough. https://docs.saltproject.io/en/3002/topics/tutorials/gitfs.html.
+
+Salt Project. 2024c. SALT.MODULES.WIN_PKG. https://docs.saltproject.io/en/latest/ref/modules/all/salt.modules.win_pkg.html#salt.modules.win_pkg.refresh_db.
 
 Salt Project. 2024a. WINDOWS PACKAGE MANAGER. https://docs.saltproject.io/en/3002/topics/windows/windows-package-manager.html.
 
