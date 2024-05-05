@@ -6,10 +6,10 @@ Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB mui
 Käytetyt Saltin versiot (3006.8) komennolla `sudo salt '*' grains.item saltversion`.
 ![Salt versiot.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-salt-versions.png "Salt versiot.")
 
-Tehtävien teko on aloitettu 5.5.2024 klo 20.30 ja päätetty XX.2024 klo XXXX.
+Tehtävien teko on aloitettu 5.5.2024 klo 20.30 ja päätetty XX.2024 klo **XXXX**.
 
 ## Tehtävä x - Lue ja tiivistä
-Tehtävä aloitettu 5.5.2024 klo 21.30 ja valmis klo XXXX.
+Tehtävä aloitettu 5.5.2024 klo 21.30 ja valmis 6.5.2024 klo 01.25.
 
 Tehtävässä käydään läpi [Salt Projectin (2024a) Windows Package Manageria](https://docs.saltproject.io/en/3002/topics/windows/windows-package-manager.html) keskittyen "Introduction, Install libraries, Populate the local Git repository, Update minion database, Install software package ja Usage osa. Eli sivun alusta kappaleen "Remove a package" loppuun, poislukien "Configuration"". 
 
@@ -56,12 +56,31 @@ Päivitetään masterin Windows-pakettien tiedot Windows-minioneiden tietokantaa
 
 ![Windows-tietokannan päivitys.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-pkg-db-refresh.png "Windows-tietokannan päivitys.")
 
-Tiedot päivittyivät Salt Projektin (2024c) mukaan `C:\ProgramData\Salt Project\Salt\var\cache\salt\minion\files\base\win\repo-ng\salt-winrepo-ng_git`-hakemistoon ja tähän hakemistoon viitataan `sls`-konfigurointitiedostossa `salt://win/repo-ng`.
-
-### Paketin asentaminen Windowsiin masterilta
-Testiasennetaan `curl`-komento Windowsille komennolla `sudo salt * pkg.install 'curl'`.
+Tiedot päivittyivät [Salt Projektin (2024c)](https://docs.saltproject.io/en/latest/ref/modules/all/salt.modules.win_pkg.html#salt.modules.win_pkg.refresh_db) mukaan `C:\ProgramData\Salt Project\Salt\var\cache\salt\minion\files\base\win\repo-ng\salt-winrepo-ng_git`-hakemistoon ja tähän hakemistoon viitataan `sls`-konfigurointitiedostossa `salt://win/repo-ng`.
 
 
+
+### Käyttö
+Listataan Windows-koneilla olevat asennetut paketit komennolla `sudo salt -G 'os:windows' pkg.list_pkgs`.
+
+![Asennetut paketit Windowsissa.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-win-list_pkgs.png "Asennetut paketit Windowsissa.")
+
+#### Paketin asentaminen Windowsiin masterilta
+Testiasennetaan `cpu-z`-sovellus Windowsille komennolla `sudo salt * pkg.install 'cpu-z'`, sillä `curl` ei toimi oikein.
+
+![CPU-Z:n asennus Windowsiin.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-win-inst-cpu-z.png "CPU-Z:n asennus Windowsiin.")
+
+Testaan Windowsista.
+
+![Ajetaan CPU-Z.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-win-run-cpu-z.png "Ajetaan CPU-Z.")
+
+Sovellus toimii.
+
+#### Paketin poisto Windowsista masterilta
+Poistetaan aikaisemmin asennettu CPU-Z-paketti komennolla `sudo salt -G 'os:windows' pkg.remove 'cpu-z'`.
+
+![CPU-Z:n poisto Windowsista.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-win-pkg-remove
+.png "CPU-Z:n poisto Windowsista.")
 
 
 ## Lähteet
