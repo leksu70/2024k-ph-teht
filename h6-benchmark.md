@@ -3,7 +3,7 @@ Nämä tehtävät kuuluvat Tero Karvisen kurssille [Infra as Code - Palvelinten 
 
 Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä vielä Salt versiot minioneilta ja masterilta.
 
-Käytetyt Saltin versiot komennolla `sudo salt '*' grains.item saltversion`.
+Käytetyt Saltin versiot (3006.8) komennolla `sudo salt '*' grains.item saltversion`.
 ![Salt versiot.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-salt-versions.png "Salt versiot.")
 
 Tehtävien teko on aloitettu 5.5.2024 klo 20.30 ja päätetty XX.2024 klo XXXX.
