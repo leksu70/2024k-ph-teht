@@ -23,7 +23,7 @@ SaltStack ja Salt yhteisö pitävät yllä GitHubissa [salt-win-repo-ng -reposit
 Salt Windows pakacke manageria hallinnoidaan kuten `yum` Linuxissa. Esim. `pkg.install` ja `pkg.installed` ovat käytettävissä.
 
 ### Salt Git repository
-Jos käytetään Salt Gir repositoryä pakettien hallintaan, asennetaan omalle koneelle `GitPython` tai `pygit2`. [Salt Projectin (2024b)](https://docs.saltproject.io/en/3002/topics/tutorials/gitfs.html) mukaan, mikäli molemmat näistä ovat asennettuina, Salt käyttää tällöin ensisijaisesti `pygit2`:sta. Komennon käyttö vaatii Pythonin `pip`-komennon, joten asennetaan se ensin komennolla `sudo apt-get update; sudo apt-get install python3-pip python3-pygit2 -y`.
+Jos käytetään Salt Gir repositorya pakettien hallintaan, asennetaan omalle koneelle `GitPython` tai `pygit2`. [Salt Projectin (2024b)](https://docs.saltproject.io/en/3002/topics/tutorials/gitfs.html) mukaan, mikäli molemmat näistä ovat asennettuina, Salt käyttää tällöin ensisijaisesti `pygit2`:sta. Komennon käyttö vaatii Pythonin `pip`-komennon, joten asennetaan se ensin komennolla `sudo apt-get update; sudo apt-get install python3-pip python3-pygit2 -y`.
 
 ![Python pip asennus.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-pip.png "Python pip asennus.")
 
