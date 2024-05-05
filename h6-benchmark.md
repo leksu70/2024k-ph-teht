@@ -43,7 +43,6 @@ Python `pip`- ja `pygit2`-asennus onnistuivat normaalisti.
 
 ### Lokaali Salt Git repository
 Luodaan lokaali repository komennolla `sudo salt-run winrepo.update_git_repos`, mutta se epäonnistuu.
-![Windows repon asennus epäonnistuu.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-winrepo-fails.png "Windows repon asennus epäonnistuu.")
 
 Pitkän tutkinnan jälkeen vika paikantui `git`-komennon puuttumiseen masterilta. Asensin `git`in komennolla `sudo apt-get update; sudo apt-get install git -y` onnistuneesti.
 
