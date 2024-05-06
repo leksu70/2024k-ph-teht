@@ -161,7 +161,7 @@ Toni Vapalo (2021a) tallensi [ohjeen julkaisualustalle](https://tonivapalo.com/p
 Mikäli käyttäjä tarvitsee käyttöönsä Python flask ja React -kehitysympäristöt, tällöin hän voisi käyttää tätä apuna.
 
 #### Lisenssi
-Lisenssinä hän käytti myös GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/sampohautala/salt/blob/master/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
+Lisenssinä hän käytti myös GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/Vapalo/vagrant-webdev-salt/blob/main/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
 
 #### Tekijä ja vuosi
 Tämän työn on tehnyt Toni Vapalo vuonna 2021.
@@ -179,7 +179,7 @@ Markus Pyhäranta (2016a) tallensi ohjeen [omalle julkaisualustalle](https://mar
 Mikäli on tarvetta saada käyttöön LAMP-stackin, tällöin saattaisin harkita tämän käyttöä.
 
 #### Lisenssi
-Lisenssinä hän käytti myös GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/sampohautala/salt/blob/master/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
+Lisenssinä hän käytti myös GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/PyhaMarkus/puppet-lamp-module/blob/master/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
 
 #### Tekijä ja vuosi
 Tämän työn on tehnyt Markus Pyhäranta vuonna 2016.
