@@ -6,7 +6,7 @@ Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB mui
 Käytetyt Saltin versiot (3006.8) komennolla `sudo salt '*' grains.item saltversion`.
 ![Salt versiot.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-salt-versions.png "Salt versiot.")
 
-Tehtävien teko on aloitettu 5.5.2024 klo 20.30 ja päätetty XX.2024 klo **XXXX**.
+Tehtävien teko on aloitettu 5.5.2024 klo 20.30 ja päätetty 6.5.2024 klo 22.45.
 
 ## Tehtävä x - Lue ja tiivistä
 Tehtävä aloitettu 5.5.2024 klo 21.30 ja valmis 6.5.2024 klo 01.25.
@@ -190,6 +190,19 @@ Alustana on käytetty Xubuntu 16.04.1 LTS versiota ja sitä on hallittu Puppetil
 #### Kiinnostavaa
 Kiinnostava nähdä myös muita kuin Salt-ratkaisuja.
 
+## Tehtävä c - Testbench. Aja toisen tekemä tila.
+Tämä tehtävä on jätetty tekemättä ajanpuutten vuoksi, sillä en ehdi palauttamaan harjoituksia tiistaina ennen deadlineä.
+
+## Tehtävä d - Viisi ideaa
+Tehtävä aloitettu 6.5.2024 klo 22.30 ja valmis klo 22.45.
+
+Tehtävänä oli listata viisi ideaa omalle moduulille eli lopputehtävälle.
+
+  1. Windowsin hallinta Saltin avulla esim. omien olemassa olevien ohjelmien automaattinen asentaminen. Haastava omalla koneella.
+  2. Käytimme Ohjelmistoprojekti 1 -kurssilla eri tietokantoja ja tiimiläiset käyttivät eri käyttöjärjestelmällisiä koneita (PC ja Mac). Näiden eri tietokantojen käyttöönotoissa oli ongelmia esim. Macin kanssa, joten tätä tuskaa voisi helpottaa. 
+  3. Haaga-Helia tarjoaa opiskelijoille jo alkuvaiheessa perussetin työkaluja, joten näiden asentaminen voisi olla automaattista.
+  4. Vagrantin ja Saltin käyttö uusissa Maceissä (M1-M3), sillä ainakaan kurssin alussa VirtualBoxiin ei voinut asentaa valmiita boxeja.
+  5. Opiskelun päättäneillä on paljon turhia sovelluksia kertynyt koneisiinsa eli kyseessä voisi olla puhdistustyökalu. Ensin kerätään ja sitten kysellään, mitä poistetaan tietokoneesta.
 
 ## Lähteet
 
