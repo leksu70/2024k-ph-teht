@@ -81,6 +81,8 @@ Poistetaan aikaisemmin asennettu CPU-Z-paketti komennolla `sudo salt -G 'os:wind
 
 ![CPU-Z:n poisto Windowsista.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-win-pkg-remove.png "CPU-Z:n poisto Windowsista.")
 
+Sovellus poistui Windowsista normaalisti.
+
 
 ## Lähteet
 
