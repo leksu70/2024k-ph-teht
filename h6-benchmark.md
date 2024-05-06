@@ -58,8 +58,6 @@ Päivitetään masterin Windows-pakettien tiedot Windows-minioneiden tietokantaa
 
 Tiedot päivittyivät [Salt Projektin (2024c)](https://docs.saltproject.io/en/latest/ref/modules/all/salt.modules.win_pkg.html#salt.modules.win_pkg.refresh_db) mukaan `C:\ProgramData\Salt Project\Salt\var\cache\salt\minion\files\base\win\repo-ng\salt-winrepo-ng_git`-hakemistoon ja tähän hakemistoon viitataan `sls`-konfigurointitiedostossa `salt://win/repo-ng`.
 
-
-
 ### Käyttö
 Listataan Windows-koneilla olevat asennetut paketit komennolla `sudo salt -G 'os:windows' pkg.list_pkgs`.
 
@@ -87,10 +85,45 @@ Testasin Windows-pakettien asennuksia useammalla sovelluksella ja niistä suurin
 
 ![Curlin:n asennus epäonnistuu Windowsiin.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-inst-curl-fails.png "Curlin:n asennus epäonnistuu Windowsiin.")
 
+## Tehtävä a - Paketti Windowsia
+Tehtävä aloitettu 6.5.2024 klo 19.40 ja valmis klo 20.05.
+
+[Tero Karvisen (2018)](https://terokarvinen.com/2018/control-windows-with-salt/) blokikirjoituksessa opastetaan kuinka luodaan tila Windows-koneille.
+
+### Tila Windows-koneille
+Luodaan tila Windowsille käyttämällä `pkg.installed`-funktiota.
+
+Luodaan hakemisto tilalle komennolla `sudo mkdir /srv/salt/windows_pkgs`.
+Luodaan tilan `init.sls`-tiedosto komennolla `sudo vi /srv/salt/windows_pkgs/init.sls` ja lisätään sinne seuraavat rivit:
+```
+{% if "Windows" == grains["os"]  %}
+windows_pkgs:
+  pkg.installed:
+    - pkgs:
+      - xming
+      - cpu-z
+{% else %}
+others:
+  test.succeed_without_changes:
+    - name: No changes in Linux machines.
+{% endif %}
+```
+
+Tiedostossa testataan, onko kohdekone Windows tai muu. Windowsin tapauksessa asennetaan kaksi pakettia (`xming` ja `cpu-z`) ja muussa tapauksessa ei asenneta mitään vaan palautetaan "true"-arvo.
+
+Ajetaan tila kaikille koneille komennolla `sudo salt '*' state.apply windows_pkgs` ja toistetaan sama komento uudelleen.
+![Asetetaan tila windows_pkgs.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-a-inst-win-pkgs.png "Asetetaan tila windows_pkgs.")
+
+Koska saman komennon ajo ei muuta tilaa, tila on idempotentti.
+
+
+
 
 ## Lähteet
 
-Karvinen, T. 2024. [Infra as Code - Palvelinten hallinta 2024 https://terokarvinen.com/2024/configuration-management-2024-spring/.
+Karvinen, T. 2018. Control Windows with Salt. https://terokarvinen.com/2018/control-windows-with-salt/.
+
+Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024 https://terokarvinen.com/2024/configuration-management-2024-spring/.
 
 Salt Project. 2024b. Git Fileserver Backend Walkthrough. https://docs.saltproject.io/en/3002/topics/tutorials/gitfs.html.
 
