@@ -83,6 +83,10 @@ Poistetaan aikaisemmin asennettu CPU-Z-paketti komennolla `sudo salt -G 'os:wind
 
 Sovellus poistui Windowsista normaalisti.
 
+Testasin Windows-pakettien asennuksia useammalla sovelluksella ja niistä suurin osa ei toiminut ainakaan minulla. Esimerkkinä `curl`.
+
+![Curlin:n asennus epäonnistuu Windowsiin.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-inst-curl-fails.png "Curlin:n asennus epäonnistuu Windowsiin.")
+
 
 ## Lähteet
 
