@@ -1,7 +1,7 @@
 # Tehtävä h6 - Benchmark
 Nämä tehtävät kuuluvat Tero Karvisen kurssille [Infra as Code - Palvelinten hallinta 2024](https://terokarvinen.com/2024/configuration-management-2024-spring/).
 
-Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä vielä Salt versiot minioneilta ja masterilta.
+Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä vielä Salt versiot minioneilta (Debian 11 ja Windows 10) ja masterilta (Debian 11).
 
 Käytetyt Saltin versiot (3006.8) komennolla `sudo salt '*' grains.item saltversion`.
 ![Salt versiot.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-salt-versions.png "Salt versiot.")
@@ -86,7 +86,7 @@ Testasin Windows-pakettien asennuksia useammalla sovelluksella ja niistä suurin
 ![Curlin:n asennus epäonnistuu Windowsiin.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-x-inst-curl-fails.png "Curlin:n asennus epäonnistuu Windowsiin.")
 
 ## Tehtävä a - Paketti Windowsia
-Tehtävä aloitettu 6.5.2024 klo 19.40 ja valmis klo 20.05.
+Tehtävä aloitettu 6.5.2024 klo 19.40 ja valmis klo 20.15.
 
 [Tero Karvisen (2018)](https://terokarvinen.com/2018/control-windows-with-salt/) blokikirjoituksessa opastetaan kuinka luodaan tila Windows-koneille.
 
@@ -124,13 +124,86 @@ Testataan vielä asennetut sovellukset `xming` ja `cpu-z` Windows-koneesta käyn
 
 ![Kuvassa CPU-Z.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-a-cpu-z.png "Kuvassa CPU-Z.")
 
-Eli tilan asennus pkg.installed-funktiolla onnistui.
+Eli tilan asennus `pkg.installed`-funktiolla onnistui.
+
+## Tehtävä b - Benchmark
+Tehtävä aloitettu 6.5.2024 klo 20.25 ja valmis klo 22.15.
+
+Tehtävänannossa pyydettiin etsimään 3-7 keskitetyn hallinan projekti (esim. tämän kurssin "Oma moduli" lopputyönä). Tarkoituksena on arvioida töitä vain niiden kotisivujen perusteella. Arviointikriteerinä käytetään mitä hyötyä tästä on eli miksi haluaisin asentaa tämän itselleni.
+
+Etsitään ainakin kolme työtä käyttäen Googlea apuna (hakusanat: "tero karvinen oma moduli"):
+  * [Sampo Hautalan (2018a) Ph h7 / Oma moduli](https://sampohautala.wordpress.com/2018/12/09/ph-h7-oma-moduli/)
+  * [Toni Vapalon (2021a) Oma moduli](https://tonivapalo.com/posts/palvelintenhallinta/phvt7/)
+  * [Markus Pyhäranta (2016) Palvelinen hallinta - Oma moduli](https://markuspyharanta.com/2016/12/10/palvelinten-hallinta-oma-moduuli/)
+
+### Benchmark - Sampo Hautalan (2018a/b) Ph h7 / Oma moduli
+Sampo Hautala (2018b) tallensi [Salt-tiedostot omaan gittiin](https://github.com/sampohautala/) ja itse [ohjeen toiselle julkaisualustalle](https://sampohautala.wordpress.com/2018/12/09/ph-h7-oma-moduli/).
+
+#### Käyttötarkoitus
+Minusta tämä työ helpottaa aloittelevien front-end kehittäjien ja graafisten suunnittelijoiden työtä, sillä se tarjoaa sopivat sovellukset valmiiksi paketoituna Windows- ja Linux-ympäristöön. Nopeuttaa tarvittavien työkalujen asentamista.
+
+#### Lisenssi
+Lisenssinä hän käytti GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/sampohautala/salt/blob/master/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
+
+#### Tekijä ja vuosi
+Tämän työn on tehnyt Sampo Hautala vuonna 2018.
+
+#### Riippuvuudet
+Salt-työ on testattu Windows 10 Pro ja Ubuntu 18.04.1 LTS ympäristössä käyttämällä testauksessa selaimena Mozilla Firefox (Firefox Quantum 61.0.1 (64-bit)).
+
+#### Kiinnostavaa
+Mielestäni työ antaa hyvän kuvan, kuinka voidaan Saltilla helposti järjestää sopivia valmiita sovelluspaketteja ja helpottaa asennuksien tuskaa.
+
+### Benchmark - Toni Vapalon (2021a/b) Oma moduli
+Toni Vapalo (2021a) tallensi [ohjeen julkaisualustalle](https://tonivapalo.com/posts/palvelintenhallinta/phvt7/) ja Salt-tiedostot (Vapalo 2021b) omaan [giittin](https://github.com/Vapalo/vagrant-webdev-salt).
+
+#### Käyttötarkoitus
+Mikäli käyttäjä tarvitsee käyttöönsä Python flask ja React -kehitysympäristöt, tällöin hän voisi käyttää tätä apuna.
+
+#### Lisenssi
+Lisenssinä hän käytti myös GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/sampohautala/salt/blob/master/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
+
+#### Tekijä ja vuosi
+Tämän työn on tehnyt Toni Vapalo vuonna 2021.
+
+#### Riippuvuudet
+Vagrantin alustaa ei kerrota, mutta oletan sen olevan (Debial) Linux, mutta tarkempaa käyttöjärjestelmäversion ei ole mainittu. Vagrantin avulla luodut virtuaalikoneet käyttävät Debian 10:tä.
+
+#### Kiinnostavaa
+Tässä työssä on kiinnostavaa nähdä, kuinka Linuxissa voidaan asentaa virtuaaliympäristöt vagrantin avulla.
+
+### Benchmark - Markus Pyhärannan (2016a/b) Palvelinten hallinta - Oma moduuli
+Markus Pyhäranta (2016a) tallensi ohjeen [omalle julkaisualustalle](https://markuspyharanta.com/2016/12/10/palvelinten-hallinta-oma-moduuli/) ja Puppetin ohjelmakoodin [gittiin](https://github.com/PyhaMarkus/puppet-lamp-module).
+
+#### Käyttötarkoitus
+Mikäli on tarvetta saada käyttöön LAMP-stackin, tällöin saattaisin harkita tämän käyttöä.
+
+#### Lisenssi
+Lisenssinä hän käytti myös GNU General Public License v3.0, joka löytyi [Githubista](https://github.com/sampohautala/salt/blob/master/LICENSE). Tämä lisenssi sallii kaupallisen käytön, muokkaamisen, uudelleen jakelun, patentissa käytön ja yksityisen käytön, mutta käytöstä ei oteta vastuuta (eli omalla vastuulla) eikä työlle anneta takuuta. Tämä työ on lisenssin mukaan vapaa ja tästä muokatut tai edelleen jaetut työt tulee jakaa kuten alkuperäinen softa eli "free software".
+
+#### Tekijä ja vuosi
+Tämän työn on tehnyt Markus Pyhäranta vuonna 2016.
+
+#### Riippuvuudet
+Alustana on käytetty Xubuntu 16.04.1 LTS versiota ja sitä on hallittu Puppetilla.
+
+#### Kiinnostavaa
+Kiinnostava nähdä myös muita kuin Salt-ratkaisuja.
+
 
 ## Lähteet
+
+Hautala, S. 2018a. Ph h7 / Oma moduli. https://sampohautala.wordpress.com/2018/12/09/ph-h7-oma-moduli/.
+
+Hautala, S. 2018b. Github: Salt (Ph h7 / Oma moduli. ). https://github.com/sampohautala/.
 
 Karvinen, T. 2018. Control Windows with Salt. https://terokarvinen.com/2018/control-windows-with-salt/.
 
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024 https://terokarvinen.com/2024/configuration-management-2024-spring/.
+
+Pyhäranta, M. 2016a. Palvelinten hallinta - Oma moduuli. https://markuspyharanta.com/2016/12/10/palvelinten-hallinta-oma-moduuli/.
+
+Pyhäranta, M. 2016b. GitHub: LAMP module. https://github.com/PyhaMarkus/puppet-lamp-module.
 
 Salt Project. 2024b. Git Fileserver Backend Walkthrough. https://docs.saltproject.io/en/3002/topics/tutorials/gitfs.html.
 
@@ -140,3 +213,6 @@ Salt Project. 2024a. WINDOWS PACKAGE MANAGER. https://docs.saltproject.io/en/300
 
 SaltStack GitHub. 2024. SaltStack Windows repository. https://github.com/saltstack/salt-winrepo-ng. 
 
+Vapalo, T. 2021a. Oma moduli. https://tonivapalo.com/posts/palvelintenhallinta/phvt7/.
+
+Vapalo. T. 2021b. Github: Vagrant Web dev Salt. https://github.com/Vapalo/vagrant-webdev-salt.
