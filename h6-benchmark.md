@@ -112,14 +112,19 @@ others:
 
 Tiedostossa testataan, onko kohdekone Windows tai muu. Windowsin tapauksessa asennetaan kaksi pakettia (`xming` ja `cpu-z`) ja muussa tapauksessa ei asenneta mitään vaan palautetaan "true"-arvo.
 
-Ajetaan tila kaikille koneille komennolla `sudo salt '*' state.apply windows_pkgs` ja toistetaan sama komento uudelleen.
+Ajetaan tila kaikille koneille komennolla `sudo salt '*' state.apply windows_pkgs` ja toistetaan sama komento uudelleen, koska ensimmäisellä kerralla ei tullut virhettä.
 
 ![Asetetaan tila windows_pkgs.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-a-inst-win-pkgs.png "Asetetaan tila windows_pkgs.")
 
 Koska saman komennon ajo ei muuta tilaa, tila on idempotentti.
 
+Testataan vielä asennetut sovellukset `xming` ja `cpu-z` Windows-koneesta käynnistämällä ne Start-valikon kautta.
 
+![Kuvassa xming.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-a-xming.png "Kuvassa xming.")
 
+![Kuvassa CPU-Z.](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h6-a-cpu-z.png "Kuvassa CPU-Z.")
+
+Eli tilan asennus pkg.installed-funktiolla onnistui.
 
 ## Lähteet
 
