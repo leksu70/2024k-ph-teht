@@ -548,9 +548,30 @@ Tämä muutos toimi, joten poistetaan vscode komennolla `sudo salt -G 'os:window
 
 ![Vscoden poisto manuaalisesti](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-20-sal-win-remove-man-vscode.png "Vscoden poisto manuaalisesti")
 
-Otetaan käyttöön Salt-tila `win-vscode`.
+Otetaan käyttöön Salt-tila `win-vscode` komennolla `sudo salt '*' state.apply win-vscode`.
 
 ![Vscode käyttöön Salt-tilalla](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-22-salt-win-vscode.png "Vscode käyttöön Salt-tilalla")
+
+Ajettu komento uudelleen eikä tila muutu.
+
+![Salt-tilan ajo uudestaa](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-23-salt-win-vscode-again.png "Salt-tilan ajo uudestaa")
+
+Tila on siis idempotentti.
+
+##### Tarkastus Windows-koneelta
+Tarkastetaan vscoden asennus vielä Windows-koneelta kirjautumalla siihen VirtualBoxin avulla manuaalisesti kirjautumisikkunan kautta. Ensin avataan VirtualBox, jonka näkymä on seuraava.
+
+![VirtualBox-näkymä](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-24-vb.png "VirtualBox-näkymä")
+
+Valitaan luotu Windows-kone (`Vagrant_win10_...`) ja painetaan `Show`-nappulaa. Avautuneesta Windows-ikkunasta painetaan hiirellä kerran ja kirjautumisnäkymä tulee esiin. `Vagrant`-käyttäjän oletussalasana on `vagrant`. Annetaan salasana ja painetaan `Submit`-painiketta (nuoli oikealle).
+
+![Annetaan vagrant-käyttäjän salasana](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-25-win-login.png "Annetaan vagrant-käyttäjän salasana")
+
+
+
+
+
+
 
 
 
