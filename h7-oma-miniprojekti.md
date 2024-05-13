@@ -216,7 +216,7 @@ end
 Windows Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up win10`-komennolla.
 
 ## Luodaan kolme virtuaalikonetta
-Tehtävä aloitettu 13.5.2024 klo 18.15 ja lopetettu 13.5.2024 klo XXXX.
+Tehtävä aloitettu 13.5.2024 klo 18.15 ja lopetettu 13.5.2024 klo 19.05.
 
 Aloitetaan avaamalla oma shell-komentotulkki - itse käytän Gitin Bash-shelliä ja avaan sen valmiista kuvakkeesta. Tässä voidaan käyttää myös muita komentotulkkeja.
 
@@ -393,14 +393,21 @@ $
 
 Omassa koneessani kaikkien kolmen virtuaalikoneen ensikäynnistämiseen menee aikaa noin 16 minuuttia, joista pisimmän ajan vie Windows-virtuaalikoneen käynnistäminen. Kolmen koneen uudelleenkäynnistäminen on huomattavasti nopeampaa ja se vie minun tietokoneellani hieman yli kolme minuuttia.
 
-### Tarkastetaan virtuaalikoneiden asennukset
-Tehtävä aloitettu 13.5.2024 klo 18.45 ja lopetettu 13.5.2024 klo XXXX.
+### Tarkastetaan virtuaalikoneiden asennukset ja hyväksytään minioneiden rekisteröinnit
+Tehtävä aloitettu 13.5.2024 klo 18.45 ja lopetettu 13.5.2024 klo 19.05.
 
 Koska virtuaalikoneisiin asentui skriptien kautta Salt, voidaan Salt Masterilta (`master`-kone) käydä tarkastamassa, ovatko Salt Minionit yrittäneet rekisteröityä masterille.
 
 Kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master` ja suoritetaan `sudo salt-key -L`-komento.
 
 ![Salt Minionien tarkastus master-koneella](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-11-ssh-salt-key.png "Salt Minionien tarkastus master-koneella")
+
+Hyväksytään minionien rekisteröintipyynnöt (eli hyväksytään minionien julkiset salausavaimet) `master`-koneella komennolla `sudo salt-key -A` ja vastaamalla Proceed?-kysymykseen `y`:llä.
+
+![Salt Minionien hyväksyntä master-koneella](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-12-salt-key-accept.png "Salt Minionien hyväksyntä master-koneella")
+
+Kaikkiin kolmeen virtuaalikoneeseen Salt on asennettu onnistuneesti, sillä minionien rekisteröiminen onnistui normaalisti.
+
 
 ## Lähteet
 
