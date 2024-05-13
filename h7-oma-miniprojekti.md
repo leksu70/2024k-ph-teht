@@ -127,7 +127,7 @@ EOF
 ### Salt Minion, Debian END
 ```
 
-## Konfigurointitiedoston skriptit Windowsille
+## Konfigurointitiedoston skripti Windowsille
 **KESKEN!!!**
 Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 01.50.
 
@@ -192,7 +192,7 @@ Lisäksi provisointivaiheessa suoritetaan kaksi shell-skriptiä `$debscript` ja 
 Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up minion`-komennolla.
 
 ### Windows 10 Salt Minion -virtuaalikone 
-Luodaan `Vagrantfile`-tiedostoon Windows minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon, 12 GB virtuaalimuistin, 2 virtuaali-CPUn, leikepöydän asetukset ja shell-skriptin `$winscript` suorituksen. provisointivaiheessa. 
+Luodaan `Vagrantfile`-tiedostoon Windows minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon, 12 GB virtuaalimuistin, 2 virtuaali-CPUn, leikepöydän asetukset ja shell-skriptin `$winscript` suorituksen provisointivaiheessa. 
 ```
 # Sal Minion Windows 10 H2
 config.vm.define "win10" do | win10 |
@@ -216,9 +216,13 @@ end
 Windows Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up win10`-komennolla.
 
 ## Luodaan kolme virtuaalikonetta
+Tehtävä aloitettu 13.5.2024 klo 18.15 ja lopetettu 13.5.2024 klo XXXX.
 
-Aloitetaan luomalla hakemisto projektille komennolla `mkdir Vko8`.**???** ja luodaan Vagrant-hakemisto sen alle komennolla `mkdir Vagrant`.
-Siirrtytään Vagrant-hakemistoon `cd Vagrant`-komennolla.
+Aloitetaan avaamalla oma shell-komentotulkki - itse käytän Gitin Bash-shelliä ja avaan sen valmiista kuvakkeesta. Tässä voidaan käyttää myös muita komentotulkkeja.
+
+![Bash-shell](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-10-bash-shell.png "Bash-shell")
+
+Luodaan projektille kansio komennolla `mkdir Vko8` ja sinne alikansio luodaan Vagrant-hakemisto sen alle komennolla `mkdir Vko8/Vagrant`. Siirrtytään Vagrant-hakemistoon `cd Vko8/Vagrant`-komennolla.
 
 Luodaan Vagrant-tiedosto, jonka sisältö on seuraava
 <details><summary>Vagrantfile-tiedosto.</summary>
@@ -357,9 +361,46 @@ end
 ```
 </details>
 
-Tiedoston luomisen jälkeen voidaan Vagrantin avulla luoda virtuaalikoneet sekä asentaa niihin `salt-master`in ja `salt-minion`it. Suoritetaan `vagrant up`-komento ja odotetaan virtuaalikoneiden luomisen ja Saltin asennuksien päättymistä.
+Tiedoston luomisen jälkeen voidaan Vagrantin avulla luoda virtuaalikoneet sekä asentaa niihin `salt-master`in ja `salt-minion`it. Suoritetaan `vagrant up`-komento ja odotetaan virtuaalikoneiden luomisen ja Saltin asennuksien päättymistä. Käynnistymisen koko output-tiedosto on nähtävissä [h7-vagrant-up.txt](https://github.com/leksu70/2024k-ph-teht/blob/master/h7-vagrant-up.txt)-tiedostossa.
 
-Omassa koneessani kaikkien kolmen virtuaalikoneen ensikäynnistämiseen menee aikaa noin 16 minuuttia, joista pisimmän ajan vie Windows-virtuaalikoneen käynnistäminen.
+```shell
+leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/Vko8/Vagrant
+$ date; vagrant up; date
+Mon May 13 01:13:23 FLEDT 2024
+Bringing machine 'master' up with 'virtualbox' provider...
+Bringing machine 'minion' up with 'virtualbox' provider...
+Bringing machine 'win10' up with 'virtualbox' provider...
+==> master: Importing base box 'debian/bullseye64'...
+...
+==> win10: Configuring and enabling network interfaces...
+==> win10: Running provisioner: shell...
+    win10: Running: inline PowerShell script
+
+==> master: Machine 'master' has a post `vagrant up` message. This is a message
+==> master: from the creator of the Vagrantfile, and not from Vagrant itself:
+==> master:
+==> master: Vanilla Debian box. See https://app.vagrantup.com/debian for help and bug reports
+
+==> minion: Machine 'minion' has a post `vagrant up` message. This is a message
+==> minion: from the creator of the Vagrantfile, and not from Vagrant itself:
+==> minion:
+==> minion: Vanilla Debian box. See https://app.vagrantup.com/debian for help and bug reports
+Mon May 13 01:29:13 FLEDT 2024
+
+leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/Vko8/Vagrant
+$
+```
+
+Omassa koneessani kaikkien kolmen virtuaalikoneen ensikäynnistämiseen menee aikaa noin 16 minuuttia, joista pisimmän ajan vie Windows-virtuaalikoneen käynnistäminen. Kolmen koneen uudelleenkäynnistäminen on huomattavasti nopeampaa ja se vie minun tietokoneellani hieman yli kolme minuuttia.
+
+### Tarkastetaan virtuaalikoneiden asennukset
+Tehtävä aloitettu 13.5.2024 klo 18.45 ja lopetettu 13.5.2024 klo XXXX.
+
+Koska virtuaalikoneisiin asentui skriptien kautta Salt, voidaan Salt Masterilta (`master`-kone) käydä tarkastamassa, ovatko Salt Minionit yrittäneet rekisteröityä masterille.
+
+Kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master` ja suoritetaan `sudo salt-key -L`-komento.
+
+![Salt Minionien tarkastus master-koneella](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-11-ssh-salt-key.png "Salt Minionien tarkastus master-koneella")
 
 ## Lähteet
 
