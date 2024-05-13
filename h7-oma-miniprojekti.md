@@ -19,10 +19,11 @@ Käynnistä Vagrantin vagrant_2.4.1_windows_amd64.msi-asennusohjelma tuplaklikka
 
 ![Windows File Manager](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-1-vagrant-filemgr.png "Windows File Manager")
 
-Seuraavaksi avautuu asennusohjelma, josta painetaan `Install`-painiketta ja asennus alkaa. 
+Seuraavaksi avautuu asennusohjelma, josta hyväksytään lisenssi valitsemalla `I accept the terms in the License Agreement` ja painetaan `Install`-painiketta 
 
-![Asennusksen aloitus painamalla Install-painiketta](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-2-vagrant-install.png "Asennusksen aloitus painamalla Install-painiketta")
+![Asennuksen aloitus painamalla Install-painiketta](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-2-vagrant-install.png "Asennuksen aloitus painamalla Install-painiketta")
 
+ ja asennus voialkaa.
 ![Asennus käynnissä](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-3-vagrant-installing.png "Asennus käynnissä")
 
 Asennuksen valmistuttua painetaan `Finish`-painiketta.
@@ -43,9 +44,9 @@ ja valitsemalla `Run` avautuu uusi ikkuna, johon kirjoitetaan `cmd` ja painetaa 
 
 Tällöin komentotulkki avautuu. Komentotulkin kautta testataan Vagrantin versio ajamalla komento `vagrant --version`.
 
-![Vagrantin versio](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-7-run-win.png "Vagrantin versio")
+![Vagrantin versio](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-8-cmd-vagrant.png "Vagrantin versio")
 
-Näin voidaan todeta, että Vagrant on asentunut koneeseen. Kun Vagrantin ajetaan myöhemmässä vaiheessa, voidaan todeta, että Vagrant toimii normaalisti.
+Näin voidaan todeta, että Vagrant on asentunut koneeseen. Kun Vagrantin suoritetaan myöhemmässä vaiheessa, voidaan todeta, että Vagrant toimii normaalisti.
 
 ## Konfigurointitiedoston skriptit Debianille
 Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tätä harjoitusta jatketaan huomenna klo **XXXXXX**.
