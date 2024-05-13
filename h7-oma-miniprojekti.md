@@ -544,6 +544,15 @@ Kokeillaan asentaa `master`-koneelta vscode manuaalisesti komennolla `sudo salt 
 
 ![Vscoden asennus manuaalisesti](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-20-sal-win-inst-man-vscode.png "Vscoden asennus manuaalisesti")
 
+Tämä muutos toimi, joten poistetaan vscode komennolla `sudo salt -G 'os:windows' pkg.remove vscode`.
+
+![Vscoden poisto manuaalisesti](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-20-sal-win-remove-man-vscode.png "Vscoden poisto manuaalisesti")
+
+Otetaan käyttöön Salt-tila `win-vscode`.
+
+![Vscode käyttöön Salt-tilalla](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-22-salt-win-vscode.png "Vscode käyttöön Salt-tilalla")
+
+
 
 ## Lähteet
 
