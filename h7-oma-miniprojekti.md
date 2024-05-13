@@ -23,7 +23,8 @@ Seuraavaksi avautuu asennusohjelma, josta hyväksytään lisenssi valitsemalla `
 
 ![Asennuksen aloitus painamalla Install-painiketta](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-2-vagrant-install.png "Asennuksen aloitus painamalla Install-painiketta")
 
- ja asennus voialkaa.
+ja asennus voi alkaa.
+
 ![Asennus käynnissä](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-3-vagrant-installing.png "Asennus käynnissä")
 
 Asennuksen valmistuttua painetaan `Finish`-painiketta.
