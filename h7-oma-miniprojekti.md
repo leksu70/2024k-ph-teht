@@ -133,7 +133,7 @@ Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 01.50.
 
 Konfiguroinnissa on käytetty [Tero Karvisen (2023)](https://terokarvinen.com/2023/salt-vagrant/) blokikirjoitusta hyväksi.
 
-Windows-koneen provisoinnissa käytetään apuna shell-skriptiä `$winscript`. Shell-skripti on tarkoitettu Windows minion -virtuaalikoneille ja sen tehtävänä on asettaa sekuriteettiprotokolla (TLS 1.2), ladata Salt Minion 3006 -asennuspaketti ja asentaa se, sekä asettaa TIMEZONE-asetuksen.
+Windows-koneen provisoinnissa käytetään apuna shell-skriptiä `$winscript`. Shell-skripti on tarkoitettu Windows minion -virtuaalikoneille ja sen tehtävänä on asettaa sekuriteettiprotokolla (TLS 1.2), ladata Salt Minion 3006 -asennuspaketti ja asentaa se, sekä asettaa näppäimistö suomenkieliseksi ja TIMEZONE-asetuksen.
 
 Salt-Minionin asennuksen komentorivioptiot on esitelty [Salt Projektin (2024b) sivulla](https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/windows.html#windows-nullsoft-exe-install-options). PowerShell-komentojen käytössä on ollut apuna [SaltStack GitHubin (2024)](https://github.com/saltstack/salt-bootstrap) sivusto.
 
@@ -146,6 +146,7 @@ $winscript = <<-'EOF'
 Invoke-WebRequest -Uri https://repo.saltproject.io/salt/py3/windows/3006/Salt-Minion-3006.8-Py3-AMD64-Setup.exe -OutFile "$env:TEMP\Salt-Minion-3006.8-Py3-AMD64-Setup.exe"
 & "$env:TEMP\Salt-Minion-3006.8-Py3-AMD64-Setup.exe" /S /minion-name=win10 /master=10.1.0.21
 
+Set-WinUserLanguageList -LanguageList fi-FI -Force
 Set-TimeZone 'FLE Standard Time'
 EOF
 #
@@ -305,6 +306,7 @@ $winscript = <<-'EOF'
 Invoke-WebRequest -Uri https://repo.saltproject.io/salt/py3/windows/3006/Salt-Minion-3006.8-Py3-AMD64-Setup.exe -OutFile "$env:TEMP\Salt-Minion-3006.8-Py3-AMD64-Setup.exe"
 & "$env:TEMP\Salt-Minion-3006.8-Py3-AMD64-Setup.exe" /S /minion-name=win10 /master=10.1.0.21
 
+Set-WinUserLanguageList -LanguageList fi-FI -Force
 Set-TimeZone 'FLE Standard Time'
 EOF
 #
@@ -482,7 +484,7 @@ Koska `vscode.sls`-tiedosto löytyy `win10`-koneelta, Saltin tietokannan päivit
 Kirjaudutaan `master`-koneelle komentotulkista komennolla `vagrant ssh master`.
 
 Luodaan `vscode`a varten oma hakemisto komennolla `sudo mkdir /srv/salt/win-vscode` sekä luodaan sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-vscode/init.sls`. Itse käytän mielellään `vi`-editoria, sillä olen käyttänyt sitä yli 20 vuotta.
-```
+```ruby
 {% if "Windows" == grains["os"]  %}
 windows_pkgs:
   pkg.installed:
@@ -499,7 +501,7 @@ others:
 Tarkastetaan, mikä on viimeisin vscode versio tiedostosta `/srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls`, jonka se pystyy asentamaan. Tiedostossa on suurin versio 1.50.1.
 
 Muokataan tiedostoa komennolla `sudo vi /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls` ja lisätään sinne [versio 1.79.1](https://code.visualstudio.com/updates/v1_79) eli rivi `('1.79.1', '4cb974a7aed77a74c7813bdccd99ee0d04901215'),`. Jotta lataus onnistuu, jälkimmäinen listan elementiksi lisätään koodin commit-tieto, mikä löytyy [GitHub microsoft/vscoden](https://github.com/search?q=repo%3Amicrosoft%2Fvscode+1.79.1+commit&type=issues) sivulta, kun etsii sivulta versionumeroa.
-```
+```ruby
 # due to winrepo installer limitations you need to manually download x86 + x64 System installer from
 # https://code.visualstudio.com/Download
 # and put it on the winrepo on master to install it the 'salt://win/repo-ng/vscode/...
@@ -579,12 +581,32 @@ Uusi ikkuna avautuu, kun painetaa `About`-valintaa.
 
 ![About-ikkuna](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-28-vscode-about.png "About-ikkuna")
 
+Näin voidaan todentaa, että oikea Visual Studio Code on asentunut.
 
+Lopuksi painetaan `OK`-nappulaa ja suljetaan Visual Studio Code.
 
+#### Luodaan python3:lle Salt-tila Windows-koneelle
+Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo XXX.
 
+Luodaan `master`-koneella win-python3-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
+```ruby
+{% if "Windows" == grains["os"]  %}
+windows_pkgs:
+  pkg.installed:
+    - pkgs:
+      - python3_x64
+{% else %}
+others:
+  test.succeed_without_changes:
+    - name: No changes in Linux machines.
+{% endif %}
+```
 
+Suoritetaan `win-python3`-tila komennolla `sudo salt '*' state.apply win-python3` ja suoritetaan se uudelleen.
 
+![win-python3-tila](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-state-win-python3.png "win-python3-tila")
 
+Ensimmäisellä kerralla asennus onnistui molemmille koneille. Linux-koneille tätä ei asenneta, mutta `win10`-koneelle se asentui. Kun sama komento ajettiin uudelleen, muutosta ei tapahtunut. Tila on idempotentti.
 
 
 
