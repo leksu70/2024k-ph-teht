@@ -216,7 +216,7 @@ end
 Windows Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up win10`-komennolla.
 
 ## Luodaan kolme virtuaalikonetta
-Tehtävä aloitettu 13.5.2024 klo 18.15 ja lopetettu 13.5.2024 klo 19.05.
+Tehtävä aloitettu 13.5.2024 klo 18.15 ja lopetettu 13.5.2024 klo 19.20.
 
 Aloitetaan avaamalla oma shell-komentotulkki - itse käytän Gitin Bash-shelliä ja avaan sen valmiista kuvakkeesta. Tässä voidaan käyttää myös muita komentotulkkeja.
 
@@ -394,7 +394,7 @@ $
 Omassa koneessani kaikkien kolmen virtuaalikoneen ensikäynnistämiseen menee aikaa noin 16 minuuttia, joista pisimmän ajan vie Windows-virtuaalikoneen käynnistäminen. Kolmen koneen uudelleenkäynnistäminen on huomattavasti nopeampaa ja se vie minun tietokoneellani hieman yli kolme minuuttia.
 
 ### Tarkastetaan virtuaalikoneiden asennukset ja hyväksytään minioneiden rekisteröinnit
-Tehtävä aloitettu 13.5.2024 klo 18.45 ja lopetettu 13.5.2024 klo 19.05.
+Tehtävä aloitettu 13.5.2024 klo 18.45 ja lopetettu 13.5.2024 klo 19.20.
 
 Koska virtuaalikoneisiin asentui skriptien kautta Salt, voidaan Salt Masterilta (`master`-kone) käydä tarkastamassa, ovatko Salt Minionit yrittäneet rekisteröityä masterille.
 
@@ -412,7 +412,71 @@ Tarkastetaan `sudo salt '*' grains.item osfinger`-komennolla, että `grains`-raj
 
 Kaikkiin kolmeen virtuaalikoneeseen Salt on asennettu onnistuneesti, sillä minionien rekisteröiminen onnistui ja `grains`-rajapinta osasi palauttaa pyydetyt tiedot.
 
+## Saltin konfigurointi
+Tehtävä aloitettu 13.5.2024 klo 19.30 ja lopetettu 13.5.2024 klo XXXXX.
 
+### Windows-virtuaalikoneen ympäristö
+Tehtävässä asennetaan Windows-koneelle Python-kehitysympäristö. Tarvittavat sovellukset ovat Visual Studio Code ja Python-tulkki.
+
+#### Otetaan käyttöön salt-winrepo-ng
+Tässä tehtävässä käytetään apuna [Tero Karvisin (2018) neuvoja](https://terokarvinen.com/2018/control-windows-with-salt/) `salt-winrepo-ng`:n käyttöönottoon.
+
+Otetaan yhteys `master`-koneeseen komentotulkista komennolla `vagrant ssh master`. Luodaan `/srv/salt/win`-kansio master-koneelle ja kansion ryhmäksi `salt`, sekä `salt`-käyttäjälle oikeudet kansioon.
+```bash
+vagrant@master:~$ sudo mkdir /srv/salt/win
+vagrant@master:~$ sudo chown root:salt /srv/salt/win
+vagrant@master:~$ sudo chmod 775 /srv/salt/win
+vagrant@master:~$ sudo ls -ld /srv/salt/win
+drwxrwxr-x 2 root salt 4096 May 13 16:42 /srv/salt/win
+vagrant@master:~$
+```
+
+Jotta `salt-run`-komento toimisi, asennetaan `git` masterille komennolla `sudo apt-get update; sudo apt-get install git -y` onnistuneesti.
+
+Asennetaan `repo`- ja `repo-ng`-repositorit `master`-koneelle komennolloilla:
+```bash
+vagrant@master:~$ sudo salt-run winrepo.update_git_repos
+https://github.com/saltstack/salt-winrepo-ng.git:
+    True
+https://github.com/saltstack/salt-winrepo.git:
+    True
+```
+
+Päivitetään masterin Windows-pakettien tiedot Windows-minioneiden tietokantaan komennolla `sudo salt -G 'os:windows' pkg.refresh_db`.
+```bash
+vagrant@master:~$ sudo salt -G 'os:windows' pkg.refresh_db
+win10:
+    ----------
+    failed:
+        0
+    success:
+        312
+    total:
+        312
+vagrant@master:~$
+```
+
+Tarkastetaan, että Windows-kone `win10` päivitti tietokantansa. Kirjaudutaan sisään komentotulkista komennolla `vagrant ssh win10` ja tarkastetaan `dir "C:\ProgramData\Salt Project\Salt\var\cache\salt\minion\files\base\win\repo-ng\salt-winrepo-ng\_\vscode.sls"`-komennolla onko tscode.sls-tiedosto olemassa.
+```shell
+Microsoft Windows [Version 10.0.19045.4291]
+(c) Microsoft Corporation. All rights reserved.
+
+vagrant@WIN10 C:\Users\vagrant>dir "C:\ProgramData\Salt Project\Salt\var\cache\s
+alt\minion\files\base\win\repo-ng\salt-winrepo-ng\_\vscode.sls"
+ Volume in drive C is Windows
+ Volume Serial Number is 2AD3-0DDF
+
+ Directory of C:\ProgramData\Salt Project\Salt\var\cache\salt\minion\files\base\
+win\repo-ng\salt-winrepo-ng\_
+
+05/13/2024  07:57 PM             1,629 vscode.sls
+               1 File(s)          1,629 bytes
+               0 Dir(s)  116,042,846,208 bytes free
+
+vagrant@WIN10 C:\Users\vagrant>
+```
+
+Koska `vscode.sls`-tiedosto löytyy `win10`-koneelta, Saltin tietokannan päivitys on onnistunut Windows-koneelle.
 
 
 ## Lähteet
