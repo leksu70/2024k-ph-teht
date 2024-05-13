@@ -83,7 +83,7 @@ EOF
 ### General Debian script END
 ```
 
-Toinen skripti sisältää `salt-master`in asentamisen, `/srv/salt`-hakemiston luonnin ja lopuksi `salt-master`-palvelun uudelleen käynnistämisen.
+Toinen skripti sisältää `git`in ja `salt-master`in asentamisen, `/srv/salt`-hakemiston luonnin ja lopuksi `salt-master`-palvelun uudelleen käynnistämisen.
 ```
 ### Salt Master
 #
@@ -91,6 +91,10 @@ $masscript = <<-'EOF'
 
 echo "Update catalog." >> /tmp/masscript.txt 2>&1
 sudo apt-get update >> /tmp/masscript.txt 2>&1
+
+# Needed for Windows support salt-winrepo-ng
+echo "Install git." >> /tmp/masscript.txt 2>&1
+sudo apt-get install git -y >> /tmp/masscript.txt 2>&1
 
 echo "Install latest salt-master version." >> /tmp/masscript.txt 2>&1
 sudo apt-get install salt-master -y >> /tmp/masscript.txt 2>&1
@@ -267,6 +271,10 @@ $masscript = <<-'EOF'
 echo "Update catalog." >> /tmp/masscript.txt 2>&1
 sudo apt-get update >> /tmp/masscript.txt 2>&1
 
+# Needed for Windows support salt-winrepo-ng
+echo "Install git." >> /tmp/masscript.txt 2>&1
+sudo apt-get install git -y >> /tmp/masscript.txt 2>&1
+
 echo "Install latest 3006 salt-master version." >> /tmp/masscript.txt 2>&1
 sudo apt-get install salt-master -y >> /tmp/masscript.txt 2>&1
 echo "Create /srv/salt directory." >> /tmp/masscript.txt 2>&1
@@ -433,8 +441,6 @@ drwxrwxr-x 2 root salt 4096 May 13 16:42 /srv/salt/win
 vagrant@master:~$
 ```
 
-Jotta `salt-run`-komento toimisi, asennetaan `git` masterille komennolla `sudo apt-get update; sudo apt-get install git -y` onnistuneesti.
-
 Asennetaan `repo`- ja `repo-ng`-repositorit `master`-koneelle komennolloilla:
 ```bash
 vagrant@master:~$ sudo salt-run winrepo.update_git_repos
@@ -586,7 +592,7 @@ Näin voidaan todentaa, että oikea Visual Studio Code on asentunut.
 Lopuksi painetaan `OK`-nappulaa ja suljetaan Visual Studio Code.
 
 #### Luodaan python3:lle Salt-tila Windows-koneelle
-Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo XXX.
+Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo 23.25.
 
 Luodaan `master`-koneella win-python3-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
 ```ruby
@@ -608,6 +614,7 @@ Suoritetaan `win-python3`-tila komennolla `sudo salt '*' state.apply win-python3
 
 Ensimmäisellä kerralla asennus onnistui molemmille koneille. Linux-koneille tätä ei asenneta, mutta `win10`-koneelle se asentui. Kun sama komento ajettiin uudelleen, muutosta ei tapahtunut. Tila on idempotentti.
 
+### Luodaan uusi käyttäjä kaikkiin minion-koneisiin
 
 
 ## Lähteet
