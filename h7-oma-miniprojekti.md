@@ -567,6 +567,19 @@ Valitaan luotu Windows-kone (`Vagrant_win10_...`) ja painetaan `Show`-nappulaa. 
 
 ![Annetaan vagrant-käyttäjän salasana](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-25-win-login.png "Annetaan vagrant-käyttäjän salasana")
 
+Kirjautumisen jälkeen painetaan `Start`-nappulaa hiiren vasemmalla nappulalla ja nähdään, että `Visual Studio Code` on asentunut Windows-koneelle. 
+
+![Start-valikko](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-26-win-start.png "Start-valikko")
+
+Klikataan `Visual Studio Codea` ja odotetaan, että se käynnistyy. Valitaan ylävalikosta `kolme pistettä`, sekä `Help`in alta `About`.
+
+![Etsitän Help-valikko](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-27-vscode-help-about.png "Etsitän Help-valikko")
+
+Uusi ikkuna avautuu, kun painetaa `About`-valintaa.
+
+![About-ikkuna](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-28-vscode-about.png "About-ikkuna")
+
+
 
 
 
