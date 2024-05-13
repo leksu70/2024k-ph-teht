@@ -398,7 +398,7 @@ Tehtävä aloitettu 13.5.2024 klo 18.45 ja lopetettu 13.5.2024 klo 19.05.
 
 Koska virtuaalikoneisiin asentui skriptien kautta Salt, voidaan Salt Masterilta (`master`-kone) käydä tarkastamassa, ovatko Salt Minionit yrittäneet rekisteröityä masterille.
 
-Kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master` ja suoritetaan `sudo salt-key -L`-komento.
+Kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master` ja suoritetaan `sudo salt-key -L`-komento. Mikäli minion-koneet ovat rekisteröityneet normaalisti, tällöin niiden pitäisi löytyä `Unaccepted Keys`:n alapuolelta.
 
 ![Salt Minionien tarkastus master-koneella](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-11-ssh-salt-key.png "Salt Minionien tarkastus master-koneella")
 
@@ -406,7 +406,13 @@ Hyväksytään minionien rekisteröintipyynnöt (eli hyväksytään minionien ju
 
 ![Salt Minionien hyväksyntä master-koneella](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-12-salt-key-accept.png "Salt Minionien hyväksyntä master-koneella")
 
-Kaikkiin kolmeen virtuaalikoneeseen Salt on asennettu onnistuneesti, sillä minionien rekisteröiminen onnistui normaalisti.
+Tarkastetaan `sudo salt '*' grains.item osfinger`-komennolla, että `grains`-rajapinta toimii.
+
+![Minionien osfinger](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-13-salt-osfinger.png "Minionien osfinger")
+
+Kaikkiin kolmeen virtuaalikoneeseen Salt on asennettu onnistuneesti, sillä minionien rekisteröiminen onnistui ja `grains`-rajapinta osasi palauttaa pyydetyt tiedot.
+
+
 
 
 ## Lähteet
