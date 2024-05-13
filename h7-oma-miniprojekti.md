@@ -2,13 +2,50 @@
 
 Nämä tehtävät kuuluvat Tero Karvisen kurssille [Infra as Code - Palvelinten hallinta 2024](https://terokarvinen.com/2024/configuration-management-2024-spring/).
 
-Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä vielä Salt versiot minioneilta (Debian 11 ja Windows 10) ja masterilta (Debian 11).
+Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä harjoituksessa on käytetty Saltin 3006.8 (Sulfur) versioita, sillä uudempi Saltin version 3007 ei näyttänyt toimivan Windows Minionina (salt-minion-palvelu jäi paused-tilaan).
 
-Tässä harjoituksessa on käytetty Saltin 3006.8 (Sulfur) versioita.
+Tehtävien teko on aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tehtävien tekoa on jatkettu 13.5.2024 12.40 ja päätetty klo XXXX.
 
-Tehtävien teko on aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tehtävien tekoa on jatkettu 13.5.2024 XXXX ja päätetty klo XXXX.
+Tehtävässä on tarkoitus hallita ohjelmistokehitykseen tarkoitettua Windows-tietokonetta, jonka takia virtuaalikoneeseen tulee asentaa Windows 10 Vagrantin avulla, sekä seuraavat työkalut: **XXXXXXXXXXXXXXXXXXXXXXXXXXXX**. 
 
-Tehtävässä on tarkoitus hallita ohjelmistokehitykseen tarkoitettua Windows-tietokonetta, jonka takia virtuaalikoneeseen tulee asentaa Windows 10, sekä seuraavat työkalut: **XXXXXXXXXXXXXXXXXXXXXXXXXXXX**.
+Virtuaalikoneen alusta on Oraclen VirtualBox (versio 7.0). Tässä harjoituksessa ei keskitytä VirtualBoxin asentamiseen, mutta sen voi asentaa [Oraclen VirtualBox -sivustolta](https://www.virtualbox.org/wiki/Downloads).
+
+## Vagrantin asennus
+Tehtävä aloitettu 13.5.2024 klo 12.45 ja lopetettu 13.5.2024 klo 13.30.
+
+Tässä tehtävässä käytetään Hashicorpin Vagrantia (version 2.4.1). Vagrantin voi ladata [Hashicorpin (2024) websivulta](https://developer.hashicorp.com/vagrant/install#windows).
+
+Käynnistä Vagrantin vagrant_2.4.1_windows_amd64.msi-asennusohjelma tuplaklikkaamalla `vagrant_2.4.1_windows_amd64.msi`-installeria.
+
+![Windows File Manager](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-1-vagrant-filemgr.png "Windows File Manager")
+
+Seuraavaksi avautuu asennusohjelma, josta painetaan `Install`-painiketta ja asennus alkaa. 
+
+![Asennusksen aloitus painamalla Install-painiketta](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-2-vagrant-install.png "Asennusksen aloitus painamalla Install-painiketta")
+
+![Asennus käynnissä](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-3-vagrant-installing.png "Asennus käynnissä")
+
+Asennuksen valmistuttua painetaan `Finish`-painiketta.
+
+![Asennus valmis](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-4-vagrant-finished.png "Asennus valmis")
+
+Lopuksi hyväksytään Vagrantin viimeistelyyn tarvittava tietokoneen uudelleenkäynnistäminen painamalla `Yes`-painiketta.
+
+![Tietokoneen uudelleenkäynnistys](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-5-vagrant-win-restart.png "Tietokoneen uudelleenkäynnistys")
+
+Kun tietokone on käynnistynyt uudelleen ja on kirjauduttu sisään, avataan komentotulkki. Komentotulkin voi avata valitsemalla `Windows Start`-ikoni hiiren oikealla painikkeella 
+
+![Windows Start-valikko](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-6-win-start-small.png "Windows Start-valikko")
+
+ja valitsemalla `Run` avautuu uusi ikkuna, johon kirjoitetaan `cmd` ja painetaa `OK`-painiketta.
+
+![Run-ikkuna](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-7-run-win.png "Run-ikkuna")
+
+Tällöin komentotulkki avautuu. Komentotulkin kautta testataan Vagrantin versio ajamalla komento `vagrant --version`.
+
+![Vagrantin versio](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-7-run-win.png "Vagrantin versio")
+
+Näin voidaan todeta, että Vagrant on asentunut koneeseen. Kun Vagrantin ajetaan myöhemmässä vaiheessa, voidaan todeta, että Vagrant toimii normaalisti.
 
 ## Konfigurointitiedoston skriptit Debianille
 Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tätä harjoitusta jatketaan huomenna klo **XXXXXX**.
@@ -90,7 +127,7 @@ EOF
 
 ## Konfigurointitiedoston skriptit Windowsille
 **KESKEN!!!**
-Tehtävä aloitettu 12.5.2024 klo 16.30 ja valmis klo **XXXXXX**.
+Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 01.50.
 
 Konfiguroinnissa on käytetty [Tero Karvisen (2023)](https://terokarvinen.com/2023/salt-vagrant/) blokikirjoitusta hyväksi.
 
@@ -134,8 +171,6 @@ end
 Lisäksi provisointivaiheessa suoritetaan kaksi shell-skriptiä `$debscript` ja `$masscript`, mitkä ovat esitelty aiemmin. Provisoinnissa käytetään boxina yleistä `config.vm.box = "debian/bullseye64"`-määritystä.
 
 Master-virtuaalikoneen voi provisoida ja käynnistää `vagrant up master`-komennolla. 
-
-**TÄHÄN KUVA MASTERIN PROVISOINNISTA.**
 
 ### Salt Debian Minion -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja kahden skriptin ajon provisointivaiheessa.
@@ -326,14 +361,20 @@ Omassa koneessani kaikkien kolmen virtuaalikoneen ensikäynnistämiseen menee ai
 
 ## Lähteet
 
+HashiCorp (2024). Install Vagrant (Windows). https://developer.hashicorp.com/vagrant/install#windows.
+
 Karvinen, T. 2018. Control Windows with Salt. https://terokarvinen.com/2018/control-windows-with-salt/.
 
 Karvinen, T. 2023. Salt Vagrant - automatically provision one master and two slaves. https://terokarvinen.com/2023/salt-vagrant/.
 
 Karvinen, T. 2024. Infra as Code - Palvelinten hallinta 2024 https://terokarvinen.com/2024/configuration-management-2024-spring/.
 
+Oracle (2023). Download VirtualBox. https://www.virtualbox.org/wiki/Downloads.
+
 Salt Project. 2024a. Install Salt on Debian 11 (Bullseye) amd64. https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/debian.html#install-salt-on-debian-11-bullseye-amd64.
 
 Salt Project. 2024b. Windows. https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/windows.html.
 
-SaltStack GitHub (2024). Bootstrapping Salt. https://github.com/saltstack/salt-bootstrap
+SaltStack GitHub (2024). Bootstrapping Salt. https://github.com/saltstack/salt-bootstrap.
+
+
