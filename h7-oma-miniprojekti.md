@@ -47,7 +47,7 @@ Tällöin komentotulkki avautuu. Komentotulkin kautta testataan Vagrantin versio
 
 ![Vagrantin versio](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-8-cmd-vagrant.png "Vagrantin versio")
 
-Näin voidaan todeta, että Vagrant on asentunut koneeseen. Kun Vagrantin suoritetaan myöhemmässä vaiheessa, voidaan todeta, että Vagrant toimii normaalisti.
+Näin voidaan todeta, että Vagrant on asentunut koneeseen. Kun Vagrantia suoritetaan myöhemmässä vaiheessa, voidaan todeta, että Vagrant toimii normaalisti.
 
 ## Konfigurointitiedoston skriptit Debianille
 Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tätä harjoitusta jatketaan huomenna klo **XXXXXX**.
