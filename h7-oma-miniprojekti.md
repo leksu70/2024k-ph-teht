@@ -160,17 +160,17 @@ EOF
 
 ### Salt Master -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon masterille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja 2 GB muistimäärän. 
-```yaml
+```ruby
 # Salt Master Debian 11
 config.vm.define "master" do | master |
-	master.vm.hostname = "master"
-	master.vm.network "private_network", ip: "10.1.0.21"
-	master.vm.provider "virtualbox" do | vb |
-		# Memory 2 GB
-		vb.memory = 2048
-	end
-	master.vm.provision "shell", inline: $debscript
-	master.vm.provision "shell", inline: $masscript
+  master.vm.hostname = "master"
+  master.vm.network "private_network", ip: "10.1.0.21"
+  master.vm.provider "virtualbox" do | vb |
+    # Memory 2 GB
+    vb.memory = 2048
+  end
+  master.vm.provision "shell", inline: $debscript
+  master.vm.provision "shell", inline: $masscript
 end
 ```
 Lisäksi provisointivaiheessa suoritetaan kaksi shell-skriptiä `$debscript` ja `$masscript`, mitkä ovat esitelty aiemmin. Provisoinnissa käytetään boxina yleistä `config.vm.box = "debian/bullseye64"`-määritystä.
@@ -180,14 +180,14 @@ Master-virtuaalikoneen voi provisoida ja käynnistää `vagrant up master`-komen
 ### Salt Debian Minion -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja kahden skriptin ajon provisointivaiheessa.
 
-```
+```ruby
 # Salt Minion Debian 11
 config.vm.define "minion", primary: true do | minion |
-	minion.vm.hostname = "minion"
-	minion.vm.network "private_network", ip: "10.1.0.22"
+  minion.vm.hostname = "minion"
+  minion.vm.network "private_network", ip: "10.1.0.22"
 
-	minion.vm.provision "shell", inline: $debscript
-	minion.vm.provision "shell", inline: $minscript
+  minion.vm.provision "shell", inline: $debscript
+  minion.vm.provision "shell", inline: $minscript
 end
 ```
 Lisäksi provisointivaiheessa suoritetaan kaksi shell-skriptiä `$debscript` ja `$minscript`, mitkä ovat esitelty aiemmin. Provisoinnissa käytetään boxina yleistä `config.vm.box = "debian/bullseye64"`-määritystä.
@@ -196,23 +196,23 @@ Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up minion`-komen
 
 ### Windows 10 Salt Minion -virtuaalikone 
 Luodaan `Vagrantfile`-tiedostoon Windows minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon, 12 GB virtuaalimuistin, 2 virtuaali-CPUn, leikepöydän asetukset ja shell-skriptin `$winscript` suorituksen provisointivaiheessa. 
-```
+```ruby
 # Sal Minion Windows 10 H2
 config.vm.define "win10" do | win10 |
-    win10.vm.box = "gusztavvargadr/windows-10"
-    win10.vm.hostname = "win10"
-    win10.vm.network "private_network", ip: "10.1.0.23"
-    win10.vm.boot_timeout = 9000
+  win10.vm.box = "gusztavvargadr/windows-10"
+  win10.vm.hostname = "win10"
+  win10.vm.network "private_network", ip: "10.1.0.23"
+  win10.vm.boot_timeout = 9000
 
-    win10.vm.provider "virtualbox" do |vb|
-        # Memory 12 GB, 2 Virtual CPUs.
-        vb.memory = 12288
-        vb.cpus = 2
-        # tämä vielä on testattavana.
-        vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
-    end
+  win10.vm.provider "virtualbox" do |vb|
+    # Memory 12 GB, 2 Virtual CPUs.
+    vb.memory = 12288
+    vb.cpus = 2
+    # tämä vielä on testattavana.
+    vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
+  end
 
-    win10.vm.provision "shell", inline: $winscript
+  win10.vm.provision "shell", inline: $winscript
 end
 ```
 
