@@ -589,7 +589,7 @@ Näin voidaan todentaa, että oikea Visual Studio Code on asentunut.
 
 Lopuksi painetaan `OK`-nappulaa ja suljetaan Visual Studio Code.
 
-#### Luodaan python3:lle Salt-tila Windows-koneelle
+#### Luodaan python3_x64:lle Salt-tila Windows-koneelle
 Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo 23.25.
 
 Luodaan `master`-koneella win-python3_x64-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3_x64`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3_x64/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
