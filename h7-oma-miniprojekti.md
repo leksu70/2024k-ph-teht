@@ -4,7 +4,7 @@ Nämä tehtävät kuuluvat Tero Karvisen kurssille [Infra as Code - Palvelinten 
 
 Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä harjoituksessa on käytetty Saltin 3006.8 (Sulfur) versioita, sillä uudempi Saltin version 3007 ei näyttänyt toimivan Windows Minionina (salt-minion-palvelu jäi paused-tilaan).
 
-Tehtävien teko on aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tehtävien tekoa on jatkettu 13.5.2024 12.40 ja päätetty klo XXXX.
+Tehtävien teko on aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tehtävien tekoa on jatkettu 13.5.2024 12.40 ja päätetty 14.5.2024 klo 01.50.
 
 Tehtävässä on tarkoitus hallita ohjelmistokehitykseen tarkoitettua Windows-tietokonetta, jonka takia virtuaalikoneeseen tulee asentaa Windows 10 Vagrantin avulla, sekä seuraavat työkalut: **XXXXXXXXXXXXXXXXXXXXXXXXXXXX**. 
 
