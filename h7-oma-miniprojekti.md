@@ -615,6 +615,54 @@ Suoritetaan `win-python3`-tila komennolla `sudo salt '*' state.apply win-python3
 Ensimmäisellä kerralla asennus onnistui molemmille koneille. Linux-koneille tätä ei asenneta, mutta `win10`-koneelle se asentui. Kun sama komento ajettiin uudelleen, muutosta ei tapahtunut. Tila on idempotentti.
 
 ### Luodaan uusi käyttäjä kaikkiin minion-koneisiin
+Luodaan kaikille minioneille `leos`-käyttäjät `add-users`-tilan avulla.
+
+Luodaan `master`-koneelle kansio komennolla `sudo mkdir /srv/salt/add-users` ja luodaan sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/add-users/init.sls`. Tiedoston lisätään tiedot:
+
+```
+{% if "Windows" == grains["os"]  %}
+
+leos:
+  user.present:
+    - name: leos
+    - password: leos
+    - fullname: Leo S
+    - groups:
+      - Administrators
+
+{% else %}
+  {% if "Debian" == grains["os"] %}
+
+leos:
+  group.present:
+    - gid: 1011
+    - system: True
+  user.present:
+    - fullname: Leo S
+    - shell: /bin/bash
+    - home: /home/leos
+    - uid: 1011
+    - gid: 1011
+    - groups:
+      - users
+
+  {% else %}
+
+others:
+  test.succeed_without_changes:
+    - name: No changes in Linux machines except Debian.
+
+  {% endif %}
+{% endif %}
+```
+
+Ensimmäinen osa luo Windows-koneelle `leos`-käyttäjän, mikä kuuluu `Administrator`-käyttäjäryhmään. toinen osa asentaa Debian-käyttöjärjestelmille `leos`-käyttäjän, mikä kuuluu lisäksi `users`-käyttäjäryhmään `leos`-ryhmän lisäksi.
+
+Tilan voi suorittaa komennolla `sudo salt '*' state.apply add-users`.
+
+![add-users-tila](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-salt-state-apply-add-users.png "add-users-tila")
+
+Jos tilan suorittaa uudelleen, mikään ei muutu eli tila on idempotentti.
 
 
 ## Lähteet
@@ -637,7 +685,10 @@ SaltStack GitHub (2024). Bootstrapping Salt. https://github.com/saltstack/salt-b
 
 Visual Studio Code (2024a). April 2024 (version 1.89). https://code.visualstudio.com/updates/v1_89.
 
-Visual Studio code (2024b). Download visual Studio Code Insiders.
+Visual Studio Code (2024c). Command line extension management. https://code.visualstudio.com/docs/editor/extension-marketplace#_command-line-extension-management.
+
+
+Visual Studio Code (2024b). Download visual Studio Code Insiders.
 
 Visual Studio Code (2023a). May 2023 (version 1.79). https://code.visualstudio.com/updates/v1_79.
 
