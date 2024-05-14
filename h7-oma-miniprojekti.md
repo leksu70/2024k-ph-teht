@@ -160,7 +160,7 @@ EOF
 
 ### Salt Master -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon masterille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja 2 GB muistimäärän. 
-```salt
+```yaml
 # Salt Master Debian 11
 config.vm.define "master" do | master |
 	master.vm.hostname = "master"
