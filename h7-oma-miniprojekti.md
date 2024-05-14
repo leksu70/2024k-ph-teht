@@ -180,7 +180,7 @@ Master-virtuaalikoneen voi provisoida ja käynnistää `vagrant up master`-komen
 ### Salt Debian Minion -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja kahden skriptin ajon provisointivaiheessa.
 
-```yaml
+```
 # Salt Minion Debian 11
 config.vm.define "minion", primary: true do | minion |
 	minion.vm.hostname = "minion"
@@ -196,7 +196,7 @@ Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up minion`-komen
 
 ### Windows 10 Salt Minion -virtuaalikone 
 Luodaan `Vagrantfile`-tiedostoon Windows minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon, 12 GB virtuaalimuistin, 2 virtuaali-CPUn, leikepöydän asetukset ja shell-skriptin `$winscript` suorituksen provisointivaiheessa. 
-```yaml
+```
 # Sal Minion Windows 10 H2
 config.vm.define "win10" do | win10 |
     win10.vm.box = "gusztavvargadr/windows-10"
