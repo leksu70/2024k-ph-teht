@@ -4,9 +4,9 @@ Nämä tehtävät kuuluvat Tero Karvisen kurssille [Infra as Code - Palvelinten 
 
 Tehtävät suoritetaan HP EliteBook 850 G3 Windows -koneella, jossa on 32 GB muistia ja Intel Core i5-6200U -prosessori. Tässä harjoituksessa on käytetty Saltin 3006.8 (Sulfur) versioita, sillä uudempi Saltin version 3007 ei näyttänyt toimivan Windows Minionina (salt-minion-palvelu jäi paused-tilaan).
 
-Tehtävien teko on aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tehtävien tekoa on jatkettu 13.5.2024 12.40 ja päätetty 14.5.2024 klo 01.50.
+Tehtävien teko on aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tehtävien tekoa on jatkettu 13.5.2024 12.40 ja päätetty 14.5.2024 klo 01.50. Tehtävien tekoa on jatkettu 14.5.2024 klo 10.00 ja päätetty klo 17.10.
 
-Tehtävässä on tarkoitus hallita ohjelmistokehitykseen tarkoitettua Windows-tietokonetta, jonka takia virtuaalikoneeseen tulee asentaa Windows 10 Vagrantin avulla, sekä seuraavat työkalut: **XXXXXXXXXXXXXXXXXXXXXXXXXXXX**. 
+Tehtävässä on tarkoitus hallita Python-ohjelmistokehitykseen tarkoitettua Windows-tietokonetta, jonka takia virtuaalikoneeseen tulee asentaa Windows 10 Vagrantin avulla, sekä seuraavat työkalut: Visual Studio Code ja Python3. 
 
 Virtuaalikoneen alusta on Oraclen VirtualBox (versio 7.0). Tässä harjoituksessa ei keskitytä VirtualBoxin asentamiseen, mutta sen voi asentaa [Oraclen VirtualBox -sivustolta](https://www.virtualbox.org/wiki/Downloads).
 
@@ -50,7 +50,7 @@ Tällöin komentotulkki avautuu. Komentotulkin kautta testataan Vagrantin versio
 Näin voidaan todeta, että Vagrant on asentunut koneeseen. Kun Vagrantia suoritetaan myöhemmässä vaiheessa, voidaan todeta, että Vagrant toimii normaalisti.
 
 ## Konfigurointitiedoston skriptit Debianille
-Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tätä harjoitusta jatketaan huomenna klo **XXXXXX**.
+Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 02.25. Tätä harjoitusta on jatkettu myöhemmin 13.5.
 
 Konfiguroinnissa on käytetty [Tero Karvisen (2023)](https://terokarvinen.com/2023/salt-vagrant/) blokikirjoitusta ja [Salt Projektin (2024a)](https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/debian.html#install-salt-on-debian-11-bullseye-amd64) ohjetta hyväksi.
 
@@ -421,7 +421,7 @@ Tarkastetaan `sudo salt '*' grains.item osfinger`-komennolla, että `grains`-raj
 Kaikkiin kolmeen virtuaalikoneeseen Salt on asennettu onnistuneesti, sillä minionien rekisteröiminen onnistui ja `grains`-rajapinta osasi palauttaa pyydetyt tiedot.
 
 ## Saltin konfigurointi
-Tehtävä aloitettu 13.5.2024 klo 19.30 ja lopetettu 13.5.2024 klo XXXXX.
+Tehtävä aloitettu 13.5.2024 klo 19.30.
 
 ### Windows-virtuaalikoneen ympäristö
 Tehtävässä asennetaan Windows-koneelle Python-kehitysympäristö. Tarvittavat sovellukset ovat Visual Studio Code ja Python-tulkki.
@@ -861,6 +861,17 @@ vagrant@master:/srv/salt$
 ```
 </details>
 
+## Luodut Salt-tiedostot
+Nämä luodut Salt-tiedostot ovat ladattavissa [GitHubistani](https://github.com/leksu70/2024k-ph-teht-salt). Olen poistanut repostani `salt/win/`-kansion, koska se ei ole minun luomani. Kopioin sieltä muokkaamani `vscode.sls`-tiedoston, jonka voi tarvittaessa lisätä kansioon `salt/win/repo-ng/salt-winrepo-ng/_`.
+
+## Kommentteja harjoituksesta
+Kokonaisuudessaan tähän miniprojektiin meni yllättävän paljon aikaa
+ * jouduin tutkimaan Windows 10:n asentamista Vagrantin avulla VirtualBoxiin ja etsimään sopivan Vagrantin boxin
+ * Windowsin salt-minionin uusin versio ei toiminut koneessani vaan palvelu jäi jumiin -> hukkasin paljon aikaa vianselvittelyyn ja lopuksi asensin vanhemman toimivan salt-minionin ympäristööni
+ * PowerShell ei ole minulle tuttu, joten jouduin kaivamaan sen käyttöön apuja SaltStackin sivuilta
+ * Käyttämäni Debian minioni ei tässä harjoituksessa tee mitään järkevää.
+
+Mielestäni tämä kurssi osoitti, että palvelinten hallinta ei ole välttämättä hankalaa. Mikäli minulla löytyy aikaa, niin tätä voisi tutkia enemmän ja syvemmin.
 
 
 ## Lähteet
