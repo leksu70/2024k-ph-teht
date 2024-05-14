@@ -57,7 +57,7 @@ Konfiguroinnissa on käytetty [Tero Karvisen (2023)](https://terokarvinen.com/20
 Debian-koneiden provisoinnissa käytetään kolmea eri skriptiä: `$debscript`, `$masscript` ja `$minscript`. Ensimmäinen on tarkoitettu kaikille Debian-järjestelmille, toinen on tarkoitettu master-koneelle ja kolmas on tarkoitettu minion-koneille.
 
 Ensimmäinen skripti on tarkoitettu Debian-käyttöjärjestelmille, joihin halutaan asentaa Salt master tai minion. Skripti sisältää Debian-koneille paketinhallinnan päivityksen, `curl`-komennon asentamisen, Saltin päivitetyn paketin tiedot ja aliaksen luonnin komentokehotteeseen.
-```
+```shell
 ### General Debian script
 #
 $debscript = <<-'EOF'
@@ -84,7 +84,7 @@ EOF
 ```
 
 Toinen skripti sisältää `git`in ja `salt-master`in asentamisen, `/srv/salt`-hakemiston luonnin ja lopuksi `salt-master`-palvelun uudelleen käynnistämisen.
-```
+```shell
 ### Salt Master
 #
 $masscript = <<-'EOF'
@@ -109,7 +109,7 @@ EOF
 ```
 
 Kolmas skripti sisältää `salt-minion`in asentamisen, konfiguroinnin ja `salt-minion`-palvelun uudelleenkäynnistämisen.
-```
+```shell
 ### Salt Minion, Debian
 #
 $minscript = <<-'EOF'
@@ -132,7 +132,6 @@ EOF
 ```
 
 ## Konfigurointitiedoston skripti Windowsille
-**KESKEN!!!**
 Tehtävä aloitettu 12.5.2024 klo 16.30 ja lopetettu 13.5.2024 klo 01.50.
 
 Konfiguroinnissa on käytetty [Tero Karvisen (2023)](https://terokarvinen.com/2023/salt-vagrant/) blokikirjoitusta hyväksi.
@@ -141,7 +140,7 @@ Windows-koneen provisoinnissa käytetään apuna shell-skriptiä `$winscript`. S
 
 Salt-Minionin asennuksen komentorivioptiot on esitelty [Salt Projektin (2024b) sivulla](https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/windows.html#windows-nullsoft-exe-install-options). PowerShell-komentojen käytössä on ollut apuna [SaltStack GitHubin (2024)](https://github.com/saltstack/salt-bootstrap) sivusto.
 
-```
+```powershell
 ### Salt Minion, Windows 10
 #
 $winscript = <<-'EOF'
@@ -159,10 +158,9 @@ EOF
 
 ## Virtuaalikoneiden konfigurointiosiot
 
-
 ### Salt Master -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon masterille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja 2 GB muistimäärän. 
-```
+```yaml
 # Salt Master Debian 11
 config.vm.define "master" do | master |
 	master.vm.hostname = "master"
@@ -182,7 +180,7 @@ Master-virtuaalikoneen voi provisoida ja käynnistää `vagrant up master`-komen
 ### Salt Debian Minion -virtuaalikone
 Luodaan `Vagrantfile`-tiedostoon minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon ja kahden skriptin ajon provisointivaiheessa.
 
-```
+```yaml
 # Salt Minion Debian 11
 config.vm.define "minion", primary: true do | minion |
 	minion.vm.hostname = "minion"
@@ -198,7 +196,7 @@ Minion-virtuaalikoneen voi provisoida ja käynnistää `vagrant up minion`-komen
 
 ### Windows 10 Salt Minion -virtuaalikone 
 Luodaan `Vagrantfile`-tiedostoon Windows minionille osio, mikä sisältää virtuaalikoneen hostnamen, IP-osoitteen privaattiverkkoon, 12 GB virtuaalimuistin, 2 virtuaali-CPUn, leikepöydän asetukset ja shell-skriptin `$winscript` suorituksen provisointivaiheessa. 
-```
+```yaml
 # Sal Minion Windows 10 H2
 config.vm.define "win10" do | win10 |
     win10.vm.box = "gusztavvargadr/windows-10"
@@ -432,7 +430,7 @@ Tässä tehtävässä käytetään apuna [Tero Karvisin (2018) neuvoja](https://
 
 #### Otetaan käyttöön salt-winrepo-ng
 Otetaan yhteys `master`-koneeseen komentotulkista komennolla `vagrant ssh master`. Luodaan `/srv/salt/win`-kansio master-koneelle ja kansion ryhmäksi `salt`, sekä `salt`-käyttäjälle oikeudet kansioon.
-```bash
+```shell
 vagrant@master:~$ sudo mkdir /srv/salt/win
 vagrant@master:~$ sudo chown root:salt /srv/salt/win
 vagrant@master:~$ sudo chmod 775 /srv/salt/win
@@ -490,7 +488,7 @@ Koska `vscode.sls`-tiedosto löytyy `win10`-koneelta, Saltin tietokannan päivit
 Kirjaudutaan `master`-koneelle komentotulkista komennolla `vagrant ssh master`.
 
 Luodaan `vscode`a varten oma hakemisto komennolla `sudo mkdir /srv/salt/win-vscode` sekä luodaan sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-vscode/init.sls`. Itse käytän mielellään `vi`-editoria, sillä olen käyttänyt sitä yli 20 vuotta.
-```ruby
+```yaml
 {% if "Windows" == grains["os"]  %}
 windows_pkgs:
   pkg.installed:
@@ -507,7 +505,7 @@ others:
 Tarkastetaan, mikä on viimeisin vscode versio tiedostosta `/srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls`, jonka se pystyy asentamaan. Tiedostossa on suurin versio 1.50.1.
 
 Muokataan tiedostoa komennolla `sudo vi /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls` ja lisätään sinne [versio 1.79.1](https://code.visualstudio.com/updates/v1_79) eli rivi `('1.79.1', '4cb974a7aed77a74c7813bdccd99ee0d04901215'),`. Jotta lataus onnistuu, jälkimmäinen listan elementiksi lisätään koodin commit-tieto, mikä löytyy [GitHub microsoft/vscoden](https://github.com/search?q=repo%3Amicrosoft%2Fvscode+1.79.1+commit&type=issues) sivulta, kun etsii sivulta versionumeroa.
-```ruby
+```yaml
 # due to winrepo installer limitations you need to manually download x86 + x64 System installer from
 # https://code.visualstudio.com/Download
 # and put it on the winrepo on master to install it the 'salt://win/repo-ng/vscode/...
@@ -546,7 +544,7 @@ vscode:
   {% endfor %}
 ```
 
-Tämän jälkeen tietokanta (salt-winrepo-ng) pitää päivittää Windows-minioneille komennolla `sudo salt -G 'os:windows' pkg.refresh_db`.
+Tämän jälkeen tietokanta (`salt-winrepo-ng`) pitää päivittää Windows-minioneille komennolla `sudo salt -G 'os:windows' pkg.refresh_db`.
 
 Kokeillaan asentaa `master`-koneelta vscode manuaalisesti komennolla `sudo salt -G 'os:windows' pkg.install vscode`.
 
@@ -595,16 +593,20 @@ Lopuksi painetaan `OK`-nappulaa ja suljetaan Visual Studio Code.
 Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo 23.25.
 
 Luodaan `master`-koneella win-python3-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
-```ruby
+```yaml
 {% if "Windows" == grains["os"]  %}
+
 windows_pkgs:
   pkg.installed:
     - pkgs:
       - python3_x64
+
 {% else %}
+
 others:
   test.succeed_without_changes:
     - name: No changes in Linux machines.
+
 {% endif %}
 ```
 
