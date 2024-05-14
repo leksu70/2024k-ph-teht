@@ -592,7 +592,7 @@ Lopuksi painetaan `OK`-nappulaa ja suljetaan Visual Studio Code.
 #### Luodaan python3:lle Salt-tila Windows-koneelle
 Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo 23.25.
 
-Luodaan `master`-koneella win-python3-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
+Luodaan `master`-koneella win-python3_x64-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3_x64`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3_x64/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
 ```yaml
 {% if "Windows" == grains["os"]  %}
 
@@ -610,9 +610,9 @@ others:
 {% endif %}
 ```
 
-Suoritetaan `win-python3`-tila komennolla `sudo salt '*' state.apply win-python3` ja suoritetaan se uudelleen.
+Suoritetaan `win-python3_x64`-tila komennolla `sudo salt '*' state.apply win-python3_x64` ja suoritetaan se uudelleen.
 
-![win-python3-tila](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-state-win-python3.png "win-python3-tila")
+![win-python3_x64-tila](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-state-win-python3_x64.png "win-python3_x64-tila")
 
 Ensimmäisellä kerralla asennus onnistui molemmille koneille. Linux-koneille tätä ei asenneta, mutta `win10`-koneelle se asentui. Kun sama komento ajettiin uudelleen, muutosta ei tapahtunut. Tila on idempotentti.
 
