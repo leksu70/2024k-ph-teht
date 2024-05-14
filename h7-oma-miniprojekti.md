@@ -600,11 +600,12 @@ windows_pkgs:
   pkg.installed:
     - pkgs:
       - python3_x64
-# Ei toimi oikein. Toimii komentoriviltä ilman salt.
-# https://github.com/microsoft/vscode/issues/136874
   cmd.run:
-#    - name: 'set NODE_OPTIONS=--throw-deprecation; code --install-extension ms-python.python'
+    # https://github.com/microsoft/vscode/issues/136874
+    #- name: 'set NODE_OPTIONS=--throw-deprecation; code --install-extension ms
+-python.python'
     - name: 'code --install-extension ms-python.python'
+
 {% else %}
 
 others:
@@ -614,11 +615,27 @@ others:
 {% endif %}
 ```
 
-Suoritetaan `win-python3_x64`-tila komennolla `sudo salt '*' state.apply win-python3_x64` ja suoritetaan se uudelleen.
+Kun tila suoritetaan komennolla `sudo salt 'win10' state.apply win-python3_x64`, niin jostain syystä `cmd.run`:n extensionin asennus onnistuu, mutta sitä ei oteta käyttöön `vagrant`-käyttäjällä eikä sitä löyty kohdekoneen `vagrant`-käyttäjältä. Tämän tiedon näyttää myös `win10`-koneessa suoritetun `code --list-extensions`-komennon suorituksen komentotulkissa (`CMD.EXE`).
 
-![win-python3_x64-tila](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-state-win-python3_x64.png "win-python3_x64-tila")
+![win-python3_x64-tila extensionin kanssa](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-state-win-python3_x64-inst-ext.png "win-python3_x64-tila extensionin kanssa")
 
-Ensimmäisellä kerralla asennus onnistui molemmille koneille. Linux-koneille tätä ei asenneta, mutta `win10`-koneelle se asentui. Kun sama komento ajettiin uudelleen, muutosta ei tapahtunut. Tila on idempotentti.
+Tilan suorittaminen onnistui ja mikäli tämä tila suoritetaan uudestaan, tila muuttuu eli tila ei ole idempotentti. Tämän vuoksi korjataan tilanne kommentoimalla pois `pkg.run`-osuus.
+
+Poistetaan ensin `python3_x64` Saltin avulla komennolla `sudo salt 'win10' pkg.remove python3_x64` 
+
+```yaml
+#  cmd.run:
+    # https://github.com/microsoft/vscode/issues/136874
+    #- name: 'set NODE_OPTIONS=--throw-deprecation; code --install-extension ms-python.python'
+#    - name: 'code --install-extension ms-python.python --force'
+
+```
+
+ja suoritetaan tila uudelleen komennolla `sudo salt 'win10' state.apply win-python3_x64`.
+
+![win-python3_x64-tila](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-31-state-win-python3_x64.png "win-python3_x64-tila")
+
+Suoritetaan tila uudelleen. Koska tila ei muuttunut, nyt tämä tila on idempotentti.
 
 ### Luodaan uusi käyttäjä kaikkiin minion-koneisiin
 Luodaan kaikille minioneille `leos`-käyttäjät `add-users`-tilan avulla.
