@@ -592,7 +592,7 @@ Lopuksi painetaan `OK`-nappulaa ja suljetaan Visual Studio Code.
 #### Luodaan python3_x64:lle Salt-tila Windows-koneelle
 Tehtävä aloitettu 13.5.2024 klo 23.05 ja lopetettu 13.5.2024 klo 23.25.
 
-Luodaan `master`-koneella win-python3_x64-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3_x64`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3_x64/init.sls` ja tiedostoon lisätään rivit sekä talletetaan tiedosto.
+Luodaan `master`-koneella `win-python3_x64`-tila luomalla sille oma kansio komennolla `sudo mkdir /srv/salt/win-python3_x64`. Lisätään sinne `init.sls`-tiedosto komennolla `sudo vi /srv/salt/win-python3_x64/init.sls` ja tiedostoon lisätään rivi.
 ```yaml
 {% if "Windows" == grains["os"]  %}
 
@@ -602,8 +602,7 @@ windows_pkgs:
       - python3_x64
   cmd.run:
     # https://github.com/microsoft/vscode/issues/136874
-    #- name: 'set NODE_OPTIONS=--throw-deprecation; code --install-extension ms
--python.python'
+    #- name: 'set NODE_OPTIONS=--throw-deprecation; code --install-extension ms-python.python'
     - name: 'code --install-extension ms-python.python'
 
 {% else %}
@@ -619,9 +618,9 @@ Kun tila suoritetaan komennolla `sudo salt 'win10' state.apply win-python3_x64`,
 
 ![win-python3_x64-tila extensionin kanssa](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-30-state-win-python3_x64-inst-ext.png "win-python3_x64-tila extensionin kanssa")
 
-Tilan suorittaminen onnistui ja mikäli tämä tila suoritetaan uudestaan, tila muuttuu eli tila ei ole idempotentti. Tämän vuoksi korjataan tilanne kommentoimalla pois `pkg.run`-osuus.
+Tilan suorittaminen onnistui ja mikäli tämä tila suoritetaan uudestaan, tila muuttuu eli tila ei ole idempotentti. Tämän vuoksi korjataan tilanne. 
 
-Poistetaan ensin `python3_x64` Saltin avulla komennolla `sudo salt 'win10' pkg.remove python3_x64` 
+Poistetaan ensin `python3_x64` Saltin avulla komennolla `sudo salt 'win10' pkg.remove python3_x64`, jonka jälkeen kommentoidaan pois `pkg.run`-osuus muokkaamalla tiedostoa komennolla `sudo vi /srv/salt/win-python3_x64/init.sls`
 
 ```yaml
 #  cmd.run:
@@ -714,6 +713,7 @@ Tämä sallii koneiden tilojen asentamisen yhdellä komennolla, kun `master`-kon
 ![Saltin highstate](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-31-salt-highstate.png "Saltin highstate")
 
 <details><summary>Komennon koko tulostus.</summary>
+
 ```yaml
 vagrant@master:/srv/salt$ sudo salt '*' state.highstate
 minion:
@@ -859,7 +859,7 @@ Total states run:     2
 Total run time:  53.920 s
 vagrant@master:/srv/salt$
 ```
-</detail>
+</details>
 
 
 
