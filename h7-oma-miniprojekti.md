@@ -861,8 +861,13 @@ vagrant@master:/srv/salt$
 ```
 </details>
 
-## Luodut Salt-tiedostot
+## Luodut tiedostot
+
+### Salt-tiedostot
 Nämä luodut Salt-tiedostot ovat ladattavissa [GitHubistani](https://github.com/leksu70/2024k-ph-teht-salt). Olen poistanut repostani `salt/win/`-kansion, koska se ei ole minun luomani. Kopioin sieltä muokkaamani `vscode.sls`-tiedoston, jonka voi tarvittaessa lisätä kansioon `salt/win/repo-ng/salt-winrepo-ng/_`.
+
+### Vagrantfile-tiedosto
+Vagrantfile-tiedosto on ladattavissa [GitHub-linkistä](https://github.com/leksu70/2024k-ph-teht/blob/master/Vagrantfile).
 
 ## Kommentteja harjoituksesta
 Kokonaisuudessaan tähän miniprojektiin meni yllättävän paljon aikaa
@@ -895,7 +900,6 @@ SaltStack GitHub (2024). Bootstrapping Salt. https://github.com/saltstack/salt-b
 Visual Studio Code (2024a). April 2024 (version 1.89). https://code.visualstudio.com/updates/v1_89.
 
 Visual Studio Code (2024c). Command line extension management. https://code.visualstudio.com/docs/editor/extension-marketplace#_command-line-extension-management.
-
 
 Visual Studio Code (2024b). Download visual Studio Code Insiders.
 
