@@ -541,7 +541,7 @@ vscode:
     msiexec: False
     locale: en_US
     reboot: False
-  {% endfor %}
+{% endfor %}
 ```
 
 Tämän jälkeen tietokanta (`salt-winrepo-ng`) pitää päivittää Windows-minioneille komennolla `sudo salt -G 'os:windows' pkg.refresh_db`.
@@ -552,7 +552,7 @@ Kokeillaan asentaa `master`-koneelta vscode manuaalisesti komennolla `sudo salt 
 
 Tämä muutos toimi, joten poistetaan vscode komennolla `sudo salt -G 'os:windows' pkg.remove vscode`.
 
-![Vscoden poisto manuaalisesti](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-20-sal-win-remove-man-vscode.png "Vscoden poisto manuaalisesti")
+![Vscoden poisto manuaalisesti](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-21-sal-win-remove-man-vscode.png "Vscoden poisto manuaalisesti")
 
 Otetaan käyttöön Salt-tila `win-vscode` komennolla `sudo salt '*' state.apply win-vscode`.
 
