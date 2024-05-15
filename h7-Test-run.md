@@ -176,3 +176,11 @@ win10:
 vagrant@master:~/2024k-ph-teht-salt$
 ```
 
+4 Asennetaan hallittavat tilat kaikille minioneille komennolla `sudo salt '*' state.highstate`.
+
+![Salt highstate 1](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-1.png "Salt highstate 1")
+![Salt highstate 2](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-1.png "Salt highstate 2")
+![Salt highstate 3](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-1.png "Salt highstate 3")
+![Salt highstate 4](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-1.png "Salt highstate 4")
+![Salt highstate 5](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-1.png "Salt highstate 5")
+![Salt highstate 6](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-1.png "Salt highstate 6")
