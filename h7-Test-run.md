@@ -10,9 +10,7 @@
 
 4. Avataan editori ja pastetaan aikaisemmin kopioidut tiedot editoriin `CTRL-v`-näppäinyhdistelmällä.
 
-5. Talletetaan tiedosto (`File` --> `Save As`) nimellä `/c/leksa/vagrant/Palautus/Vagrantfile`.
-
-Siirrytään takaisin komentotulkkiin ja tarkastetaan onko siellä `Vagrantfile`-tiedosto komennolla `ls -l Vagrantfile`.
+5. Talletetaan tiedosto (`File` --> `Save As`) nimellä `/c/leksa/vagrant/Palautus/Vagrantfile`. Siirrytään takaisin komentotulkkiin ja tarkastetaan onko siellä `Vagrantfile`-tiedosto komennolla `ls -l Vagrantfile`.
 
 ```
 leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/Palautus
@@ -28,7 +26,7 @@ Koska tiedosto on oikeassa hakemistossa, niin voimme jatkaa eteenpäin ja käynn
 6. Käynnistetään Vagrant komentotulkista komennolla `vagrant up`. Käynnistys on nähtävissä [20240515-Palautus1.md-linkistä](https://github.com/leksu70/2024k-ph-teht/blob/master/20240515-Palautus1.md).
 
 7. Kirjaudutaan toisella komentotulkilla ja siirrytään oikeaan kansioon komennolla `cd /c/leksa/vagrant/Palautus` ja kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master`.
-```
+```shell
 leksa@LEKSULA-PC MINGW64 /
 $ cd /c/leksa/vagrant/Palautus
 
