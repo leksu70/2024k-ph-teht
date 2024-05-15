@@ -12,7 +12,7 @@
 
 5. Talletetaan tiedosto (`File` --> `Save As`) nimellä `/c/leksa/vagrant/Palautus/Vagrantfile`. Siirrytään takaisin komentotulkkiin ja tarkastetaan onko siellä `Vagrantfile`-tiedosto komennolla `ls -l Vagrantfile`.
 
-```
+```shell
 leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/Palautus
 $ ls -l Vagrantfile
 -rw-r--r-- 1 leksa 197610 4331 May 14 00:41 Vagrantfile
@@ -43,3 +43,31 @@ permitted by applicable law.
 Last login: Wed May 15 09:07:22 2024 from 10.0.2.2
 vagrant@master:~$
 ```
+
+8. Tarkastetaan Saltin tila, sillä Vagrantin provisiointiskriptit asensivat valmiiksi `salt-master` ja `salt-minion` paketit. Ajetaan komento `sudo salt-key -L`, jotta nähdään ovatko minionit ottaneet yhteyttä masteriin.
+```shell
+vagrant@master:~$ sudo salt-key -L
+Accepted Keys:
+Denied Keys:
+Unaccepted Keys:
+minion
+win10
+Rejected Keys:
+vagrant@master:~$
+```
+Salt-minionit ovat yrittäneet ottaa yhteyttä masteriin.
+
+9. Hyväksytään minioneiden rekisteröinnit komennolla `sudo salt-key -A` ja vastataan `y` hyväksymiskysymykseen.
+```sell
+vagrant@master:~$ sudo salt-key -A
+The following keys are going to be accepted:
+Unaccepted Keys:
+minion
+win10
+Proceed? [n/Y] y
+Key for minion minion accepted.
+Key for minion win10 accepted.
+vagrant@master:~$
+```
+
+
