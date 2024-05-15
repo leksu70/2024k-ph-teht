@@ -313,7 +313,8 @@ Tila ei muutu, joten tilan on idempotentti.
 
 ![Windows Start-valikko](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win10-start.png "Windows Start-valikko")
 
-5.4 Käynnistetään viel Visual Studio Code Start-valikosta.
+5.4 Käynnistetään vielä Visual Studio Code Start-valikosta.
 
 ![VS Code toimii](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win-vscode-works.png "VS Code toimii")
 
+6 Sammutetaan virtuaalikoneet oman Windows-koneen komentotulkista komennolla `vagrant halt` ja poistetaan asennus komennolla `vagrant destroy`.
