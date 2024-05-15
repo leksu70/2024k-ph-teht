@@ -703,7 +703,7 @@ base:
   '*':
     - add-users
     - git
-  'os:windows':
+  'win10':
     - win-vscode
     - win-python3_x64
 ```
