@@ -1,6 +1,6 @@
 # Testiajo: tehtävä 7 - oma miniprojekti
 
-## Vagrant-asennus
+## 1 Vagrant-asennus
 
 1.1 Avataan komentotulkki. Itse käytän Gitin tarjoamaa bash-komentotulkkia.
 
@@ -26,7 +26,7 @@ Koska tiedosto on oikeassa hakemistossa, niin voimme jatkaa eteenpäin ja käynn
 1.6. Käynnistetään Vagrant komentotulkista komennolla `vagrant up`. Käynnistys on nähtävissä [20240515-Palautus1.md-linkistä](https://github.com/leksu70/2024k-ph-teht/blob/master/20240515-Palautus1.md).
 
 
-## Salt-asennuksen tarkastus
+## 2 Salt-asennuksen tarkastus
 2.1 Kirjaudutaan toisella komentotulkilla ja siirrytään oikeaan kansioon komennolla `cd /c/leksa/vagrant/Palautus` ja kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master`.
 ```shell
 leksa@LEKSULA-PC MINGW64 /
@@ -87,7 +87,7 @@ win10:
 vagrant@master:~$
 ```
 
-## Saltin konfigurointi
+## 3 Saltin konfigurointi
 
 3.1 Otetaan käyttöön valmiit konfiguroinnit [Githubista](https://github.com/leksu70/2024k-ph-teht-salt) kloonaamalla sen `git clone https://github.com/leksu70/2024k-ph-teht-salt.git'-komennon avulla ja tarkastetaan, että tiedostot ovat syntyneet oikeaan hakemistoon. Siirrytään git-hakemistoon komennolla `cd 2024k-ph-teht-salt/salt/`.
 ```shell
@@ -118,6 +118,61 @@ vagrant@master:~/2024k-ph-teht-salt$ sudo ln -s /home/vagrant/2024k-ph-teht-salt
 vagrant@master:~/2024k-ph-teht-salt$ ll /srv
 total 0
 lrwxrwxrwx 1 root root 37 May 15 11:37 salt -> /home/vagrant/2024k-ph-teht-salt/salt
+vagrant@master:~/2024k-ph-teht-salt$
+```
+
+3.3 Luodaan `/srv/salt/win`-kansio master-koneelle ja kansion ryhmäksi `salt`, sekä `salt`-käyttäjäryhmälle oikeudet kansioon.
+```shell
+vagrant@master:~/2024k-ph-teht-salt$ mkdir /srv/salt/win
+vagrant@master:~/2024k-ph-teht-salt$ sudo chgrp salt /srv/salt/win
+vagrant@master:~/2024k-ph-teht-salt$ chmod 775 /srv/salt/win
+vagrant@master:~/2024k-ph-teht-salt$ sudo ls -ld /srv/salt/win
+drwxrwxr-x 2 vagrant salt 4096 May 15 11:43 /srv/salt/win
+vagrant@master:~/2024k-ph-teht-salt$
+vagrant@master:~/2024k-ph-teht-salt$ ll /srv/salt/
+total 28
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 add-users
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 git
+-rw-r--r-- 1 vagrant vagrant   90 May 15 11:25 top.sls
+-rw-r--r-- 1 vagrant vagrant 1693 May 15 11:25 vscode.sls
+drwxrwxr-x 2 root    salt    4096 May 15 11:40 win
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 win-python3_x64
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 win-vscode
+vagrant@master:~/2024k-ph-teht-salt$
+```
+
+3.4 Asennetaan `repo`- ja `repo-ng`-repositorit `master`-koneelle komennolloilla `sudo salt-run winrepo.update_git_repos`:
+```bash
+vagrant@master:~/2024k-ph-teht-salt$ sudo salt-run winrepo.update_git_repos
+[WARNING ] Attempt to run a shell command with what may be an invalid shell! Check to ensure that the shell </usr/sbin/nologin> is valid for this user.
+...
+[WARNING ] Attempt to run a shell command with what may be an invalid shell! Check to ensure that the shell </usr/sbin/nologin> is valid for this user.
+https://github.com/saltstack/salt-winrepo-ng.git:
+    True
+https://github.com/saltstack/salt-winrepo.git:
+    True
+vagrant@master:~/2024k-ph-teht-salt$
+```
+
+3.5 Tarkastetaan löytyykö vscode.sls-tiedosto komennolla `ll /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls` ja korvataan se uudella päivitetyllä versiolla kopioimalla `/srv/salt/vscode.sls` tiedosto `salt-winrepo-ng/_`-kansioon.
+```shell
+vagrant@master:~/2024k-ph-teht-salt$ ll /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls
+-rw-r--r-- 1 salt salt 1629 May 15 11:48 /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls
+vagrant@master:~/2024k-ph-teht-salt$ sudo cp salt/vscode.sls /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls
+vagrant@master:~/2024k-ph-teht-salt$
+```
+
+3.6 Päivitetään Saltin tietokanta (`salt-winrepo-ng`) Windows-minioneille komennolla `sudo salt -G 'os:windows' pkg.refresh_db`.
+```shell
+vagrant@master:~/2024k-ph-teht-salt$ sudo salt -G 'os:windows' pkg.refresh_db
+win10:
+    ----------
+    failed:
+        0
+    success:
+        312
+    total:
+        312
 vagrant@master:~/2024k-ph-teht-salt$
 ```
 
