@@ -1,16 +1,16 @@
 # Testiajo: tehtävä 7 - oma miniprojekti
 
-## Vagrant
+## Vagrant-asennus
 
-1. Avataan komentotulkki. Itse käytän Gitin tarjoamaa bash-komentotulkkia.
+1.1 Avataan komentotulkki. Itse käytän Gitin tarjoamaa bash-komentotulkkia.
 
-2. Luodaan hakemisto Vagrantille suorittamalla komento `mkdir /c/leksa/vagrant/Palautus` ja siirrytään sinne komennolla `cd /c/leksa/vagrant/Palautus`.
+1.2 Luodaan hakemisto Vagrantille suorittamalla komento `mkdir /c/leksa/vagrant/Palautus` ja siirrytään sinne komennolla `cd /c/leksa/vagrant/Palautus`.
 
-3. Ladataan Vagrantfile Githubista linkistä https://github.com/leksu70/2024k-ph-teht/blob/master/Vagrantfile ja maalaamalla hiirellä koodiosio ja otetaan siitä `CTRL-c`-näppäinyhdistelmällä.
+1.3 Ladataan Vagrantfile Githubista linkistä https://github.com/leksu70/2024k-ph-teht/blob/master/Vagrantfile ja maalaamalla hiirellä koodiosio ja otetaan siitä `CTRL-c`-näppäinyhdistelmällä.
 
-4. Avataan editori ja pastetaan aikaisemmin kopioidut tiedot editoriin `CTRL-v`-näppäinyhdistelmällä.
+1.4 Avataan editori ja pastetaan aikaisemmin kopioidut tiedot editoriin `CTRL-v`-näppäinyhdistelmällä.
 
-5. Talletetaan tiedosto (`File` --> `Save As`) nimellä `/c/leksa/vagrant/Palautus/Vagrantfile`. Siirrytään takaisin komentotulkkiin ja tarkastetaan onko siellä `Vagrantfile`-tiedosto komennolla `ls -l Vagrantfile`.
+1.5 Talletetaan tiedosto (`File` --> `Save As`) nimellä `/c/leksa/vagrant/Palautus/Vagrantfile`. Siirrytään takaisin komentotulkkiin ja tarkastetaan onko siellä `Vagrantfile`-tiedosto komennolla `ls -l Vagrantfile`.
 
 ```shell
 leksa@LEKSULA-PC MINGW64 /c/leksa/vagrant/Palautus
@@ -23,9 +23,11 @@ $
 
 Koska tiedosto on oikeassa hakemistossa, niin voimme jatkaa eteenpäin ja käynnistää virtuaalikoneet.
 
-6. Käynnistetään Vagrant komentotulkista komennolla `vagrant up`. Käynnistys on nähtävissä [20240515-Palautus1.md-linkistä](https://github.com/leksu70/2024k-ph-teht/blob/master/20240515-Palautus1.md).
+1.6. Käynnistetään Vagrant komentotulkista komennolla `vagrant up`. Käynnistys on nähtävissä [20240515-Palautus1.md-linkistä](https://github.com/leksu70/2024k-ph-teht/blob/master/20240515-Palautus1.md).
 
-7. Kirjaudutaan toisella komentotulkilla ja siirrytään oikeaan kansioon komennolla `cd /c/leksa/vagrant/Palautus` ja kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master`.
+
+## Salt-asennuksen tarkastus
+2.1 Kirjaudutaan toisella komentotulkilla ja siirrytään oikeaan kansioon komennolla `cd /c/leksa/vagrant/Palautus` ja kirjaudutaan `master`-koneeseen komennolla `vagrant ssh master`.
 ```shell
 leksa@LEKSULA-PC MINGW64 /
 $ cd /c/leksa/vagrant/Palautus
@@ -44,7 +46,7 @@ Last login: Wed May 15 09:07:22 2024 from 10.0.2.2
 vagrant@master:~$
 ```
 
-8. Tarkastetaan Saltin tila, sillä Vagrantin provisiointiskriptit asensivat valmiiksi `salt-master` ja `salt-minion` paketit. Ajetaan komento `sudo salt-key -L`, jotta nähdään ovatko minionit ottaneet yhteyttä masteriin.
+2.2 Tarkastetaan Saltin tila, sillä Vagrantin provisiointiskriptit asensivat valmiiksi `salt-master` ja `salt-minion` paketit. Ajetaan komento `sudo salt-key -L`, jotta nähdään ovatko minionit ottaneet yhteyttä masteriin.
 ```shell
 vagrant@master:~$ sudo salt-key -L
 Accepted Keys:
@@ -70,4 +72,18 @@ Key for minion win10 accepted.
 vagrant@master:~$
 ```
 
+Tarkastetaan vielä, mitkä järjestelmät kuuluvat masterin hallintaan.
+```shell
+vagrant@master:~$ sudo salt '*' grains.get id
+minion:
+    minion
+win10:
+    win10
+vagrant@master:~$ sudo salt '*' grains.get osfinger
+minion:
+    Debian-11
+win10:
+    Windows-10
+vagrant@master:~$
+```
 
