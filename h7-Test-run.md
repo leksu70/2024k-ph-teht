@@ -315,5 +315,5 @@ Tila ei muutu, joten tilan on idempotentti.
 
 5.4 Käynnistetään viel Visual Studio Code Start-valikosta.
 
-![VS Code toimii](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win-vscode-workst.png "VS Code toimii")
+![VS Code toimii](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win-vscode-works.png "VS Code toimii")
 
