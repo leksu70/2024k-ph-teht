@@ -300,14 +300,20 @@ vagrant@master:~/2024k-ph-teht-salt/salt$
 Tila ei muutu, joten tilan on idempotentti.
 
 5 Tarkastus Windows-koneelta.
-Avataan VirtualBox-ikkuna.
+
+5.1 Avataan VirtualBox-ikkuna.
 
 ![VirtualBox](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-01-vb.png "VirtualBox")
 
-Valitaan "Palautus_win10..."-virtuaalikone ja painetaa `Show`-ikonia.
+5.2 Valitaan "Palautus_win10..."-virtuaalikone ja painetaa `Show`-ikonia.
 
 ![Windows](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-02-win.png "Windows")
 
-Avataan ja tarkastetaan, että Windowsin Start-valikosta löytyy **Visual Studio Code** ja **Python3**.
+5.3 Avataan ja tarkastetaan, että Windowsin Start-valikosta löytyy **Visual Studio Code** ja **Python3**.
 
 ![Windows Start-valikko](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win10-start.png "Windows Start-valikko")
+
+5.4 Käynnistetään viel Visual Studio Code Start-valikosta.
+
+![VS Code toimii](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win-vscode-workst.png "VS Code toimii")
+
