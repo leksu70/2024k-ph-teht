@@ -184,3 +184,69 @@ vagrant@master:~/2024k-ph-teht-salt$
 ![Salt highstate 4/6](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-4.png "Salt highstate 4/6")
 ![Salt highstate 5/6](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-5.png "Salt highstate 5/6")
 ![Salt highstate 6/6](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-highstate-6.png "Salt highstate 6/6")
+
+```shell
+vagrant@master:~/2024k-ph-teht-salt$ sudo salt '*' state.highstate
+minion:
+----------
+          ID: leos
+    Function: group.present
+      Result: True
+     Comment: Group leos is present and up to date
+     Started: 12:13:55.897204
+    Duration: 12.169 ms
+     Changes:
+----------
+          ID: leos
+    Function: user.present
+      Result: True
+     Comment: User leos is present and up to date
+     Started: 12:13:55.911702
+    Duration: 76.154 ms
+     Changes:
+----------
+          ID: git
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 12:13:58.447490
+    Duration: 85.832 ms
+     Changes:
+
+Summary for minion
+------------
+Succeeded: 3
+Failed:    0
+------------
+Total states run:     3
+Total run time: 174.155 ms
+win10:
+----------
+          ID: leos
+    Function: user.present
+      Result: True
+     Comment: User leos is present and up to date
+     Started: 15:14:01.764119
+    Duration: 5218.813 ms
+     Changes:
+----------
+          ID: git
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 15:14:07.029386
+    Duration: 2234.654 ms
+     Changes:
+
+Summary for win10
+------------
+Succeeded: 2
+Failed:    0
+------------
+Total states run:     2
+Total run time:   7.453 s
+vagrant@master:~/2024k-ph-teht-salt$
+```
+
+Komennon uudelleen suorittaminen ei muuta tiloja, joten tila on idempotentti.
+
