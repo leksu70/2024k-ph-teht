@@ -704,8 +704,8 @@ base:
     - add-users
     - git
   'win10':
-    - win-vscode
     - win-python3_x64
+    - win-vscode
 ```
 
 Tämä sallii koneiden tilojen asentamisen yhdellä komennolla, kun `master`-koneella ajetaan komento `sudo salt '*' state.highstate`.
