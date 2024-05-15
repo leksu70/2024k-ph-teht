@@ -154,7 +154,7 @@ https://github.com/saltstack/salt-winrepo.git:
 vagrant@master:~/2024k-ph-teht-salt$
 ```
 
-3.5 Tarkastetaan löytyykö vscode.sls-tiedosto komennolla `ll /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls` ja korvataan se uudella päivitetyllä versiolla kopioimalla `/srv/salt/vscode.sls` tiedosto `salt-winrepo-ng/_`-kansioon.
+3.5 Tarkastetaan löytyykö `vscode.sls`-tiedosto komennolla `ll /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls` ja korvataan se uudella päivitetyllä versiolla kopioimalla `/srv/salt/vscode.sls` tiedosto `salt-winrepo-ng/_`-kansioon.
 ```shell
 vagrant@master:~/2024k-ph-teht-salt$ ll /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls
 -rw-r--r-- 1 salt salt 1629 May 15 11:48 /srv/salt/win/repo-ng/salt-winrepo-ng/_/vscode.sls
