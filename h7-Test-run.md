@@ -99,8 +99,8 @@ remote: Compressing objects: 100% (23/23), done.
 remote: Total 36 (delta 8), reused 29 (delta 4), pack-reused 0
 Receiving objects: 100% (36/36), 17.26 KiB | 491.00 KiB/s, done.
 Resolving deltas: 100% (8/8), done.
-vagrant@master:~$ cd 2024k-ph-teht-salt/salt/
-vagrant@master:~/2024k-ph-teht-salt/salt$ ll
+vagrant@master:~$ cd 2024k-ph-teht-salt
+vagrant@master:~/2024k-ph-teht-salt$ ll salt
 total 24
 drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 add-users
 drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 git
@@ -108,9 +108,16 @@ drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 git
 -rw-r--r-- 1 vagrant vagrant 1693 May 15 11:25 vscode.sls
 drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 win-python3_x64
 drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 win-vscode
-vagrant@master:~/2024k-ph-teht-salt/salt$
+vagrant@master:~/2024k-ph-teht-salt$
+```
+3.2 Poistetaan ensin `/srv/salt`-kansio `sudo rmdir /srv/salt`-komennolla ja linkataan sen haettuun gittiin komennolla `sudo ln -s /home/vagrant/2024k-ph-teht-salt
+/salt /srv/salt` ja tarkastetaan, että se näkyy oikein komennolla `ll /srv`.
+```shell
+vagrant@master:~/2024k-ph-teht-salt$ sudo ln -s /home/vagrant/2024k-ph-teht-salt
+/salt /srv/salt
+vagrant@master:~/2024k-ph-teht-salt$ ll /srv
+total 0
+lrwxrwxrwx 1 root root 37 May 15 11:37 salt -> /home/vagrant/2024k-ph-teht-salt/salt
+vagrant@master:~/2024k-ph-teht-salt$
 ```
 
-
-
-3.2 
