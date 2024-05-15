@@ -59,7 +59,7 @@ vagrant@master:~$
 ```
 Salt-minionit ovat yrittäneet ottaa yhteyttä masteriin.
 
-9. Hyväksytään minioneiden rekisteröinnit komennolla `sudo salt-key -A` ja vastataan `y` hyväksymiskysymykseen.
+2.3 Hyväksytään minioneiden rekisteröinnit komennolla `sudo salt-key -A` ja vastataan `y` hyväksymiskysymykseen.
 ```sell
 vagrant@master:~$ sudo salt-key -A
 The following keys are going to be accepted:
@@ -87,3 +87,30 @@ win10:
 vagrant@master:~$
 ```
 
+## Saltin konfigurointi
+
+3.1 Otetaan käyttöön valmiit konfiguroinnit [Githubista](https://github.com/leksu70/2024k-ph-teht-salt) kloonaamalla sen `git clone https://github.com/leksu70/2024k-ph-teht-salt.git'-komennon avulla ja tarkastetaan, että tiedostot ovat syntyneet oikeaan hakemistoon. Siirrytään git-hakemistoon komennolla `cd 2024k-ph-teht-salt/salt/`.
+```shell
+vagrant@master:~$ git clone https://github.com/leksu70/2024k-ph-teht-salt.git
+Cloning into '2024k-ph-teht-salt'...
+remote: Enumerating objects: 36, done.
+remote: Counting objects: 100% (36/36), done.
+remote: Compressing objects: 100% (23/23), done.
+remote: Total 36 (delta 8), reused 29 (delta 4), pack-reused 0
+Receiving objects: 100% (36/36), 17.26 KiB | 491.00 KiB/s, done.
+Resolving deltas: 100% (8/8), done.
+vagrant@master:~$ cd 2024k-ph-teht-salt/salt/
+vagrant@master:~/2024k-ph-teht-salt/salt$ ll
+total 24
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 add-users
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 git
+-rw-r--r-- 1 vagrant vagrant   90 May 15 11:25 top.sls
+-rw-r--r-- 1 vagrant vagrant 1693 May 15 11:25 vscode.sls
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 win-python3_x64
+drwxr-xr-x 2 vagrant vagrant 4096 May 15 11:25 win-vscode
+vagrant@master:~/2024k-ph-teht-salt/salt$
+```
+
+
+
+3.2 
