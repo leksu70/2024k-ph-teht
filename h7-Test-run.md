@@ -250,3 +250,64 @@ vagrant@master:~/2024k-ph-teht-salt$
 
 Komennon uudelleen suorittaminen ei muuta tiloja, joten tila on idempotentti.
 
+4.2 Asennetaan win10-tila komennolla `sudo salt 'win10' state.highstate`.
+```shell
+vagrant@master:~/2024k-ph-teht-salt/salt$ sudo salt 'win10' state.highstate
+win10:
+----------
+          ID: leos
+    Function: user.present
+      Result: True
+     Comment: User leos is present and up to date
+     Started: 16:45:44.791748
+    Duration: 5703.581 ms
+     Changes:
+----------
+          ID: git
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 16:45:50.557468
+    Duration: 21968.768 ms
+     Changes:
+----------
+          ID: windows_pkgs
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 16:46:12.526236
+    Duration: 155.297 ms
+     Changes:
+----------
+          ID: windows_pkgs_cmds
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 16:46:12.681533
+    Duration: 140.664 ms
+     Changes:
+
+Summary for win10
+------------
+Succeeded: 4
+Failed:    0
+------------
+Total states run:     4
+Total run time:  27.968 s
+vagrant@master:~/2024k-ph-teht-salt/salt$
+```
+
+Tila ei muutu, joten tilan on idempotentti.
+
+5 Tarkastus Windows-koneelta.
+Avataan VirtualBox-ikkuna.
+
+![VirtualBox](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-01-vb.png "VirtualBox")
+
+Valitaan "Palautus_win10..."-virtuaalikone ja painetaa `Show`-ikonia.
+
+![Windows](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-02-win.png "Windows")
+
+Avataan ja tarkastetaan, että Windowsin Start-valikosta löytyy **Visual Studio Code** ja **Python3**.
+
+![Windows Start-valikko](https://github.com/leksu70/2024k-ph-teht/blob/master/kuvat/h7-test-win10-start.png "Windows Start-valikko")
